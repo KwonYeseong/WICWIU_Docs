@@ -15,8 +15,7 @@ template class Tensor<unsigned char>;
 @param pAnswer Time사용여부
 @return 성공 시 TRUE, 실패 시 FALSE.
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> int Tensor<DTYPE>::Alloc(Shape *pShape, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Alloc(Shape *pShape, IsUseTime pAnswer)" << '\n';
@@ -59,8 +58,7 @@ template<typename DTYPE> int Tensor<DTYPE>::Alloc(Shape *pShape, IsUseTime pAnsw
 *@param *pTensor deep copy할 대상 Tensor.
 *@return 성공 시 TRUE, 실패 시 FALSE.
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> int Tensor<DTYPE>::Alloc(Tensor<DTYPE> *pTensor) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Alloc(Tensor<DTYPE> *pTensor)" << '\n';
@@ -85,8 +83,7 @@ template<typename DTYPE> int Tensor<DTYPE>::Alloc(Tensor<DTYPE> *pTensor) {
 *@details 메모리에 할당되어 있는 Tensor데이터를 삭제한다.
 *@return 없음.
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> void Tensor<DTYPE>::Delete() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Delete()" << '\n';
@@ -118,8 +115,7 @@ template<typename DTYPE> void Tensor<DTYPE>::Delete() {
 *@see Tensor<DTYPE>::Alloc(Shape *pShape, IsUseTime pAnswer),
 *     Shape::Shape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE>::Tensor(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Tensor(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4, IsUseTime pAnswer)" << '\n';
@@ -143,8 +139,7 @@ template<typename DTYPE> Tensor<DTYPE>::Tensor(int pSize0, int pSize1, int pSize
 *@see Tensor<DTYPE>::Alloc(Shape *pShape, IsUseTime pAnswer),
       Shape::Shape(int pSize0, int pSize1, int pSize2, int pSize3)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE>::Tensor(int pSize0, int pSize1, int pSize2, int pSize3, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Tensor(int pSize0, int pSize1, int pSize2, int pSize3, IsUseTime pAnswer)" << '\n';
@@ -167,8 +162,7 @@ template<typename DTYPE> Tensor<DTYPE>::Tensor(int pSize0, int pSize1, int pSize
 *@see Tensor<DTYPE>::Alloc(Shape *pShape, IsUseTime pAnswer),
 *     Shape::Shape(int pSize0, int pSize1, int pSize2)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE>::Tensor(int pSize0, int pSize1, int pSize2, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Tensor(int pSize0, int pSize1, int pSize2, IsUseTime pAnswer)" << '\n';
@@ -190,8 +184,7 @@ template<typename DTYPE> Tensor<DTYPE>::Tensor(int pSize0, int pSize1, int pSize
 *@see Tensor<DTYPE>::Alloc(Shape *pShape, IsUseTime pAnswer),
 *     Shape::Shape(int pSize0, int pSize1)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE>::Tensor(int pSize0, int pSize1, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Tensor(int pSize0, int pSize1, IsUseTime pAnswer)" << '\n';
@@ -212,8 +205,7 @@ template<typename DTYPE> Tensor<DTYPE>::Tensor(int pSize0, int pSize1, IsUseTime
 *@see Tensor<DTYPE>::Alloc(Shape *pShape, IsUseTime pAnswer),
 *     Shape::Shape(int pSize0)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE>::Tensor(int pSize0, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Tensor(int pSize0, IsUseTime pAnswer)" << '\n';
@@ -232,8 +224,7 @@ template<typename DTYPE> Tensor<DTYPE>::Tensor(int pSize0, IsUseTime pAnswer) {
 *@return 없음.
 *@see Tensor<DTYPE>::Alloc(Shape *pShape, IsUseTime pAnswer)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE>::Tensor(Shape *pShape, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Tensor(Shape *pShape, IsUseTime pAnswer)" << '\n';
@@ -252,8 +243,7 @@ template<typename DTYPE> Tensor<DTYPE>::Tensor(Shape *pShape, IsUseTime pAnswer)
 *@return 없음.
 *@see Tensor(Tensor<DTYPE> *pTensor)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE>::Tensor(Tensor *pTensor) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Tensor(Tensor *pTensor)" << '\n';
@@ -271,8 +261,7 @@ template<typename DTYPE> Tensor<DTYPE>::Tensor(Tensor *pTensor) {
 *@return 없음.
 *@see void Delete()
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE>::~Tensor() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::~Tensor()" << '\n';
@@ -285,8 +274,7 @@ template<typename DTYPE> Tensor<DTYPE>::~Tensor() {
 *@brief Tensor의 Shape을 반환.
 *@return m_aShape
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Shape *Tensor<DTYPE>::GetShape() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetShape()" << '\n';
@@ -300,8 +288,7 @@ template<typename DTYPE> Shape *Tensor<DTYPE>::GetShape() {
 *@return m_Rank
 *@see Shape::GetRank()
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> int Tensor<DTYPE>::GetRank() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetRank()" << '\n';
@@ -315,8 +302,7 @@ template<typename DTYPE> int Tensor<DTYPE>::GetRank() {
 *@return Shape의 m_aDim[pRanknum]
 *@see Shape::GetDim()
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> int Tensor<DTYPE>::GetDim(int pRanknum) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetDim(int pRanknum)" << '\n';
@@ -329,8 +315,7 @@ template<typename DTYPE> int Tensor<DTYPE>::GetDim(int pRanknum) {
 *@brief Tensor의 m_aLongArray를 반환.
 *@return m_aLongArray
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> LongArray<DTYPE> *Tensor<DTYPE>::GetLongArray() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetLongArray()" << '\n';
@@ -344,8 +329,7 @@ template<typename DTYPE> LongArray<DTYPE> *Tensor<DTYPE>::GetLongArray() {
 *@return LongArray<DTYPE>의  m_TimeSize * m_CapacityPerTime
 *@see LongArray<DTYPE>::GetCapacity()
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> int Tensor<DTYPE>::GetCapacity() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetCapacity()" << '\n';
@@ -359,8 +343,7 @@ template<typename DTYPE> int Tensor<DTYPE>::GetCapacity() {
 *@return LongArray<DTYPE>의 m_aaHostLongArray[index / m_CapacityPerTime][index % m_CapacityPerTime]
 *@see LongArray<DTYPE>::GetElement(unsigned int index)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> int Tensor<DTYPE>::GetElement(unsigned int index) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetElement(unsigned int index)" << '\n';
@@ -373,8 +356,7 @@ template<typename DTYPE> int Tensor<DTYPE>::GetElement(unsigned int index) {
 *@brief []연산자 오버로딩
 *@details m_aLongArray의 특정 위치에 있는 값을 return할 수 있게 한다.
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> DTYPE& Tensor<DTYPE>::operator[](unsigned int index) {
     #ifdef __CUDNN__
     # if __DEBUG__
@@ -403,8 +385,7 @@ template<typename DTYPE> DTYPE& Tensor<DTYPE>::operator[](unsigned int index) {
 *@return m_Device
 *@see enum Device
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Device Tensor<DTYPE>::GetDevice() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetDevice()" << '\n';
@@ -417,8 +398,7 @@ template<typename DTYPE> Device Tensor<DTYPE>::GetDevice() {
 *@brief Tensor의 Time사용 여부를 반환한다.
 *@return m_IsUseTime
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> IsUseTime Tensor<DTYPE>::GetIsUseTime() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetIsUseTime()" << '\n';
@@ -433,8 +413,7 @@ template<typename DTYPE> IsUseTime Tensor<DTYPE>::GetIsUseTime() {
 *@return m_aaHostLongArray[pTime]
 *@see *LongArray<DTYPE>::GetCPULongArray(unsigned int pTime)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> DTYPE *Tensor<DTYPE>::GetCPULongArray(unsigned int pTime) {
     #ifdef __CUDNN__
     # if __DEBUG__
@@ -463,8 +442,7 @@ template<typename DTYPE> DTYPE *Tensor<DTYPE>::GetCPULongArray(unsigned int pTim
 *@details Tensor가 time 축을 사용하는 경우, Tensor의 time의 rank 값을 반환한다 @ref Shape::GetRank()
 *@return 값이 존재할 시 Tensor의 time의 rank, 존재하지 않을 시 0
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 template<typename DTYPE> int Tensor<DTYPE>::GetTimeSize() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetTimeSize()" << '\n';
@@ -477,8 +455,7 @@ template<typename DTYPE> int Tensor<DTYPE>::GetTimeSize() {
 /*!
 *@brief 삭제 예정
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 template<typename DTYPE> int Tensor<DTYPE>::GetBatchSize() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetBatchSize()" << '\n';
@@ -491,8 +468,7 @@ template<typename DTYPE> int Tensor<DTYPE>::GetBatchSize() {
 /*!
 @brief 삭제 예정
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 template<typename DTYPE> int Tensor<DTYPE>::GetChannelSize() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetChannelSize()" << '\n';
@@ -505,8 +481,7 @@ template<typename DTYPE> int Tensor<DTYPE>::GetChannelSize() {
 /*!
 @brief 삭제 예정
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 template<typename DTYPE> int Tensor<DTYPE>::GetRowSize() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetRowSize()" << '\n';
@@ -519,8 +494,7 @@ template<typename DTYPE> int Tensor<DTYPE>::GetRowSize() {
 /*!
 @brief 삭제 예정
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 template<typename DTYPE> int Tensor<DTYPE>::GetColSize() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetColSize()" << '\n';
@@ -542,8 +516,7 @@ template<typename DTYPE> int Tensor<DTYPE>::GetColSize() {
 *@return 성공 시 TRUE, 실패 시 FALSE.
 *@see Shape::ReShape(int pRank, ...)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> int Tensor<DTYPE>::ReShape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::ReShape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4)" << '\n';
@@ -573,8 +546,7 @@ template<typename DTYPE> int Tensor<DTYPE>::ReShape(int pSize0, int pSize1, int 
 *@return 성공 시 TRUE, 실패 시 FALSE.
 *@see Shape::ReShape(int pRank, ...)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> int Tensor<DTYPE>::ReShape(int pSize0, int pSize1, int pSize2, int pSize3) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::ReShape(int pSize0, int pSize1, int pSize2, int pSize3)" << '\n';
@@ -603,8 +575,7 @@ template<typename DTYPE> int Tensor<DTYPE>::ReShape(int pSize0, int pSize1, int 
 *@return 성공 시 TRUE, 실패 시 FALSE.
 *@see Shape::ReShape(int pRank, ...)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> int Tensor<DTYPE>::ReShape(int pSize0, int pSize1, int pSize2) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::ReShape(int pSize0, int pSize1, int pSize2)" << '\n';
@@ -632,8 +603,7 @@ template<typename DTYPE> int Tensor<DTYPE>::ReShape(int pSize0, int pSize1, int 
 *@return 성공 시 TRUE, 실패 시 FALSE.
 *@see Shape::ReShape(int pRank, ...)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> int Tensor<DTYPE>::ReShape(int pSize0, int pSize1) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::ReShape(int pSize0, int pSize1)" << '\n';
@@ -660,8 +630,7 @@ template<typename DTYPE> int Tensor<DTYPE>::ReShape(int pSize0, int pSize1) {
 *@return 성공 시 TRUE, 실패 시 FALSE.
 *@see Shape::ReShape(int pRank, ...)
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> int Tensor<DTYPE>::ReShape(int pSize0) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::ReShape(int pSize0)" << '\n';
@@ -686,8 +655,7 @@ template<typename DTYPE> int Tensor<DTYPE>::ReShape(int pSize0) {
 *@return 없음.
 *@see Tensor<DTYPE>::SetDeviceCPU()
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> void Tensor<DTYPE>::Reset() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Reset()" << '\n';
@@ -724,8 +692,7 @@ template<typename DTYPE> void Tensor<DTYPE>::Reset() {
 *@return 없음.
 *@see Shape::SetDeviceCPU(), LongArray<DTYPE>::SetDeviceCPU()
 */
-//author 권예성
-//date 2018-09-02
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> void Tensor<DTYPE>::SetDeviceCPU() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::SetDeviceCPU()" << '\n';
@@ -743,8 +710,7 @@ template<typename DTYPE> void Tensor<DTYPE>::SetDeviceCPU() {
 *@return 성공 시 TRUE
 *@see LongArray<DTYPE>::Save(FILE *fileForSave), Tensor<DTYPE>::SetDeviceCPU()
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 template<typename DTYPE> int Tensor<DTYPE>::Save(FILE *fileForSave) {
     #ifdef __CUDNN__
     # if __DEBUG__
@@ -778,8 +744,7 @@ template<typename DTYPE> int Tensor<DTYPE>::Save(FILE *fileForSave) {
 *@return 성공 시 TRUE
 *@see LongArray<DTYPE>::Load(FILE *fileForSave), Tensor<DTYPE>::SetDeviceCPU()
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 template<typename DTYPE> int Tensor<DTYPE>::Load(FILE *fileForLoad) {
     #ifdef __CUDNN__
     # if __DEBUG__
@@ -810,8 +775,7 @@ template<typename DTYPE> int Tensor<DTYPE>::Load(FILE *fileForLoad) {
 /*!
 @*brief 작성 예정
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 template<typename DTYPE> void Tensor<DTYPE>::SetDeviceGPU(unsigned int idOfDevice) {
     # if __DEBUG__
     std::cout << "Tensor<DTYPE>::SetDeviceGPU()" << '\n';
@@ -827,8 +791,7 @@ template<typename DTYPE> void Tensor<DTYPE>::SetDeviceGPU(unsigned int idOfDevic
 /*!
 *@brief 작성 예정
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 template<typename DTYPE> DTYPE *Tensor<DTYPE>::GetGPUData(unsigned int pTime) {
     # if __DEBUG__
     std::cout << "Tensor<DTYPE>::GetGPUData(unsigned int pTime)" << '\n';
@@ -860,8 +823,7 @@ template<typename DTYPE> DTYPE *Tensor<DTYPE>::GetGPUData(unsigned int pTime) {
 /*!
 *@brief 작성 예정
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 template<typename DTYPE> cudnnTensorDescriptor_t& Tensor<DTYPE>::GetDescriptor() {
     # if __DEBUG__
     std::cout << "Tensor<DTYPE>::GetDescriptor()" << '\n';
@@ -894,8 +856,7 @@ template<typename DTYPE> cudnnTensorDescriptor_t& Tensor<DTYPE>::GetDescriptor()
 /*!
 *@brief 작성 예정
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 template<typename DTYPE> void Tensor<DTYPE>::Reset(cudnnHandle_t& pCudnnHandle) {
     # if __DEBUG__
     std::cout << "Tensor<DTYPE>::Reset(cudnnHandle_t& pCudnnHandle)" << '\n';
@@ -952,8 +913,7 @@ template<typename DTYPE> void Tensor<DTYPE>::Reset(cudnnHandle_t& pCudnnHandle) 
 *@return 정규분포를 따르는 임의의 값을 갖는 Tensor
 *@see Tensor<DTYPE>::Random_normal(Shape * pShape, float mean, float stddev, IsUseTime pAnswer = UseTime)
 */
-//author 윤동휘
-//date 2018-09-02
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Random_normal(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4, float mean, float stddev, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Random_normal()" << '\n';
@@ -972,8 +932,7 @@ template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Random_normal(int pSize0,
 *@return 정규분포를 따르는 임의의 값을 갖는 Tensor
 *@see Tensor<DTYPE>::Tensor(Shape *pShape, IsUseTime pAnswer)
 */
-//author 윤동휘
-//date 2018-09-02
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Random_normal(Shape *pShape, float mean, float stddev, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Random_normal()" << '\n';
@@ -1013,8 +972,7 @@ template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Random_normal(Shape *pSha
 *@return 0으로 초기화된 Tensor
 *@see Tensor<DT1YPE>::Zeros(Shape *pShape, IsUseTime pAnswer)
 */
-//author 윤동휘
-//date 2018-09-02
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Zeros(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Zero()" << '\n';
@@ -1031,8 +989,7 @@ template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Zeros(int pSize0, int pSi
 @return 0으로 초기화된 Tensor
 @see Tensor<DTYPE>::Tensor(Shape *pShape, IsUseTime pAnswer)
 */
-//author 윤동휘
-//date 2018-09-02
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Zeros(Shape *pShape, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Zero()" << '\n';
@@ -1054,8 +1011,7 @@ template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Zeros(Shape *pShape, IsUs
 *@return 상수로 초기화된 텐서
 *@see Tensor<DTYPE>::Tensor(Shape *pShape, DTYPE constant, IsUseTime pAnswer)
 */
-//author 윤동휘
-//date 2018-09-02
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Constants(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4, DTYPE constant, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Constant()" << '\n';
@@ -1073,8 +1029,7 @@ template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Constants(int pSize0, int
 *@return 상수로 초기화된 텐서
 *@see Tensor<DTYPE>::Tensor(Shape *pShape, IsUseTime pAnswer)
 */
-//author 윤동휘
-//date 2018-09-02
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-02
 template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Constants(Shape *pShape, DTYPE constant, IsUseTime pAnswer) {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::Constant()" << '\n';

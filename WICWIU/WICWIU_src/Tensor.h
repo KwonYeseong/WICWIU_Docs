@@ -9,8 +9,7 @@
 @details 시간 사용 유무를 이뉴머레이션으로 정의
          시간 사용 시 UseTime, 사용하지 않을 시 NoUseTime
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 enum IsUseTime {
     UseTime,
     NoUseTime
@@ -22,15 +21,19 @@ enum IsUseTime {
 @details Tensor클래스는 Shape와 LongArray를 이용하여 Tensor의 모양과 데이터를 저장한다.
          Operator클래스에서   m_aaResult(ForwardPropagate한 값)와 m_aaGradient(BackPropagate한 값)을 저장한다.
 */
-//author 윤동휘
-//date 2018-09-03
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 template<typename DTYPE> class Tensor {
 private:
     Shape *m_aShape; ///< Tensor를 구성하는 Shape 클래스, 텐서의 차원을 정의
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
     LongArray<DTYPE> *m_aLongArray; ///< Tensor를 구성하는 LongArray 클래스, 텐서의 원소들의 값을 저장
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
     Device m_Device; ///< 장치 사용 구분자, CPU or GPU, Device 참고
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
     int m_idOfDevice = -1; ///< GPU 사용 시, 사용하려는 GPU의 번호
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
     IsUseTime m_IsUseTime; ///< time 축 사용 유무, IsUseTime 참고
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 
 private:
     int  Alloc(Shape *pShape, IsUseTime pAnswer);
@@ -110,9 +113,7 @@ public:
 @param co 접근하려는 Tensor의 shape의 column 축의 인덱스 번호
 @return LongArray 원소에 접근하기 위한 인덱스 번호
 */
-//author 윤동휘
-//date 2018-09-03
-
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 inline unsigned int Index5D(Shape *pShape, int ti, int ba, int ch, int ro, int co) {
     return (((ti * (*pShape)[1] + ba) * (*pShape)[2] + ch) * (*pShape)[3] + ro) * (*pShape)[4] + co;
 }
@@ -127,9 +128,7 @@ inline unsigned int Index5D(Shape *pShape, int ti, int ba, int ch, int ro, int c
 @param co 접근하려는 Tensor의 shape의 column 축의 인덱스 번호
 @return LongArray 원소에 접근하기 위한 인덱스 번호
 */
-//author 윤동휘
-//date 2018-09-03
-
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 inline unsigned int Index4D(Shape *pShape, int ba, int ch, int ro, int co) {
     return ((ba * (*pShape)[1] + ch) * (*pShape)[2] + ro) * (*pShape)[3] + co;
 }
@@ -143,9 +142,7 @@ inline unsigned int Index4D(Shape *pShape, int ba, int ch, int ro, int co) {
 @param co 접근하려는 Tensor의 shape의 column 축의 인덱스 번호
 @return LongArray 원소에 접근하기 위한 인덱스 번호
 */
-//author 윤동휘
-//date 2018-09-03
-
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 inline unsigned int Index3D(Shape *pShape, int ch, int ro, int co) {
     return (ch * (*pShape)[1] + ro) * (*pShape)[2] + co;
 }
@@ -158,9 +155,7 @@ inline unsigned int Index3D(Shape *pShape, int ch, int ro, int co) {
 @param co 접근하려는 Tensor의 shape의 column 축의 인덱스 번호
 @return LongArray 원소에 접근하기 위한 인덱스 번호
 */
-//author 윤동휘
-//date 2018-09-03
-
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
 inline unsigned int Index2D(Shape *pShape, int ro, int co) {
     return ro * (*pShape)[1] + co;
 }
