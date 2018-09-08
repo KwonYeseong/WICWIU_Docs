@@ -3,19 +3,31 @@
 
 #include "Common.h"
 
+/*!
+@class LongArray 다차원 Tensor의 데이터를 저장하고 관리하는 클래스.
+@brief 학습에 사용 될 Tensor의 맴버변수 중 LongArray를 정의하기 위한 클래스.
+@details 실질적으로 Tensor클래스의 데이터를 저장하고 관리하기위한 클래스.
+@details 데이터를 초기화하고 CPU와 GPU간 데이터의 이동을 가능하게 한다.
+*/
+// 문서 작성자 : 권예성, 작성 날짜 2018-09-08
+
 template<typename DTYPE> class LongArray {
 private:
-    DTYPE **m_aaHostLongArray;
+    DTYPE **m_aaHostLongArray; ///< 메모리에 올라가 있는 데이터의 주소 값.
 
-    int m_CapacityOfLongArray;
-    int m_TimeSize;
-    int m_CapacityPerTime;
-
-    Device m_Device;
-    int m_idOfDevice = -1;
+    int m_CapacityOfLongArray; ///< LongArray의 용량.
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
+    int m_TimeSize; ///< TimeSize
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
+    int m_CapacityPerTime; ///< Capacity를 Time으로 눈 값.
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
+    Device m_Device; ///< 장치 사용 구분자 (CPU or GPU)
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
+    int m_idOfDevice = -1; ///< GPU사용 시, 사용하려는 GPU번호.
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 
 #ifdef __CUDNN__
-    DTYPE **m_aaDevLongArray;
+    DTYPE **m_aaDevLongArray; ///< GPU메모리(Vram)에 올라가있는 데이터의 주소 값.
 #endif  // __CUDNN
 
 private:

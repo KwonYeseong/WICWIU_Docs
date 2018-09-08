@@ -257,7 +257,7 @@ template<typename DTYPE> Tensor<DTYPE>::Tensor(Tensor *pTensor) {
 
 /*!
 *@brief Tensor 소멸자.
-*@details Delete를 사용하여 해당 Tensor를 메모리에서 헤제한다.
+*@details Delete를 사용하여 해당 Tensor를 메모리에서 삭제한다.
 *@return 없음.
 *@see void Delete()
 */
@@ -355,6 +355,7 @@ template<typename DTYPE> int Tensor<DTYPE>::GetElement(unsigned int index) {
 /*!
 *@brief []연산자 오버로딩
 *@details m_aLongArray의 특정 위치에 있는 값을 return할 수 있게 한다.
+*@details 단, m_Device가 GPU일 시 CPU로 바꿔 준 후 값을 찾아 반환한다.
 */
 // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> DTYPE& Tensor<DTYPE>::operator[](unsigned int index) {

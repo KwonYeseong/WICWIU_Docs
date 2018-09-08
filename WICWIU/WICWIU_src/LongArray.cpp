@@ -5,6 +5,16 @@ template class LongArray<float>;
 template class LongArray<double>;
 template class LongArray<unsigned char>;
 
+/*!
+@brief LongArray의 맴버 변수들을 초기화하는 메소드
+@details pTimeSize을 m_TimeSize, pCapacityPerTime을 m_CapacityPerTime로 대입하고
+@details 2차원 포인터 array인 m_aaHostLongArray가 가리키는 모든 값을 0.f로 초기화 한다.
+@param pTimeSize Alloc할 LongArray의 TimeSize.
+@param pCapacity Alloc할 LongArray의 Capacity.
+@return 성공 시 TRUE.
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
+
 template<typename DTYPE> int LongArray<DTYPE>::Alloc(unsigned int pTimeSize, unsigned int pCapacityPerTime) {
     #ifdef __DEBUG__
     std::cout << "LongArray<DTYPE>::Alloc(unsigned int pTimeSize, unsigned int pCapacityPerTime)" << '\n';
@@ -29,6 +39,13 @@ template<typename DTYPE> int LongArray<DTYPE>::Alloc(unsigned int pTimeSize, uns
     return TRUE;
 }
 
+/*!
+@brief LongArray를 deep copy하는 메소드.
+@details pLongArray를 deep copy한다.
+@param pLongArray deep copy할 대상 LongArray
+@return 성공 시 TRUE
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> int LongArray<DTYPE>::Alloc(LongArray *pLongArray) {
     #ifdef __DEBUG__
     std::cout << "LongArray<DTYPE>::Alloc(LongArray *pLongArray)" << '\n';
@@ -59,6 +76,12 @@ template<typename DTYPE> int LongArray<DTYPE>::Alloc(LongArray *pLongArray) {
     return TRUE;
 }
 
+/*!
+@brief LongArray를 삭제하는 메소드.
+@details m_aaHostLongArray의 포인터를 모두 NULL포인터로 만든 후 삭제한다.
+@return 없음.
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> void LongArray<DTYPE>::Delete() {
     #ifdef __DEBUG__
     std::cout << "LongArray<DTYPE>::Delete()" << '\n';
@@ -145,6 +168,14 @@ template<typename DTYPE> int LongArray<DTYPE>::MemcpyGPU2CPU() {
 
 #endif  // if __CUDNN__
 
+/*!
+@brief 입력받은 TimeSize와 Capacity크기의 LongArray를 Alloc하는 생성자.
+@param pTimeSize Alloc할 LongArray의 TimeSize
+@param pCapacity Alloc할 LongArray의 Capacity
+@return 없음.
+@see LongArray<DTYPE>::Alloc(unsigned int pTimeSize, unsigned int pCapacityPerTime)
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> LongArray<DTYPE>::LongArray(unsigned int pTimeSize, unsigned int pCapacity) {
     #ifdef __DEBUG__
     std::cout << "LongArray<DTYPE>::LongArray(unsigned int pTimeSize, unsigned int pCapacity)" << '\n';
@@ -160,6 +191,13 @@ template<typename DTYPE> LongArray<DTYPE>::LongArray(unsigned int pTimeSize, uns
     Alloc(pTimeSize, pCapacity);
 }
 
+/*!
+@brief LongArray를 deep copy하는 메소드.
+@param *pLongArray deep copy할 대상 LongArray
+@return 없음.
+@see LongArray<DTYPE>::Alloc(LongArray *pLongArray)
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> LongArray<DTYPE>::LongArray(LongArray *pLongArray) {
     #ifdef __DEBUG__
     std::cout << "LongArray<DTYPE>::LongArray(LongArray *pLongArray)" << '\n';
@@ -175,6 +213,13 @@ template<typename DTYPE> LongArray<DTYPE>::LongArray(LongArray *pLongArray) {
     Alloc(pLongArray);
 }
 
+/*!
+@brief LongArray의 소멸자.
+@details Delete를 사용하여 해당 LongArray를 메모리에서 삭제한다
+@return 없음.
+@see void LongArray<DTYPE>::Delete()
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> LongArray<DTYPE>::~LongArray() {
     #ifdef __DEBUG__
     std::cout << "LongArray<DTYPE>::~LongArray()" << '\n';
@@ -182,18 +227,42 @@ template<typename DTYPE> LongArray<DTYPE>::~LongArray() {
     Delete();
 }
 
+/*!
+@brief LongArray의 m_CapacityOfLongArray를 반환하는 메소드.
+@details m_TimeSize와 m_CapacityPerTime의 곱을 반환한다. 이 값은 m_CapacityOfLongArray와 같다.
+@return m_TimeSize * m_CapacityPerTime
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> int LongArray<DTYPE>::GetCapacity() {
     return m_TimeSize * m_CapacityPerTime;
 }
 
+/*!
+@brief LongArray의 m_TimeSize를 반환하는 메소드
+@return m_TimeSize
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> int LongArray<DTYPE>::GetTimeSize() {
     return m_TimeSize;
 }
 
+/*!
+@brief LongArray의 m_CapacityPerTime를 반환하는 메소드,
+@return m_CapacityPerTime
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> int LongArray<DTYPE>::GetCapacityPerTime() {
     return m_CapacityPerTime;
 }
 
+/*!
+@brief LongArray의 특정 원소의 값을 반환하는 메소드.
+@details 메모리에 있는 LongArray데이터 중 index번째 있는 원소의 값을 반환한다.
+@details 단, m_Device가 GPU일 시 CPU로 바꿔 준 후 값을 찾아 반환한다.
+@return m_aaHostLongArray[index / m_CapacityPerTime][index % m_CapacityPerTime]
+@see LongArray<DTYPE>::SetDeviceCPU()
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> DTYPE LongArray<DTYPE>::GetElement(unsigned int index) {
     #ifdef __CUDNN__
     # if __DEBUG__
@@ -216,6 +285,13 @@ template<typename DTYPE> DTYPE LongArray<DTYPE>::GetElement(unsigned int index) 
     return m_aaHostLongArray[index / m_CapacityPerTime][index % m_CapacityPerTime];
 }
 
+/*!
+@brief []연산자 오버로딩
+@details m_aLongArray의 특정 위치에 있는 값을 return할 수 있게 한다.
+@details 단, m_Device가 GPU일 시 CPU로 바꿔 준 후 값을 찾아 반환한다.
+@see LongArray<DTYPE>::SetDeviceCPU()
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> DTYPE& LongArray<DTYPE>::operator[](unsigned int index) {
     #ifdef __CUDNN__
     # if __DEBUG__
@@ -238,14 +314,32 @@ template<typename DTYPE> DTYPE& LongArray<DTYPE>::operator[](unsigned int index)
     return m_aaHostLongArray[index / m_CapacityPerTime][index % m_CapacityPerTime];
 }
 
+/*!
+@brief LongArray의 m_Device를 반환하는 메소드.
+@return m_Device
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> Device LongArray<DTYPE>::GetDevice() {
     return m_Device;
 }
 
+/*!
+@brief LongArray의 m_idOfDevice를 반환하는 메소드.
+@return m_idOfDevice
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> int LongArray<DTYPE>::GetDeviceID() {
     return m_idOfDevice;
 }
 
+/*!
+@brief m_aaHostLongArray중 pTime에 있는 LongArray를 반환하는 메소드.
+@details m_TimeSize개의 time Dimension중 pTime번째의 LongArray를 반환한다.
+@details 단, m_Device가 GPU일 시 CPU로 바꿔 준 후 값을 찾아 반환한다.
+@return m_aaHostLongArray[pTime]
+@see LongArray<DTYPE>::SetDeviceCPU()
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> DTYPE *LongArray<DTYPE>::GetCPULongArray(unsigned int pTime) {
     #ifdef __CUDNN__
     # if __DEBUG__
@@ -268,6 +362,13 @@ template<typename DTYPE> DTYPE *LongArray<DTYPE>::GetCPULongArray(unsigned int p
     return m_aaHostLongArray[pTime];
 }
 
+/*!
+@brief LongArray의 m_Device를 CPU로 바꾸는 메소드.
+@details m_Device를 CPU로 바꾼다. CUDNN이 있을 경우 GPU 메모리의 값들을 CPU메모리로 복사한다.
+@return 없음.
+@see MemcpyGPU2CPU()
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> int LongArray<DTYPE>::SetDeviceCPU() {
     #ifdef __DEBUG__
     std::cout << "LongArray<DTYPE>::SetDeviceCPU()" << '\n';
@@ -280,6 +381,15 @@ template<typename DTYPE> int LongArray<DTYPE>::SetDeviceCPU() {
     return TRUE;
 }
 
+/*!
+@brief LongArray의 데이터를 파일에 저장하는 메소드.
+@details fwrite함수를 통해 *fileForSave가 가리키는 파일에 LongArray데이터를 쓴다.
+@details 단, m_Device가 GPU일 시 CPU로 바꿔 준 후 값을 찾아 반환한다.
+@param *fileForSave 데이터를 저장할 file을 가리는 포인터.
+@return 성공 시 TRUE.
+@see LongArray<DTYPE>::SetDeviceCPU()
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> int LongArray<DTYPE>::Save(FILE *fileForSave) {
     #ifdef __CUDNN__
     # if __DEBUG__
@@ -310,6 +420,15 @@ template<typename DTYPE> int LongArray<DTYPE>::Save(FILE *fileForSave) {
     return TRUE;
 }
 
+/*!
+@brief LongArray에 저장된 데이터를 불러오는 메소드.
+@details fread함수를 통해 *fileForLoad가 가리키는 파일에 저장된 데이터를 LongArray에 쓴다.
+@details 단, m_Device가 GPU일 시 CPU로 바꿔 준 후 값을 찾아 반환한다.
+@param *fileForLoad 불러올 데이터를 가진 file을 가리키는 포인터.
+@return 성공 시 TRUE.
+@see LongArray<DTYPE>::SetDeviceCPU()
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> int LongArray<DTYPE>::Load(FILE *fileForLoad) {
     #ifdef __CUDNN__
     # if __DEBUG__
@@ -340,7 +459,18 @@ template<typename DTYPE> int LongArray<DTYPE>::Load(FILE *fileForLoad) {
     return TRUE;
 }
 
+
 #ifdef __CUDNN__
+/*!
+@brief LongArray의 m_Device를 GPU로 바꿔주는 메소드.
+@details LongArray의 m_Device를 GPU로 바꾼다.
+@details m_aaDevLongArray가 NULL포인터 일 경우 AllocOnGPU를 통해 idOfDevice번째 GPU에 LongArray를 할당한다.
+@details idOfDevice와 m_idOfDevice가 같지 않을 경우 현재 할당된 GPU에서 LongArray를 삭제한 후 idOfDevice번째 GPU에 새로 할당한다.
+@param idOfDevice 할당 할 GPU번호.
+@return 성공 시 TRUE.
+@see LongArray<DTYPE>::AllocOnGPU, LongArray<DTYPE>::DelteOnGPU, LongArray<DTYPE>::MemcpyCPU2GPU()
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> int LongArray<DTYPE>::SetDeviceGPU(unsigned int idOfDevice) {
     # if __DEBUG__
     std::cout << "LongArray<DTYPE>::SetDeviceGPU()" << '\n';
@@ -358,6 +488,14 @@ template<typename DTYPE> int LongArray<DTYPE>::SetDeviceGPU(unsigned int idOfDev
     return TRUE;
 }
 
+/*!
+@brief m_aaDevLongArray중 pTime에 있는 LongArray를 반환하는 메소드.
+@details m_TimeSize개의 time Dimension중 pTime번째의 LongArray를 반환한다.
+@details 단, m_Device가 CPU일 시 GPU로 바꿔 준 후 값을 찾아 반환한다.
+@return m_aaDevLongArray[pTime]
+@see LongArray<DTYPE>::SetDeviceGPU()
+*/
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> DTYPE *LongArray<DTYPE>::GetGPUData(unsigned int pTime) {
 # if __DEBUG__
 
