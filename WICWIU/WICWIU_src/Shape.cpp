@@ -3,6 +3,14 @@
 
 //////////////////////////////////////////////////////////////////////////////// for private method
 
+/*!
+@brief
+@details
+@param pRank
+@param ...
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 int Shape::Alloc(int pRank, ...) {
     #ifdef __DEBUG__
     std::cout << "Shape::Alloc(int pRank, ...)" << '\n';
@@ -38,6 +46,13 @@ int Shape::Alloc(int pRank, ...) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param pShape
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 int Shape::Alloc(Shape *pShape) {
     #ifdef __DEBUG__
     std::cout << "Shape::Alloc(Shape *pShape)" << '\n';
@@ -66,6 +81,12 @@ int Shape::Alloc(Shape *pShape) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 void Shape::Delete() {
     #ifdef __DEBUG__
     std::cout << "Shape::Delete()" << '\n';
@@ -81,6 +102,13 @@ void Shape::Delete() {
 #endif  // if __CUDNN__
 }
 
+/*!
+@brief
+@details
+@param idOfDevice
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 #ifdef __CUDNN__
 int Shape::AllocOnGPU(unsigned int idOfDevice) {
     # if __DEBUG__
@@ -105,6 +133,12 @@ int Shape::AllocOnGPU(unsigned int idOfDevice) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 void Shape::DeleteOnGPU() {
     # if __DEBUG__
     std::cout << "Shape::DeleteOnGPU()" << '\n';
@@ -116,6 +150,12 @@ void Shape::DeleteOnGPU() {
     }
 }
 
+/*!
+@brief
+@details
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 int Shape::ReShapeOnGPU() {
     # if __DEBUG__
     std::cout << "Shape::ReShapeOnGPU()" << '\n';
@@ -135,7 +175,17 @@ int Shape::ReShapeOnGPU() {
 #endif  // if __CUDNN__
 
 //////////////////////////////////////////////////////////////////////////////// for public method
-
+/*!
+@brief
+@details
+@param pSize0
+@param pSize1
+@param pSize2
+@param pSize3
+@param pSize4
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 Shape::Shape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4) {
     #ifdef __DEBUG__
     std::cout << "Shape::Shape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4)" << '\n';
@@ -150,6 +200,16 @@ Shape::Shape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4) {
     Alloc(5, pSize0, pSize1, pSize2, pSize3, pSize4);
 }
 
+/*!
+@brief
+@details
+@param pSize0
+@param pSize1
+@param pSize2
+@param pSize3
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 Shape::Shape(int pSize0, int pSize1, int pSize2, int pSize3) {
     #ifdef __DEBUG__
     std::cout << "Shape::Shape(int pSize0, int pSize1, int pSize2, int pSize3)" << '\n';
@@ -164,6 +224,15 @@ Shape::Shape(int pSize0, int pSize1, int pSize2, int pSize3) {
     Alloc(4, pSize0, pSize1, pSize2, pSize3);
 }
 
+/*!
+@brief
+@details
+@param pSize0
+@param pSize1
+@param pSize2
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 Shape::Shape(int pSize0, int pSize1, int pSize2) {
     #ifdef __DEBUG__
     std::cout << "Shape::Shape(int pSize0, int pSize1, int pSize2, int pSize3)" << '\n';
@@ -178,6 +247,14 @@ Shape::Shape(int pSize0, int pSize1, int pSize2) {
     Alloc(3, pSize0, pSize1, pSize2);
 }
 
+/*!
+@brief
+@details
+@param pSize0
+@param pSize1
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 Shape::Shape(int pSize0, int pSize1) {
     #ifdef __DEBUG__
     std::cout << "Shape::Shape(int pSize0, int pSize1)" << '\n';
@@ -192,6 +269,13 @@ Shape::Shape(int pSize0, int pSize1) {
     Alloc(2, pSize0, pSize1);
 }
 
+/*!
+@brief
+@details
+@param pSize0
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 Shape::Shape(int pSize0) {
     #ifdef __DEBUG__
     std::cout << "Shape::Shape(int pSize0)" << '\n';
@@ -206,6 +290,13 @@ Shape::Shape(int pSize0) {
     Alloc(1, pSize0);
 }
 
+/*!
+@brief
+@details
+@param pShape
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 Shape::Shape(Shape *pShape) {
     #ifdef __DEBUG__
     std::cout << "Shape::Shape(Shape *pShape)" << '\n';
@@ -220,6 +311,12 @@ Shape::Shape(Shape *pShape) {
     Alloc(pShape);
 }
 
+/*!
+@brief
+@details
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 Shape::~Shape() {
     #ifdef __DEBUG__
     std::cout << "Shape::~Shape()" << '\n';
@@ -228,6 +325,12 @@ Shape::~Shape() {
     Delete();
 }
 
+/*!
+@brief
+@details
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 int Shape::GetRank() {
     #ifdef __DEBUG__
     std::cout << "Shape::GetRank()" << '\n';
@@ -236,6 +339,13 @@ int Shape::GetRank() {
     return m_Rank;
 }
 
+/*!
+@brief
+@details
+@param pRanknum
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 int Shape::GetDim(int pRanknum) {
     #ifdef __DEBUG__
     std::cout << "Shape::GetDim(int pRanknum)" << '\n';
@@ -252,6 +362,12 @@ int Shape::GetDim(int pRanknum) {
     }
 }
 
+/*!
+@brief
+@details
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 Device Shape::GetDevice() {
     #ifdef __DEBUG__
     std::cout << "Shape::GetDevice()" << '\n';
@@ -260,10 +376,23 @@ Device Shape::GetDevice() {
     return m_Device;
 }
 
+/*!
+@brief
+@details
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 int Shape::GetDeviceID() {
     return m_idOfDevice;
 }
 
+/*!
+@brief
+@details
+@param pRanknum
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 int& Shape::operator[](int pRanknum) {
     #ifdef __DEBUG__
     std::cout << "Shape::operator[](int pRanknum)" << '\n';
@@ -280,6 +409,17 @@ int& Shape::operator[](int pRanknum) {
     }
 }
 
+/*!
+@brief
+@details
+@param pSize0
+@param pSize1
+@param pSize2
+@param pSize3
+@param pSize4
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 int Shape::ReShape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4) {
     #ifdef __DEBUG__
     std::cout << "Shape::ReShape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4)" << '\n';
@@ -288,6 +428,14 @@ int Shape::ReShape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4) {
     return ReShape(5, pSize0, pSize1, pSize2, pSize3, pSize4);
 }
 
+/*!
+@brief
+@details
+@param pRank
+@param ...
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 int Shape::ReShape(int pRank, ...) {
     #ifdef __DEBUG__
     std::cout << "Shape::ReShape(int pRank, ...)" << '\n';
@@ -329,6 +477,12 @@ int Shape::ReShape(int pRank, ...) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 int Shape::SetDeviceCPU() {
     #ifdef __DEBUG__
     std::cout << "Shape::SetDeviceCPU()" << '\n';
@@ -341,6 +495,13 @@ int Shape::SetDeviceCPU() {
 
 #ifdef __CUDNN__
 
+/*!
+@brief
+@details
+@param idOfDevice
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 int Shape::SetDeviceGPU(unsigned int idOfDevice) {
     # if __DEBUG__
     std::cout << "Shape::SetDeviceGPU()" << '\n';
@@ -353,6 +514,12 @@ int Shape::SetDeviceGPU(unsigned int idOfDevice) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 cudnnTensorDescriptor_t& Shape::GetDescriptor() {
     # if __DEBUG__
     std::cout << "Shape::GetDescriptor()" << '\n';
@@ -383,7 +550,14 @@ cudnnTensorDescriptor_t& Shape::GetDescriptor() {
 
 #endif  // __CUDNN__
 
-
+/*!
+@brief
+@details
+@param pOS
+@param pShape
+@return
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-06
 std::ostream& operator<<(std::ostream& pOS, Shape *pShape) {
     #ifdef __DEBUG__
     std::cout << "std::ostream& operator<<(std::ostream& pOS, Shape *pShape)" << '\n';
