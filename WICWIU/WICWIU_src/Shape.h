@@ -7,12 +7,21 @@
 // typedef cudnnTensorDescriptor_t ShapeOnGPU;
 // #endif  // if __CUDNN__
 
+/*!
+@class Shape Tensor의 차원 값을 저장하고 관리하는 클래스
+@details 추가 예정
+*/
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-09
 class Shape {
 private:
-    int m_Rank;
-    int *m_aDim;
-    Device m_Device;
-    int m_idOfDevice = -1;
+    int m_Rank;///< Shape 클래스를 구성하는 Rank 멤버변수, 텐서를 구성하는 축의 개수
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-09
+    int *m_aDim;///< Shape 클래스를 구성하는 Dimension 멤버변수, 각 축의 차원
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-09
+    Device m_Device;///< 장치 사용 구분자, CPU or GPU, Device 참고
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-09
+    int m_idOfDevice = -1;///< GPU 사용 시, 사용하려는 GPU의 번호
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-09
 
 #ifdef __CUDNN__
     cudnnTensorDescriptor_t m_desc;
