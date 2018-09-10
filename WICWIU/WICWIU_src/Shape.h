@@ -8,7 +8,8 @@
 // #endif  // if __CUDNN__
 
 /*!
-@class Shape Tensor의 차원 값을 저장하고 관리하는 클래스
+@class Shape Tensor의 차원 정보를 담고 있는 Shape을 저장하고 관리하는 클래스
+@brief Tensor의 차원 정보를 담고 있는 Shape을 저장하고 관리하는 클래스
 @details 추가 예정
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-09
