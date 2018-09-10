@@ -10,9 +10,9 @@ template class Tensor<unsigned char>;
 
 /*!
 @brief Tensor의 Shape 정의 및 하는 메소드.
-@details  pShape의 형태을 갖는 Tensor를 정의하고 그 Tensor의 m_aLongArray를 메모리에 할당한는 메소드.
+@details pShape의 형태을 갖는 Tensor를 정의하고 그 Tensor의 m_aLongArray를 메모리에 할당한는 메소드.
 @param *pShape alloc하는 Tensor의 Shape형태.
-@param pAnswer Time사용여부
+@param pAnswer Time 사용 여부
 @return 성공 시 TRUE, 실패 시 FALSE.
 */
 // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
