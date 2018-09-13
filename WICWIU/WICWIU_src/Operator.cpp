@@ -7,6 +7,14 @@ template class Operator<double>;
 
 //////////////////////////////////////////////////////////////////////////////// for private method
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::Alloc() {
     m_apOutput   = new Container<Operator<DTYPE> *>();
     m_apInput    = new Container<Operator<DTYPE> *>();
@@ -16,6 +24,14 @@ template<typename DTYPE> int Operator<DTYPE>::Alloc() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::Alloc(int numInput, ...) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Alloc(Tensor<DTYPE> *)" << '\n';
@@ -55,6 +71,14 @@ template<typename DTYPE> int Operator<DTYPE>::Alloc(int numInput, ...) {
 }
 
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Operator<DTYPE>::Delete() {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Delete()" << '\n';
@@ -100,6 +124,14 @@ template<typename DTYPE> void Operator<DTYPE>::Delete() {
     }
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 // Add Graph Edge
 template<typename DTYPE> int Operator<DTYPE>::AddInputEdge(Operator<DTYPE> *pInput) {
     try {
@@ -112,6 +144,14 @@ template<typename DTYPE> int Operator<DTYPE>::AddInputEdge(Operator<DTYPE> *pInp
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::AddOutputEdge(Operator<DTYPE> *pOutput) {
     try {
         m_apOutput->Push(pOutput);
@@ -125,6 +165,14 @@ template<typename DTYPE> int Operator<DTYPE>::AddOutputEdge(Operator<DTYPE> *pOu
 
 //////////////////////////////////////////////////////////////////////////////// for public method
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE>::Operator(std::string pName) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Operator()" << '\n';
@@ -141,6 +189,14 @@ template<typename DTYPE> Operator<DTYPE>::Operator(std::string pName) {
     Alloc();
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput, std::string pName) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Operator()" << '\n';
@@ -158,6 +214,14 @@ template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput, std:
     AddEdgebetweenOperators(1, pInput);
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput0, Operator<DTYPE> *pInput1, std::string pName) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Operator()" << '\n';
@@ -175,6 +239,14 @@ template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput0, Ope
     AddEdgebetweenOperators(2, pInput0, pInput1);
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput0, Operator<DTYPE> *pInput1, Operator<DTYPE> *pInput2, std::string pName) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Operator()" << '\n';
@@ -192,6 +264,14 @@ template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput0, Ope
     AddEdgebetweenOperators(3, pInput0, pInput1, pInput2);
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE>::~Operator() {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::~Operator()" << '\n';
@@ -199,12 +279,28 @@ template<typename DTYPE> Operator<DTYPE>::~Operator() {
     this->Delete();
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::AddEdgebetweenOperators(Operator<DTYPE> *pInput) {
     this->AddInputEdge(pInput);
     pInput->AddOutputEdge(this);
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::AddEdgebetweenOperators(int numInput, ...) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Alloc(Tensor<DTYPE> *)" << '\n';
@@ -243,6 +339,14 @@ template<typename DTYPE> int Operator<DTYPE>::AddEdgebetweenOperators(int numInp
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetResult(Tensor<DTYPE> *pTensor) {
     if (m_aaResult->GetSize()) {
         Tensor<DTYPE> *temp = m_aaResult->Pop();
@@ -254,11 +358,27 @@ template<typename DTYPE> int Operator<DTYPE>::SetResult(Tensor<DTYPE> *pTensor) 
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::AddResult(Tensor<DTYPE> *pTensor) {
     m_aaResult->Push(pTensor);
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetGradient(Tensor<DTYPE> *pTensor) {
     if (m_aaGradient->GetSize()) {
         Tensor<DTYPE> *temp = m_aaGradient->Pop();
@@ -270,11 +390,27 @@ template<typename DTYPE> int Operator<DTYPE>::SetGradient(Tensor<DTYPE> *pTensor
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::AddGradient(Tensor<DTYPE> *pTensor) {
     m_aaGradient->Push(pTensor);
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetDelta(Tensor<DTYPE> *pTensor) {
     if (m_aaGradient->GetSize()) {
         Tensor<DTYPE> *temp = m_aaGradient->Pop();
@@ -286,108 +422,300 @@ template<typename DTYPE> int Operator<DTYPE>::SetDelta(Tensor<DTYPE> *pTensor) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::AddDelta(Tensor<DTYPE> *pTensor) {
     m_aaGradient->Push(pTensor);
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetDevice(Device pDevice) {
     m_Device = pDevice;
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetDeviceID(unsigned int idOfDevice) {
     m_idOfDevice = idOfDevice;
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetIsTensorholder(int pIsParameter) {
     m_isParameter = pIsParameter;
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetIsTrainable(int pIsTrainable) {
     m_isTrainable = pIsTrainable;
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetModeTraining() {
     m_Mode = TRAINING;
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetModeAccumulating() {
     m_Mode = ACCUMULATING;
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetModeInferencing() {
     m_Mode = INFERENCING;
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE> **Operator<DTYPE>::GetOutput() {
     return m_apOutput->GetRawData();
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Operator<DTYPE> *> *Operator<DTYPE>::GetOutputContainer() {
     return m_apOutput;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE> **Operator<DTYPE>::GetInput() {
     return m_apInput->GetRawData();
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Operator<DTYPE> *> *Operator<DTYPE>::GetInputContainer() {
     return m_apInput;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *Operator<DTYPE>::GetResult() const {
     return (*m_aaResult)[0];
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Tensor<DTYPE> *> *Operator<DTYPE>::GetResultContainer() {
     return m_aaResult;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *Operator<DTYPE>::GetGradient() const {
     return (*m_aaGradient)[0];
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Tensor<DTYPE> *> *Operator<DTYPE>::GetGradientContainer() {
     return m_aaGradient;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *Operator<DTYPE>::GetDelta() const {
     return (*m_aaGradient)[0];
     // return (*m_aaDelta)[0];
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Tensor<DTYPE> *> *Operator<DTYPE>::GetDeltaContainer() {
     return m_aaGradient;
     // return m_aaDelta;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> std::string Operator<DTYPE>::GetName() const {
     return m_name;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Device Operator<DTYPE>::GetDevice() {
     return m_Device;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::GetDeviceID() {
     return m_idOfDevice;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::GetIsTensorholder() {
     return m_isParameter;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::GetIsTrainable() {
     return m_isTrainable;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::ForwardPropagate(int pTime) {
     #ifdef __DEBUG__
     std::cout << "thread number : " << pThreadNum << '\n';
@@ -396,6 +724,14 @@ template<typename DTYPE> int Operator<DTYPE>::ForwardPropagate(int pTime) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::BackPropagate(int pTime) {
     #ifdef __DEBUG__
     std::cout << "thread number : " << pThreadNum << '\n';
@@ -404,6 +740,14 @@ template<typename DTYPE> int Operator<DTYPE>::BackPropagate(int pTime) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::ResetResult() {
     // Tensorholder의 경우는 하면 안된다.
     int size = m_aaResult->GetSize();
@@ -427,6 +771,14 @@ template<typename DTYPE> int Operator<DTYPE>::ResetResult() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::ResetGradient() {
     int size = m_aaGradient->GetSize();
 
@@ -449,11 +801,27 @@ template<typename DTYPE> int Operator<DTYPE>::ResetGradient() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Operator<DTYPE>::PrintInformation() {
     std::cout << this->GetName() << " : ";
     std::cout << this->GetResult()->GetShape() << '\n';
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Operator<DTYPE>::SetDeviceCPU() {
     this->SetDevice(CPU);
 
@@ -461,6 +829,14 @@ template<typename DTYPE> void Operator<DTYPE>::SetDeviceCPU() {
     this->SetGradientOnCPU();
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetResultOnCPU() {
     // Tensorholder의 경우는 하면 안된다.
     int size = m_aaResult->GetSize();
@@ -472,6 +848,14 @@ template<typename DTYPE> int Operator<DTYPE>::SetResultOnCPU() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetGradientOnCPU() {
     int size = m_aaGradient->GetSize();
 
@@ -482,6 +866,14 @@ template<typename DTYPE> int Operator<DTYPE>::SetGradientOnCPU() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::Save(FILE *fileForSave) {
     int size = m_aaResult->GetSize();
 
@@ -492,6 +884,14 @@ template<typename DTYPE> int Operator<DTYPE>::Save(FILE *fileForSave) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::Load(FILE *fileForLoad) {
     int size = m_aaResult->GetSize();
 
@@ -504,11 +904,27 @@ template<typename DTYPE> int Operator<DTYPE>::Load(FILE *fileForLoad) {
 
 #ifdef __CUDNN__
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetCudnnHandle(cudnnHandle_t& pCudnnHandle) {
     m_pCudnnHandle = pCudnnHandle;
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::SetResultOnGPU(unsigned int idOfDevice) {
     // Tensorholder의 경우는 하면 안된다.
     int size = m_aaResult->GetSize();
@@ -520,7 +936,15 @@ template<typename DTYPE> int Operator<DTYPE>::SetResultOnGPU(unsigned int idOfDe
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
 template<typename DTYPE> int Operator<DTYPE>::SetGradientOnGPU(unsigned int idOfDevice) {
+// 문서 작성자 : , 작성 날짜 : 2018-
     int size = m_aaGradient->GetSize();
 
     for (int i = 0; i < size; i++) {
@@ -530,6 +954,14 @@ template<typename DTYPE> int Operator<DTYPE>::SetGradientOnGPU(unsigned int idOf
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Operator<DTYPE>::InitializeAttributeForGPU(unsigned int idOfDevice) {}
 
 // template<typename DTYPE> void Operator<DTYPE>::SetDeviceGPU(unsigned int idOfDevice) {
@@ -539,6 +971,14 @@ template<typename DTYPE> void Operator<DTYPE>::InitializeAttributeForGPU(unsigne
 // this->SetGradientOnGPU(idOfDevice);
 // }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Operator<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnHandle, unsigned int idOfDevice) {
     checkCudaErrors(cudaSetDevice(idOfDevice));
     this->SetCudnnHandle(pCudnnHandle);
@@ -549,10 +989,26 @@ template<typename DTYPE> void Operator<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudn
     this->InitializeAttributeForGPU(idOfDevice);
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> cudnnHandle_t& Operator<DTYPE>::GetCudnnHandle() {
     return m_pCudnnHandle;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::ForwardPropagateOnGPU(int pTime) {
     # if __DEBUG__
     std::cout << "Operator<DTYPE>::ForwardPropagateOnGPU(int)" << '\n';
@@ -561,6 +1017,14 @@ template<typename DTYPE> int Operator<DTYPE>::ForwardPropagateOnGPU(int pTime) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::BackPropagateOnGPU(int pTime) {
     # if __DEBUG__
     std::cout << "Operator<DTYPE>::BackPropagateOnGPU(int)" << '\n';

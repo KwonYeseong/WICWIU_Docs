@@ -3,18 +3,37 @@
 
 #include "../LossFunction.h"
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE>
 class SoftmaxCrossEntropy : public LossFunction<DTYPE>{
 private:
-    Tensor<DTYPE> *m_aSoftmaxResult;
-    DTYPE m_epsilon;  // for backprop
+    Tensor<DTYPE> *m_aSoftmaxResult; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE m_epsilon;  // for backprop ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_timesize;
+    int m_timesize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    DTYPE **sum;
-    DTYPE **max;
+    DTYPE **sum; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE **max; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     SoftmaxCrossEntropy(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, DTYPE epsilon, std::string pName = "NO NAME") : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "SoftmaxCrossEntropy::SoftmaxCrossEntropy(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -22,6 +41,14 @@ public:
         Alloc(pOperator, epsilon);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     SoftmaxCrossEntropy(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, std::string pName = "NO NAME") : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "SoftmaxCrossEntropy::SoftmaxCrossEntropy(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -29,6 +56,14 @@ public:
         Alloc(pOperator, 1e-6f);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~SoftmaxCrossEntropy() {
         #ifdef __DEBUG__
         std::cout << "SoftmaxCrossEntropy::~SoftmaxCrossEntropy()" << '\n';
@@ -36,6 +71,14 @@ public:
         Delete();
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual int Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon) {
         #ifdef __DEBUG__
         std::cout << "SoftmaxCrossEntropy::Alloc(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -69,12 +112,28 @@ public:
     }
 
     #ifdef __CUDNN__
+        /*!
+        @brief
+        @details
+        @param
+        @return
+        @todo 우선순위
+        */
+        // 문서 작성자 : , 작성 날짜 : 2018-
         void InitializeAttributeForGPU(unsigned int idOfDevice) {
             m_aSoftmaxResult->SetDeviceGPU(idOfDevice);
         }
 
     #endif  // if __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual void Delete() {
         if (m_aSoftmaxResult) {
             delete m_aSoftmaxResult;
@@ -98,6 +157,14 @@ public:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input         = this->GetTensor();
         Tensor<DTYPE> *label         = this->GetLabel()->GetResult();
@@ -158,6 +225,14 @@ public:
         return result;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *label         = this->GetLabel()->GetResult();
         Tensor<DTYPE> *softmaxresult = m_aSoftmaxResult;
@@ -188,6 +263,14 @@ public:
 
 #ifdef __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* ForwardPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input         = this->GetTensor();
         Tensor<DTYPE> *label         = this->GetLabel()->GetResult();
@@ -225,6 +308,14 @@ public:
         return result;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* BackPropagateOnGPU(int pTime = 0) {
         return this->BackPropagate(pTime);
     }
@@ -232,6 +323,14 @@ public:
 #endif  // __CUDNN__
 
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE Max(Tensor<DTYPE> *input, int start, int end) {
         DTYPE max = (*input)[start];
 

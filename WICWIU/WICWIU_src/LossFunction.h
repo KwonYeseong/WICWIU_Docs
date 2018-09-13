@@ -3,23 +3,38 @@
 
 #include "Module_utils.h"
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class LossFunction {
 private:
-    Tensor<DTYPE> *m_aResult;
-    Tensor<DTYPE> *m_aGradient;
+    Tensor<DTYPE> *m_aResult; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_aGradient; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Operator<DTYPE> *m_pInputOperator;
-    Tensor<DTYPE> *m_pInputTensor;
+    Operator<DTYPE> *m_pInputOperator; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pInputTensor; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Operator<DTYPE> *m_pLabel;
+    Operator<DTYPE> *m_pLabel; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    std::string m_name;
+    std::string m_name; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Device m_Device;
-    int m_idOfDevice = -1;
+    Device m_Device; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_idOfDevice = -1; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnHandle_t m_pCudnnHandle;
+    cudnnHandle_t m_pCudnnHandle; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // if __CUDNN__
 
 public:

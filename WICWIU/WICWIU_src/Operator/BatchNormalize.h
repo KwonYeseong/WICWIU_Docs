@@ -5,57 +5,106 @@
 
 #include <cmath>
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE>
 class BatchNormalize : public Operator<DTYPE>{
 private:
-    Tensor<DTYPE> *m_pTenInput;
-    Tensor<DTYPE> *m_pTenScale;
-    Tensor<DTYPE> *m_pTenBias;
-    Tensor<DTYPE> *m_pTenResult;
+    Tensor<DTYPE> *m_pTenInput; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pTenScale; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pTenBias; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pTenResult; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Tensor<DTYPE> *m_pTenDerInput;
-    Tensor<DTYPE> *m_pTenDerScale;
-    Tensor<DTYPE> *m_pTenDerBias;
-    Tensor<DTYPE> *m_pTenDerResult;
+    Tensor<DTYPE> *m_pTenDerInput; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pTenDerScale; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pTenDerBias; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pTenDerResult; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Tensor<DTYPE> *m_aTenTotalMean;
-    Tensor<DTYPE> *m_aTenTotalVariance;
+    Tensor<DTYPE> *m_aTenTotalMean; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_aTenTotalVariance; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Tensor<DTYPE> *m_aTenCachedMean;
-    Tensor<DTYPE> *m_aTenCachedInvVariance;
+    Tensor<DTYPE> *m_aTenCachedMean; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_aTenCachedInvVariance; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_inputTimeSize;
-    int m_inputBatchSize;
-    int m_numChannel;
-    int m_numInputRow;
-    int m_numInputColumn;
+    int m_inputTimeSize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_inputBatchSize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_numChannel; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_numInputRow; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_numInputColumn; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_isChannelwise;
-    Mode m_mode;
+    int m_isChannelwise; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Mode m_mode; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_inputCapacity;
-    int m_batchSummaryCapacity;
+    int m_inputCapacity; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_batchSummaryCapacity; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    float m_epsilon;
-    float m_momentum;
-    double m_exponentialAverageFactor;
+    float m_epsilon; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    float m_momentum; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    double m_exponentialAverageFactor; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnHandle_t m_CUDNNHandle;
-    cudnnBatchNormMode_t m_CUDNNMode;
-    cudnnTensorDescriptor_t m_CUDNNXDesc;
-    cudnnTensorDescriptor_t m_CUDNNYDesc;
-    cudnnTensorDescriptor_t m_CUDNNDxDesc;
-    cudnnTensorDescriptor_t m_CUDNNDyDesc;
-    cudnnTensorDescriptor_t m_CUDNNBatchSummaryDesc;
+    cudnnHandle_t m_CUDNNHandle; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnBatchNormMode_t m_CUDNNMode; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnTensorDescriptor_t m_CUDNNXDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnTensorDescriptor_t m_CUDNNYDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnTensorDescriptor_t m_CUDNNDxDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnTensorDescriptor_t m_CUDNNDyDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnTensorDescriptor_t m_CUDNNBatchSummaryDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    float m_CUDNNAlpha;
-    float m_CUDNNBeta;
-    double m_CUDNNEpsilon;
-    double m_CUDNNExponentialAverageFactor;
+    float m_CUDNNAlpha; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    float m_CUDNNBeta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    double m_CUDNNEpsilon; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    double m_CUDNNExponentialAverageFactor; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // _CUDNN__
 
 public:
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     BatchNormalize(Operator<DTYPE> *pInput, Operator<DTYPE> *pScale, Operator<DTYPE> *pBias, int pIsChannelwise = TRUE, std::string pName = NULL) : Operator<DTYPE>(pInput, pScale, pBias, pName) {
 #if __DEBUG__
         std::cout << "BatchNormalize:: BatchNormalize( Operator< DTYPE>*, Operator< DTYPE>*, Operator< DTYPE>*, int, std:: string)" << '\n';
@@ -64,6 +113,14 @@ public:
         Alloc(pInput, pScale, pBias, pIsChannelwise);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     BatchNormalize(Operator<DTYPE> *pInput, Operator<DTYPE> *pScale, Operator<DTYPE> *pBias, int pIsChannelwise = TRUE, float pMomentum = 0.1, std::string pName = NULL) : Operator<DTYPE>(pInput, pScale, pBias, pName) {
 #if __DEBUG__
         std::cout << "BatchNormalize:: BatchNormalize( Operator< DTYPE>*, Operator< DTYPE>*, Operator< DTYPE>*, int, std:: string)" << '\n';
@@ -72,6 +129,14 @@ public:
         Alloc(pInput, pScale, pBias, pIsChannelwise, pMomentum);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     ~BatchNormalize() {
 #if __DEBUG__
         std::cout << "BatchNormalize:: ~ BatchNormalize()" << '\n';
@@ -80,6 +145,14 @@ public:
         Delete();
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pScale, Operator<DTYPE> *pBias, int pIsChannelwise, float pMomentum = 0.1, double pEpsilon = 0.01) {
 #if __DEBUG__
         std::cout << "BatchNormalize:: Alloc( Operator< DTYPE>*, Operator< DTYPE>*, Operator< DTYPE>*, int, double)" << '\n';
@@ -132,6 +205,14 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         checkCudaErrors(cudaSetDevice(idOfDevice));
 
@@ -164,6 +245,14 @@ public:
 
 #endif  // if __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
 #ifdef __CUDNN__
         checkCUDNN(cudnnDestroyTensorDescriptor(m_CUDNNBatchSummaryDesc));
@@ -177,6 +266,14 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime = 0) {
         DTYPE *CUDNNX = m_pTenInput->GetGPUData(pTime);
 
@@ -235,6 +332,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {
         DTYPE *CUDNNX       = m_pTenInput->GetGPUData(pTime);
         DTYPE *CUDNNBnScale = m_pTenScale->GetGPUData(0);
@@ -262,6 +367,14 @@ public:
 
 #endif  // if __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int SetModeTraining() {
         if (m_mode == ACCUMULATING) {
 #ifdef __CUDNN__
@@ -285,6 +398,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int SetModeAccumulating() {
         // std::cout << m_aTenTotalMean << '\n';
         // std::cout << m_aTenTotalVariance << '\n';
@@ -311,6 +432,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int SetModeInferencing() {
         // std::cout << m_aTenTotalMean << '\n';
         // std::cout << m_aTenTotalVariance << '\n';

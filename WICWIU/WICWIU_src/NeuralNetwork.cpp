@@ -6,6 +6,14 @@ template class NeuralNetwork<double>;
 
 //////////////////////////////////////////////////////////////////////////////// for private method
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::Alloc() {
     m_aaOperator          = new Container<Operator<DTYPE> *>();
     m_apExcutableOperator = new Container<Operator<DTYPE> *>();
@@ -14,6 +22,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::Alloc() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void NeuralNetwork<DTYPE>::Delete() {
     #ifdef __DEBUG__
     std::cout << "NeuralNetwork<DTYPE>::Delete()" << '\n';
@@ -65,11 +81,27 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::Delete() {
 }
 
 #ifdef __CUDNN__
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::AllocOnGPU() {
     // checkCudaErrors(cudaSetDevice(2));
     checkCUDNN(cudnnCreate(&m_cudnnHandle));
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void NeuralNetwork<DTYPE>::DeleteOnGPU() {
     // checkCudaErrors(cudaThreadSynchronize());
     // checkCudaErrors(cudaDeviceSynchronize());
@@ -82,6 +114,14 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::DeleteOnGPU() {
 //////////////////////////////////////////////////////////////////////////////// for public method
 
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> NeuralNetwork<DTYPE>::NeuralNetwork() {
     #ifdef __DEBUG__
     std::cout << "NeuralNetwork<DTYPE>::NeuralNetwork()" << '\n';
@@ -109,6 +149,14 @@ template<typename DTYPE> NeuralNetwork<DTYPE>::NeuralNetwork() {
     Alloc();
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> NeuralNetwork<DTYPE>::~NeuralNetwork() {
     #ifdef __DEBUG__
     std::cout << "NeuralNetwork<DTYPE>::~NeuralNetwork()" << '\n';
@@ -117,6 +165,14 @@ template<typename DTYPE> NeuralNetwork<DTYPE>::~NeuralNetwork() {
     this->Delete();
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::SetInput(Operator<DTYPE> *pInput) {
     m_aaOperator->Push(pInput);
     m_Operatordegree++;
@@ -126,6 +182,14 @@ template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::SetInput(Operato
     return pInput;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::SetInput(int pNumOfInput, ...) {
     Operator<DTYPE> *temp = NULL;
 
@@ -141,6 +205,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::SetInput(int pNumOfInput, ...
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::IsInput(Operator<DTYPE> *pOperator) {
     for (int i = 0; i < m_InputDegree; i++) {
         if ((*m_apInput)[i] == pOperator) return TRUE;
@@ -149,6 +221,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::IsInput(Operator<DTYPE> *pOpe
     return FALSE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::IsValid(Operator<DTYPE> *pOperator) {
     Container<Operator<DTYPE> *> *prevOp = pOperator->GetOutputContainer();
     int numOfOutputEdge                  = prevOp->GetSize();
@@ -169,6 +249,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::IsValid(Operator<DTYPE> *pOpe
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::AnalyzeGraph(Operator<DTYPE> *pResultOperator) {
     // BFS
     Container<Operator<DTYPE> *> queue;
@@ -243,16 +331,40 @@ template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::AnalyzeGraph(Ope
     return pResultOperator;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> LossFunction<DTYPE> *NeuralNetwork<DTYPE>::SetLossFunction(LossFunction<DTYPE> *pLossFunction) {
     m_aLossFunction = pLossFunction;
     return pLossFunction;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Optimizer<DTYPE> *NeuralNetwork<DTYPE>::SetOptimizer(Optimizer<DTYPE> *pOptimizer) {
     m_aOptimizer = pOptimizer;
     return pOptimizer;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::FeedInputTensor(int pNumOfInput, ...) {
     Tensor<DTYPE> *temp = NULL;
 
@@ -268,38 +380,110 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::FeedInputTensor(int pNumOfInp
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Operator<DTYPE> *> *NeuralNetwork<DTYPE>::GetInputContainer() {
     return m_apInput;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::GetResultOperator() {
     return this->GetResult();
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::GetResult() {
     return m_apExcutableOperator->GetLast();
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Operator<DTYPE> *> *NeuralNetwork<DTYPE>::GetExcutableOperatorContainer() {
     return m_apExcutableOperator;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Operator<DTYPE> *> *NeuralNetwork<DTYPE>::GetParameterContainer() {
     return m_apParameter;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Operator<DTYPE> *> *NeuralNetwork<DTYPE>::GetParameter() {
     return m_apParameter;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> LossFunction<DTYPE> *NeuralNetwork<DTYPE>::GetLossFunction() {
     return m_aLossFunction;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Optimizer<DTYPE> *NeuralNetwork<DTYPE>::GetOptimizer() {
     return m_aOptimizer;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ForwardPropagate(int pTime) {
     for (int i = 0; i < m_ExcutableOperatorDegree; i++) {
         (*m_apExcutableOperator)[i]->ForwardPropagate(pTime);
@@ -309,6 +493,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ForwardPropagate(int pTime) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::BackPropagate(int pTime) {
     m_aLossFunction->BackPropagate(pTime);
 
@@ -318,6 +510,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::BackPropagate(int pTime) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void NeuralNetwork<DTYPE>::SetDeviceCPU() {
     m_Device = CPU;
 
@@ -327,24 +527,56 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::SetDeviceCPU() {
     m_aLossFunction->SetDeviceCPU();
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void NeuralNetwork<DTYPE>::SetModeTraining() {
     for (int i = 0; i < m_ExcutableOperatorDegree; i++) {
         (*m_apExcutableOperator)[i]->SetModeTraining();
     }
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void NeuralNetwork<DTYPE>::SetModeAccumulating() {
     for (int i = 0; i < m_ExcutableOperatorDegree; i++) {
         (*m_apExcutableOperator)[i]->SetModeAccumulating();
     }
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void NeuralNetwork<DTYPE>::SetModeInferencing() {
     for (int i = 0; i < m_ExcutableOperatorDegree; i++) {
         (*m_apExcutableOperator)[i]->SetModeInferencing();
     }
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::Training() {
     if (m_Device == CPU) {
         this->TrainingOnCPU();
@@ -355,6 +587,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::Training() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::Testing() {
     if (m_Device == CPU) {
         this->TestingOnCPU();
@@ -365,6 +605,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::Testing() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::TrainingOnCPU() {
     this->ResetOperatorResult();
     this->ResetOperatorGradient();
@@ -379,6 +627,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::TrainingOnCPU() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::TestingOnCPU() {
     this->ResetOperatorResult();
     this->ResetLossFunctionResult();
@@ -387,6 +643,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::TestingOnCPU() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::TrainingOnGPU() {
 #ifdef __CUDNN__
     this->ResetOperatorResult();
@@ -406,6 +670,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::TrainingOnGPU() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::TestingOnGPU() {
 #ifdef __CUDNN__
     this->ResetOperatorResult();
@@ -420,6 +692,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::TestingOnGPU() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> float NeuralNetwork<DTYPE>::GetAccuracy(int numOfClass) {
     Operator<DTYPE> *result = GetResultOperator();
     Operator<DTYPE> *label  = m_aLossFunction->GetLabel();
@@ -449,6 +729,14 @@ template<typename DTYPE> float NeuralNetwork<DTYPE>::GetAccuracy(int numOfClass)
     return (float)((accuracy / timesize) / batchsize);
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::GetMaxIndex(Tensor<DTYPE> *data, int ba, int ti, int numOfClass) {
     Shape *pShape = data->GetShape();
     int    start  = Index5D(pShape, ti, ba, 0, 0, 0);
@@ -469,6 +757,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::GetMaxIndex(Tensor<DTYPE> *da
 }
 
 ///////////////////////////////////////////
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> float NeuralNetwork<DTYPE>::GetTop5Accuracy(int numOfClass) {
     Operator<DTYPE> *result = GetResultOperator();
     Operator<DTYPE> *label  = m_aLossFunction->GetLabel();
@@ -501,6 +797,14 @@ template<typename DTYPE> float NeuralNetwork<DTYPE>::GetTop5Accuracy(int numOfCl
     return (float)((top5Accuracy / timesize) / batchsize);
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int* NeuralNetwork<DTYPE>::GetTop5Index(Tensor<DTYPE> *data, int ba, int ti, int numOfClass) {
     Shape *pShape = data->GetShape();
     int    start  = Index5D(pShape, ti, ba, 0, 0, 0);
@@ -533,6 +837,14 @@ template<typename DTYPE> int* NeuralNetwork<DTYPE>::GetTop5Index(Tensor<DTYPE> *
 }
 ///////////////////////////////////////////
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> float NeuralNetwork<DTYPE>::GetLoss() {
     float avg_loss = 0.f;
 
@@ -548,6 +860,14 @@ template<typename DTYPE> float NeuralNetwork<DTYPE>::GetLoss() {
     return avg_loss;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void NeuralNetwork<DTYPE>::PrintGraphInformation() {
     std::cout << "Graph Structure: " << "\n\n";
 
@@ -560,6 +880,14 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::PrintGraphInformation() {
     // std::cout << "Optimizern: " << m_aOptimizer->GetName() << '\n';
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetOperatorResult() {
     for (int i = 0; i < m_ExcutableOperatorDegree; i++) {
         (*m_apExcutableOperator)[i]->ResetResult();
@@ -567,6 +895,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetOperatorResult() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetOperatorGradient() {
     for (int i = 0; i < m_ExcutableOperatorDegree; i++) {
         (*m_apExcutableOperator)[i]->ResetGradient();
@@ -574,21 +910,53 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetOperatorGradient() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetLossFunctionResult() {
     m_aLossFunction->ResetResult();
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetLossFunctionGradient() {
     m_aLossFunction->ResetGradient();
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetParameterGradient() {
     m_aOptimizer->ResetParameterGradient();
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::SerchOperator(std::string pName) {
     std::string name = "NULL";
 
@@ -601,6 +969,14 @@ template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::SerchOperator(st
     return NULL;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::Save(FILE *fileForSave) {
     for (int i = 0; i < m_ParameterDegree; i++) {
         // important order
@@ -609,6 +985,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::Save(FILE *fileForSave) {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::Load(FILE *fileForLoad) {
     for (int i = 0; i < m_ParameterDegree; i++) {
         // important order
@@ -618,6 +1002,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::Load(FILE *fileForLoad) {
 }
 
 #ifdef __CUDNN__
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ForwardPropagateOnGPU(int pTime) {
     for (int i = 0; i < m_ExcutableOperatorDegree; i++) {
         (*m_apExcutableOperator)[i]->ForwardPropagateOnGPU(pTime);
@@ -627,6 +1019,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ForwardPropagateOnGPU(int pTi
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::BackPropagateOnGPU(int pTime) {
     m_aLossFunction->BackPropagateOnGPU(pTime);
 
@@ -636,6 +1036,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::BackPropagateOnGPU(int pTime)
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void NeuralNetwork<DTYPE>::SetDeviceGPU(unsigned int idOfDevice) {
     // std::cout << "NeuralNetwork<DTYPE>::SetModeGPU()" << '\n';
     checkCudaErrors(cudaSetDevice(idOfDevice));
@@ -663,6 +1071,14 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::SetDeviceGPU(unsigned int id
     m_aOptimizer->SetDeviceGPU(m_cudnnHandle, idOfDevice);
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::SetDeviceID(unsigned int idOfDevice) {
     m_idOfDevice = idOfDevice;
     return TRUE;

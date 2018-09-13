@@ -3,9 +3,23 @@
 
 #include "../LossFunction.h"
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE>
 class MSE : public LossFunction<DTYPE>{
 public:
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     MSE(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, std::string pName) : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "MSE::MSE(Operator<DTYPE> *, MetaParameter *, std::string)" << '\n';
@@ -13,12 +27,28 @@ public:
         this->Alloc(pOperator);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~MSE() {
         #ifdef __DEBUG__
         std::cout << "MSE::~MSE()" << '\n';
         #endif  // __DEBUG__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual int Alloc(Operator<DTYPE> *pOperator) {
         #ifdef __DEBUG__
         std::cout << "MSE::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -39,6 +69,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetTensor();
         Tensor<DTYPE> *label  = this->GetLabel()->GetResult();
@@ -65,6 +103,14 @@ public:
         return result;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *input       = this->GetTensor();
         Tensor<DTYPE> *label       = this->GetLabel()->GetResult();
@@ -93,11 +139,27 @@ public:
 
 #ifdef __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* ForwardPropagateOnGPU(int pTime = 0) {
         this->ForwardPropagate();
         return NULL;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* BackPropagateOnGPU(int pTime = 0) {
         this->BackPropagate();
         return NULL;
@@ -106,6 +168,14 @@ public:
 #endif  // __CUDNN__
 
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     inline DTYPE Error(DTYPE pred, DTYPE ans) {
         return (pred - ans) * (pred - ans) / 2;
     }

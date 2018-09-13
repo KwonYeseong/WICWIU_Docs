@@ -3,15 +3,26 @@
 
 #include "Operator_utils.h"
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Module : public Operator<DTYPE>{
 private:
-    Container<Operator<DTYPE> *> *m_aaExcutableOperator;
-    int m_numOfExcutableOperator;
+    Container<Operator<DTYPE> *> *m_aaExcutableOperator; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_numOfExcutableOperator; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Operator<DTYPE> *m_pLastOperator;
+    Operator<DTYPE> *m_pLastOperator; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Device m_Device;
-    unsigned int m_idOfDevice = 0;
+    Device m_Device; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    unsigned int m_idOfDevice = 0; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 private:
     int  Alloc();

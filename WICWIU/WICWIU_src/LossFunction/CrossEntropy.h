@@ -3,12 +3,27 @@
 
 #include "../LossFunction.h"
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE>
 class CrossEntropy : public LossFunction<DTYPE>{
 private:
-    DTYPE m_epsilon = 0.0;  // for backprop
+    DTYPE m_epsilon = 0.0;  // for backprop ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     CrossEntropy(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, int epsilon = 1e-6f) : LossFunction<DTYPE>(pOperator, pLabel) {
         #ifdef __DEBUG__
         std::cout << "CrossEntropy::CrossEntropy(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -16,6 +31,14 @@ public:
         this->Alloc(pOperator, epsilon);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     CrossEntropy(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, std::string pName) : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "CrossEntropy::CrossEntropy(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -23,6 +46,14 @@ public:
         this->Alloc(pOperator, 1e-6f);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     CrossEntropy(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, int epsilon, std::string pName) : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "CrossEntropy::CrossEntropy(Operator<DTYPE> *, Operator<DTYPE> *, int, std::string)" << '\n';
@@ -30,12 +61,28 @@ public:
         this->Alloc(pOperator, epsilon);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     ~CrossEntropy() {
         #ifdef __DEBUG__
         std::cout << "CrossEntropy::~CrossEntropy()" << '\n';
         #endif  // __DEBUG__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual int Alloc(Operator<DTYPE> *pOperator, int epsilon) {
         #ifdef __DEBUG__
         std::cout << "CrossEntropy::Alloc(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -54,6 +101,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetTensor();
         Tensor<DTYPE> *label  = this->GetLabel()->GetResult();
@@ -80,6 +135,14 @@ public:
         return result;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *input       = this->GetTensor();
         Tensor<DTYPE> *label       = this->GetLabel()->GetResult();
@@ -108,11 +171,27 @@ public:
 
 #ifdef __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* ForwardPropagateOnGPU(int pTime = 0) {
         this->ForwardPropagate();
         return NULL;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* BackPropagateOnGPU(int pTime = 0) {
         this->BackPropagate();
         return NULL;

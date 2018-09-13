@@ -3,20 +3,40 @@
 
 #include "../Operator.h"
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Relu : public Operator<DTYPE>{
 private:
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc;
-    cudnnActivationDescriptor_t actDesc;
-    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta;
+    cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnActivationDescriptor_t actDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    float m_alpha;
-    float m_beta;
-    double m_coef;
+    float m_alpha; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    float m_beta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    double m_coef; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #endif  // __CUDNN__
 
 public:
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Relu(Operator<DTYPE> *pInput) : Operator<DTYPE>(pInput) {
         #ifdef __DEBUG__
         std::cout << "Relu::Relu(Operator<DTYPE> *)" << '\n';
@@ -24,6 +44,14 @@ public:
         this->Alloc(pInput);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Relu(Operator<DTYPE> *pInput, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "Relu::Relu(Operator<DTYPE> *)" << '\n';
@@ -31,6 +59,14 @@ public:
         this->Alloc(pInput);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     ~Relu() {
         #ifdef __DEBUG__
         std::cout << "Relu::~Relu()" << '\n';
@@ -39,6 +75,14 @@ public:
         Delete();
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput) {
         #ifdef __DEBUG__
         std::cout << "Relu::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -58,6 +102,14 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         Operator<DTYPE> *pInput = this->GetInput()[0];
 
@@ -96,6 +148,14 @@ public:
 
 #endif  // if __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
 #ifdef __CUDNN__
 
@@ -118,6 +178,14 @@ public:
 #endif  // if __CUDNN__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *result = this->GetResult();
@@ -146,6 +214,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *result      = this->GetResult();
         Tensor<DTYPE> *this_delta  = this->GetGradient();
@@ -180,12 +256,28 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     inline DTYPE MAX(DTYPE data1, DTYPE data2) {
         if (data1 >= data2) return data1;
         else return data2;
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *result = this->GetResult();
@@ -201,6 +293,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *result      = this->GetResult();
         Tensor<DTYPE> *this_delta  = this->GetGradient();

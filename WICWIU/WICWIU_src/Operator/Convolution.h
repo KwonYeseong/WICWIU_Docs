@@ -4,46 +4,101 @@
 #include "../Operator.h"
 #include <cstdio>
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Convolution2D : public Operator<DTYPE>{
 private:
-    int m_stride[2];
-    int m_padding[2];
+    int m_stride[2]; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_padding[2]; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t inputTensorDesc, outputTensorDesc, deltaDesc, inputDeltaDesc;
-    cudnnConvolutionDescriptor_t convDesc;
-    cudnnFilterDescriptor_t filterDesc, filterDeltaDesc;
-    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevFilter, *m_pDevInputDelta, *m_pDevDelta, *m_pDevFilterDelta;
+    cudnnTensorDescriptor_t inputTensorDesc, outputTensorDesc, deltaDesc, inputDeltaDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnConvolutionDescriptor_t convDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnFilterDescriptor_t filterDesc, filterDeltaDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevFilter, *m_pDevInputDelta, *m_pDevDelta, *m_pDevFilterDelta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    cudnnConvolutionFwdAlgo_t m_algo;
-    cudnnConvolutionBwdFilterAlgo_t m_filterAlgo;
-    cudnnConvolutionBwdDataAlgo_t m_dataAlgo;
+    cudnnConvolutionFwdAlgo_t m_algo; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnConvolutionBwdFilterAlgo_t m_filterAlgo; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnConvolutionBwdDataAlgo_t m_dataAlgo; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    size_t m_sizeInBytes;
-    size_t m_dataSizeInBytes;
-    size_t m_filterSizeInBytes;
+    size_t m_sizeInBytes; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    size_t m_dataSizeInBytes; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    size_t m_filterSizeInBytes; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    DTYPE m_alpha;
-    DTYPE m_beta;
+    DTYPE m_alpha; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE m_beta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    void *m_devWorkSpace;
-    void *m_dataDevWorkSpace;
-    void *m_filterDevWorkSpace;
+    void *m_devWorkSpace; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    void *m_dataDevWorkSpace; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    void *m_filterDevWorkSpace; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // __CUDNN__
 
 public:
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Convolution2D(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, std::string pName = "NO NAME") : Operator<DTYPE>(pInput, pWeight, pName) {
         Alloc(pInput, pWeight, stride1, stride2, 0, 0);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Convolution2D(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding, std::string pName = "NO NAME") : Operator<DTYPE>(pInput, pWeight, pName) {
         Alloc(pInput, pWeight, stride1, stride2, padding, padding);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Convolution2D(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding1, int padding2, std::string pName = "NO NAME") : Operator<DTYPE>(pInput, pWeight, pName) {
         Alloc(pInput, pWeight, stride1, stride2, padding1, padding2);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~Convolution2D() {
         #ifdef __DEBUG__
         std::cout << "Convolution2D::~Convolution2D()" << '\n';
@@ -51,6 +106,14 @@ public:
         Delete();
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding1, int padding2) {
         int outputWidth  = 0;
         int outputHeight = 0;
@@ -79,6 +142,14 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         Operator<DTYPE> *pInput  = this->GetInput()[0];
         Operator<DTYPE> *pWeight = this->GetInput()[1];
@@ -190,6 +261,14 @@ public:
 
 #endif  // if __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
 #ifdef __CUDNN__
 
@@ -230,6 +309,14 @@ public:
 #endif  // if __CUDNN__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input = this->GetInput()[0]->GetResult();
         Shape *shapeOfInput  = input->GetShape();
@@ -275,6 +362,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *input       = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *input_delta = this->GetInput()[0]->GetDelta();
@@ -333,6 +428,14 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *weight = this->GetInput()[1]->GetResult();
@@ -351,6 +454,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input           = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *input_delta     = this->GetInput()[0]->GetDelta();
@@ -377,10 +488,26 @@ public:
 
 #endif  // if __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int* GetStrideList() {
         return m_stride;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int* GetPaddingList() {
         return m_padding;
     }

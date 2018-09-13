@@ -3,11 +3,25 @@
 
 #include "../Operator.h"
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE>
 class BatchNormalize : public Operator<DTYPE>{
 public:
     // enum class Mode;
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     BatchNormalize(Operator<DTYPE> *pInput, Operator<DTYPE> *pScale, Operator<DTYPE> *pBias, int pIsChannelwise, std::string pName) : Operator<DTYPE>(pName) {
                 #ifdef __DEBUG__
         std::cout << "BatchNormalize:: BatchNormalize( Operator< DTYPE>*, Operator< DTYPE>*, Operator< DTYPE>*, int, std:: string)" << '\n';
@@ -16,6 +30,14 @@ public:
         Allocate(pInput, pScale, pBias, pIsChannelwise, 1e-6f);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     BatchNormalize(Operator<DTYPE> *pInput, Operator<DTYPE> *pScale, Operator<DTYPE> *pBias, int pIsChannelwise, float pEpsilon, std::string pName) : Operator<DTYPE>(pName) {
                 #ifdef __DEBUG__
         std::cout << "BatchNormalize:: BatchNormalize( Operator< DTYPE>*, Operator< DTYPE>*, Operator< DTYPE>*, int, float, std:: string)" << '\n';
@@ -24,6 +46,14 @@ public:
         Allocate(pInput, pScale, pBias, pIsChannelwise, pEpsilon);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     ~BatchNormalize() {
                 #ifdef __DEBUG__
         std::cout << "BatchNormalize:: ~ BatchNormalize()" << '\n';
@@ -32,6 +62,14 @@ public:
         Delete();
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         if (m_mode == INFERENCING) {
             Transform(m_pTenInput);
@@ -47,6 +85,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         unsigned int inputIndex        = 0;
         unsigned int batchSummaryIndex = 0;
@@ -88,11 +134,27 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
         this->ForwardPropagate();
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {
         this->BackPropagate();
 
@@ -101,6 +163,14 @@ public:
 
 #endif  // __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void SetModeTraining() {
         // std::cout << "BatchNormalize::SetModeTraining()" << '\n';
 
@@ -114,6 +184,14 @@ public:
         m_mode = TRAINING;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void SetModeAccumulating() {
         // std::cout << "BatchNormalize::SetModeAccumulating()" << '\n';
 
@@ -131,6 +209,14 @@ public:
         m_mode = ACCUMULATING;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void SetModeInferencing() {
         // std::cout << "BatchNormalize::SetModeInferencing()" << '\n';
 
@@ -150,41 +236,75 @@ public:
     // };
 
 private:
-    Tensor<DTYPE> *m_pTenInput;
-    Tensor<DTYPE> *m_pTenScale;
-    Tensor<DTYPE> *m_pTenBias;
-    Tensor<DTYPE> *m_pTenResult;
+    Tensor<DTYPE> *m_pTenInput; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pTenScale; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pTenBias; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pTenResult; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Tensor<DTYPE> *m_pTenDerInput;
-    Tensor<DTYPE> *m_pTenDerScale;
-    Tensor<DTYPE> *m_pTenDerBias;
-    Tensor<DTYPE> *m_pTenDerResult;
+    Tensor<DTYPE> *m_pTenDerInput; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pTenDerScale; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pTenDerBias; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pTenDerResult; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Shape *m_pInputShape;
-    int m_inputBatchSize;
-    int m_numChannel;
-    int m_numInputRow;
-    int m_numInputColumn;
+    Shape *m_pInputShape; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_inputBatchSize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_numChannel; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_numInputRow; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_numInputColumn; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_isChannelwise;
-    int m_effectiveBatchSize;
-    int m_numBatchSummaryRow;
-    int m_numBatchSummaryColumn;
-    Shape *m_aBatchSummaryShape;
+    int m_isChannelwise; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_effectiveBatchSize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_numBatchSummaryRow; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_numBatchSummaryColumn ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-;
+    Shape *m_aBatchSummaryShape; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Tensor<DTYPE> *m_aTenNormalizedInput;
+    Tensor<DTYPE> *m_aTenNormalizedInput; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Tensor<DTYPE> *m_aTenBatchMean;
-    Tensor<DTYPE> *m_aTenBatchStandardDeviation;
+    Tensor<DTYPE> *m_aTenBatchMean; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_aTenBatchStandardDeviation; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Tensor<DTYPE> *m_aTenTotalMean;
-    Tensor<DTYPE> *m_aTenTotalStandardDeviation;
+    Tensor<DTYPE> *m_aTenTotalMean; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_aTenTotalStandardDeviation; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    float m_epsilon;
+    float m_epsilon; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Mode m_mode;
-    int m_numBatch;
+    Mode m_mode; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_numBatch; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void Allocate(Operator<DTYPE> *pInput, Operator<DTYPE> *pScale, Operator<DTYPE> *pBias, int pIsChannelwise, float pEpsilon) {
         Operator<DTYPE>::Alloc(3, pInput, pScale, pBias);
 
@@ -246,6 +366,14 @@ private:
         m_numBatch = 0;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
         if (m_aBatchSummaryShape) {
             delete m_aBatchSummaryShape;
@@ -278,6 +406,14 @@ private:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void ComputeBatchSummary() {
         unsigned int batchSummaryIndex = 0;
 
@@ -318,6 +454,14 @@ private:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void Accumulate() {
         unsigned int batchSummaryIndex = 0;
 
@@ -338,6 +482,14 @@ private:
         m_numBatch++;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void Normalize() {
         unsigned int inputIndex        = 0;
         unsigned int batchSummaryIndex = 0;
@@ -360,6 +512,14 @@ private:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void Transform(Tensor<DTYPE> *pTenInput) {
         unsigned int inputIndex        = 0;
         unsigned int batchSummaryIndex = 0;
@@ -378,6 +538,14 @@ private:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void ComputeTotalSummary() {
         unsigned int batchSummaryIndex = 0;
 
@@ -399,6 +567,14 @@ private:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void ReplaceTransform() {
         unsigned int batchSummaryIndex = 0;
 
@@ -418,6 +594,14 @@ private:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void RestoreTransform() {
         unsigned int batchSummaryIndex = 0;
 
@@ -437,6 +621,14 @@ private:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void RestoreAccumulation() {
         unsigned int batchSummaryIndex = 0;
 
@@ -458,6 +650,14 @@ private:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     unsigned int GetBatchSummaryIndex(int pChannel, int pInputRow, int pInputColumn) {
         if (m_isChannelwise) {
             return Index4D(m_aBatchSummaryShape, 0, pChannel, 0, 0);
@@ -466,6 +666,14 @@ private:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     float GetVarianceBias() {
         if (m_effectiveBatchSize > 1) {
             return (m_effectiveBatchSize - 1.f) / m_effectiveBatchSize;
@@ -474,6 +682,14 @@ private:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     float SqrtStable(float base) {
         return std::sqrt(base + m_epsilon);
     }

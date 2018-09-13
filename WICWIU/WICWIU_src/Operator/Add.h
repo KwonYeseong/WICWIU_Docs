@@ -3,27 +3,52 @@
 
 #include "../Operator.h"
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Addall : public Operator<DTYPE>{
 private:
-    Shape *m_pLeftTenShape;
-    Shape *m_pRightTenShape;
+    Shape *m_pLeftTenShape; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Shape *m_pRightTenShape; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_timesize;
-    int m_batchsize;
-    int m_channelsize;
-    int m_rowsize;
-    int m_colsize;
+    int m_timesize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_batchsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_channelsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_rowsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_colsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t leftTensorDesc, rightTensorDesc, outputTensorDesc, leftDeltaDesc, rightDeltaDesc, deltaDesc;
-    DTYPE *m_pDevLeft, *m_pDevRight, *m_pDevOutput, *m_pDevLeftDelta, *m_pDevRightDelta, *m_pDevDelta;
+    cudnnTensorDescriptor_t leftTensorDesc, rightTensorDesc, outputTensorDesc, leftDeltaDesc, rightDeltaDesc, deltaDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE *m_pDevLeft, *m_pDevRight, *m_pDevOutput, *m_pDevLeftDelta, *m_pDevRightDelta, *m_pDevDelta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    DTYPE m_alpha;
-    DTYPE m_beta;
+    DTYPE m_alpha; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE m_beta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #endif  // __CUDNN__
 
 public:
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Addall(Operator<DTYPE> *pLeftInput, Operator<DTYPE> *pRightInput, std::string pName) : Operator<DTYPE>(pLeftInput, pRightInput, pName) {
         #ifdef __DEBUG__
         std::cout << "Addall::Addall(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -31,12 +56,28 @@ public:
         this->Alloc(pLeftInput, pRightInput);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     ~Addall() {
         #ifdef __DEBUG__
         std::cout << "Addall::~Addall()" << '\n';
         #endif  // __DEBUG__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pLeftInput, Operator<DTYPE> *pRightInput) {
         #ifdef __DEBUG__
         std::cout << "Addall::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -59,6 +100,14 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         m_alpha = 1;
         m_beta  = 0;
@@ -93,6 +142,14 @@ public:
 
 #endif  // if __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
 #ifdef __CUDNN__
 
@@ -118,6 +175,14 @@ public:
 #endif  // if __CUDNN__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -142,6 +207,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -169,6 +242,14 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -191,6 +272,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -217,28 +306,53 @@ public:
 #endif  // __CUDNN__
 };
 
-
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class AddColWise : public Operator<DTYPE>{
 private:
-    Shape *m_pInputTenShape;
-    Shape *m_pBiasTenShape;
+    Shape *m_pInputTenShape; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Shape *m_pBiasTenShape; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_timesize;
-    int m_batchsize;
-    int m_channelsize;
-    int m_rowsize;
-    int m_colsize;
+
+    int m_timesize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_batchsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_channelsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_rowsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_colsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc;
-    DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta;
+    cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    DTYPE m_alpha;
-    DTYPE m_beta;
+    DTYPE m_alpha; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE m_beta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #endif  // __CUDNN__
 
 public:
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     AddColWise(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias, std::string pName) : Operator<DTYPE>(pInput, pBias, pName) {
         #ifdef __DEBUG__
         std::cout << "AddColWise::AddColWise(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -246,12 +360,28 @@ public:
         this->Alloc(pInput, pBias);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     ~AddColWise() {
         #ifdef __DEBUG__
         std::cout << "AddColWise::~AddColWise()" << '\n';
         #endif  // __DEBUG__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias) {
         #ifdef __DEBUG__
         std::cout << "AddColWise::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -285,6 +415,14 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         m_alpha = 1;
         m_beta  = 0;
@@ -319,6 +457,14 @@ public:
 
 #endif  // if __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
 #ifdef __CUDNN__
 
@@ -344,6 +490,14 @@ public:
 #endif  // if __CUDNN__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -369,6 +523,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -397,6 +559,14 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -419,6 +589,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -445,27 +623,52 @@ public:
 #endif  // __CUDNN__
 };
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class AddChannelWise : public Operator<DTYPE>{
 private:
-    Shape *m_pInputTenShape;
-    Shape *m_pBiasTenShape;
+    Shape *m_pInputTenShape; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Shape *m_pBiasTenShape; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_timesize;
-    int m_batchsize;
-    int m_channelsize;
-    int m_rowsize;
-    int m_colsize;
+    int m_timesize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_batchsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_channelsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_rowsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_colsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc;
-    DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta;
+    cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    DTYPE m_alpha;
-    DTYPE m_beta;
+    DTYPE m_alpha; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE m_beta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #endif  // __CUDNN__
 
 public:
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     AddChannelWise(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias, std::string pName) : Operator<DTYPE>(pInput, pBias, pName) {
         #ifdef __DEBUG__
         std::cout << "AddChannelWise::AddChannelWise(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -473,12 +676,28 @@ public:
         this->Alloc(pInput, pBias);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     ~AddChannelWise() {
         #ifdef __DEBUG__
         std::cout << "AddChannelWise::~AddChannelWise()" << '\n';
         #endif  // __DEBUG__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias) {
         #ifdef __DEBUG__
         std::cout << "AddColWise::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -512,6 +731,14 @@ public:
     }
 
     #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         m_alpha = 1;
         m_beta  = 0;
@@ -546,6 +773,14 @@ public:
 
     #endif  // if __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
     #ifdef __CUDNN__
 
@@ -571,6 +806,14 @@ public:
     #endif  // if __CUDNN__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -596,6 +839,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -623,6 +874,14 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -646,6 +905,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
