@@ -3,17 +3,37 @@
 
 #include "../Operator.h"
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class GlobalAvaragePooling2D : public Operator<DTYPE>{
 private:
-    int m_timesize;
-    int m_batchsize;
-    int m_channelsize;
-    int m_rowsize;
-    int m_colsize;
+    int m_timesize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_batchsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_channelsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_rowsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_colsize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_divisor;
+    int m_divisor; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     GlobalAvaragePooling2D(Operator<DTYPE> *pInput, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "GlobalAvaragePooling2D::GlobalAvaragePooling2D(Operator<DTYPE> *, std::string)" << '\n';
@@ -21,8 +41,24 @@ public:
         Alloc(pInput);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~GlobalAvaragePooling2D() {}
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput) {
         Shape *pInputTenShape = pInput->GetResult()->GetShape();
 
@@ -40,6 +76,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -67,6 +111,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner         = this->GetInputContainer();
         Container<Tensor<DTYPE> *>   *input_gradient_container = (*input_contatiner)[0]->GetGradientContainer();
@@ -96,11 +148,27 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
         this->ForwardPropagate(pTime);
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {
         this->BackPropagate(pTime);
 

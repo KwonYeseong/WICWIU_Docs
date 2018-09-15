@@ -3,26 +3,45 @@
 
 #include "Optimizer_utils.h"
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class NeuralNetwork {
 private:
-    Container<Operator<DTYPE> *> *m_aaOperator;
-    Container<Operator<DTYPE> *> *m_apExcutableOperator;
-    Container<Operator<DTYPE> *> *m_apInput;
-    Container<Operator<DTYPE> *> *m_apParameter;
+    Container<Operator<DTYPE> *> *m_aaOperator; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Container<Operator<DTYPE> *> *m_apExcutableOperator; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Container<Operator<DTYPE> *> *m_apInput; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Container<Operator<DTYPE> *> *m_apParameter; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_Operatordegree;
-    int m_ExcutableOperatorDegree;
-    int m_InputDegree;
-    int m_ParameterDegree;
+    int m_Operatordegree; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_ExcutableOperatorDegree; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_InputDegree; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_ParameterDegree; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    LossFunction<DTYPE> *m_aLossFunction;
-    Optimizer<DTYPE> *m_aOptimizer;
+    LossFunction<DTYPE> *m_aLossFunction; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Optimizer<DTYPE> *m_aOptimizer; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Device m_Device;
-    int m_idOfDevice = -1;  // 추후 수정
+    Device m_Device; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_idOfDevice = -1;  // 추후 수정  ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnHandle_t m_cudnnHandle;
+    cudnnHandle_t m_cudnnHandle; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // if __CUDNN__
 
 private:

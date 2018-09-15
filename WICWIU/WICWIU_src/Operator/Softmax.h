@@ -3,16 +3,34 @@
 
 #include "../Operator.h"
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE>
 class Softmax : public Operator<DTYPE>{
-    DTYPE m_epsilon;
+    DTYPE m_epsilon; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_timesize;
+    int m_timesize; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    DTYPE **sum;
-    DTYPE **max;
+    DTYPE **sum; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE **max; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Softmax(Operator<DTYPE> *pOperator, DTYPE epsilon = 1e-6f) : Operator<DTYPE>(pOperator) {
         #ifdef __DEBUG__
         std::cout << "Softmax::Softmax(Operator *)" << '\n';
@@ -20,6 +38,14 @@ public:
         Alloc(pOperator, epsilon);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Softmax(Operator<DTYPE> *pOperator, std::string pName) : Operator<DTYPE>(pOperator, pName) {
         #ifdef __DEBUG__
         std::cout << "Softmax::Softmax(Operator *)" << '\n';
@@ -27,6 +53,14 @@ public:
         Alloc(pOperator);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Softmax(Operator<DTYPE> *pOperator, DTYPE epsilon, std::string pName) : Operator<DTYPE>(pOperator, pName) {
         #ifdef __DEBUG__
         std::cout << "Softmax::Softmax(Operator *)" << '\n';
@@ -34,12 +68,28 @@ public:
         Alloc(pOperator, epsilon);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     ~Softmax() {
         #ifdef __DEBUG__
         std::cout << "Softmax::~Softmax()" << '\n';
         #endif  // __DEBUG__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual int Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon = 1e-6f) {
         Operator<DTYPE> *pInput = pOperator;
 
@@ -65,6 +115,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual void Delete() {
         if (sum) {
             for (int i = 0; i < m_timesize; i++) {
@@ -83,6 +141,14 @@ public:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -138,6 +204,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *result      = this->GetResult();
         Tensor<DTYPE> *this_delta  = this->GetGradient();
@@ -175,6 +249,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE Max(Tensor<DTYPE> *input, int start, int end) {
         DTYPE max = (*input)[start];
 
@@ -186,11 +268,27 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime = 0) {
         this->ForwardPropagate(pTime);
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {
         this->BackPropagate(pTime);
         return TRUE;

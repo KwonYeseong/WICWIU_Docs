@@ -4,6 +4,14 @@ template class LossFunction<int>;
 template class LossFunction<float>;
 template class LossFunction<double>;
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> LossFunction<DTYPE>::LossFunction(std::string pName) {
     #ifdef __DEBUG__
     std::cout << "LossFunction<DTYPE>::LossFunction()" << '\n';
@@ -17,6 +25,14 @@ template<typename DTYPE> LossFunction<DTYPE>::LossFunction(std::string pName) {
     m_Device         = CPU;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> LossFunction<DTYPE>::LossFunction(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, std::string pName) {
     #ifdef __DEBUG__
     std::cout << "LossFunction<DTYPE>::LossFunction()" << '\n';
@@ -31,6 +47,14 @@ template<typename DTYPE> LossFunction<DTYPE>::LossFunction(Operator<DTYPE> *pOpe
     Alloc(pOperator, pLabel);
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> LossFunction<DTYPE>::~LossFunction() {
     #ifdef __DEBUG__
     std::cout << "LossFunction<DTYPE>::~LossFunction()" << '\n';
@@ -38,6 +62,14 @@ template<typename DTYPE> LossFunction<DTYPE>::~LossFunction() {
     this->Delete();
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int LossFunction<DTYPE>::Alloc(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel) {
     #ifdef __DEBUG__
     std::cout << "LossFunction<DTYPE>::Alloc(Tensor<DTYPE> *)" << '\n';
@@ -50,6 +82,14 @@ template<typename DTYPE> int LossFunction<DTYPE>::Alloc(Operator<DTYPE> *pOperat
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void LossFunction<DTYPE>::Delete() {
     if (m_aResult) {
         delete m_aResult;
@@ -62,46 +102,134 @@ template<typename DTYPE> void LossFunction<DTYPE>::Delete() {
     }
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void LossFunction<DTYPE>::SetResult(Tensor<DTYPE> *pTensor) {
     m_aResult = pTensor;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void LossFunction<DTYPE>::SetGradient(Tensor<DTYPE> *pTensor) {
     m_aGradient = pTensor;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::GetResult() const {
     return m_aResult;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::GetGradient() const {
     return m_aGradient;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE> *LossFunction<DTYPE>::GetOperator() const {
     return m_pInputOperator;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::GetTensor() const {
     return m_pInputTensor;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE> *LossFunction<DTYPE>::GetLabel() const {
     return m_pLabel;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> std::string LossFunction<DTYPE>::GetName() const {
     return m_name;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Device LossFunction<DTYPE>::GetDevice() {
     return m_Device;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int LossFunction<DTYPE>::GetDeviceID() {
     return m_idOfDevice;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::ForwardPropagate(int pTime) {
     #ifdef __DEBUG__
     std::cout << "LossFunction<DTYPE>::ForwardPropagate(int pTime)" << '\n';
@@ -110,6 +238,14 @@ template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::ForwardPropagate(in
     return NULL;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::BackPropagate(int pTime) {
     #ifdef __DEBUG__
     std::cout << "LossFunction<DTYPE>::BackPropagate(int pTime)" << '\n';
@@ -120,6 +256,14 @@ template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::BackPropagate(int p
 
 #ifdef __CUDNN__
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::ForwardPropagateOnGPU(int pTime) {
     # if __DEBUG__
     std::cout << this->GetName() << '\n';
@@ -127,6 +271,14 @@ template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::ForwardPropagateOnG
     return NULL;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::BackPropagateOnGPU(int pTime) {
     # if __DEBUG__
     std::cout << this->GetName() << '\n';
@@ -136,11 +288,26 @@ template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::BackPropagateOnGPU(
 
 #endif  // __CUDNN__
 
-
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> DTYPE& LossFunction<DTYPE>::operator[](unsigned int index) {
     return (*m_aResult)[index];
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void LossFunction<DTYPE>::SetDeviceCPU() {
     m_Device = CPU;
 
@@ -150,13 +317,30 @@ template<typename DTYPE> void LossFunction<DTYPE>::SetDeviceCPU() {
 #endif  // __CUDNN__
 }
 
+
 #ifdef __CUDNN__
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int LossFunction<DTYPE>::SetResultOnCPU() {
     if (m_aResult) m_aResult->SetDeviceCPU();
 
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int LossFunction<DTYPE>::SetGradientOnCPU() {
     if (m_aGradient) m_aGradient->SetDeviceCPU();
 
@@ -169,6 +353,14 @@ template<typename DTYPE> int LossFunction<DTYPE>::SetGradientOnCPU() {
 // this->SetGradientOnGPU(idOfDevice);
 // }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void LossFunction<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnHandle, unsigned int idOfDevice) {
     checkCudaErrors(cudaSetDevice(idOfDevice));
     m_Device       = GPU;
@@ -179,20 +371,52 @@ template<typename DTYPE> void LossFunction<DTYPE>::SetDeviceGPU(cudnnHandle_t& p
     this->InitializeAttributeForGPU(idOfDevice);
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void LossFunction<DTYPE>::InitializeAttributeForGPU(unsigned int idOfDevice) {}
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int LossFunction<DTYPE >::SetResultOnGPU(unsigned int idOfDevice) {
     if (m_aResult) m_aResult->SetDeviceGPU(idOfDevice);
 
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int LossFunction<DTYPE>::SetGradientOnGPU(unsigned int idOfDevice) {
     if (m_aGradient) m_aGradient->SetDeviceGPU(idOfDevice);
 
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> cudnnHandle_t& LossFunction<DTYPE>::GetCudnnHandle() {
     return m_pCudnnHandle;
 }
@@ -200,6 +424,14 @@ template<typename DTYPE> cudnnHandle_t& LossFunction<DTYPE>::GetCudnnHandle() {
 #endif  // __CUDNN__
 
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int LossFunction<DTYPE>::ResetResult() {
     if (m_Device == CPU) {
         if (m_aResult) m_aResult->Reset();
@@ -216,6 +448,14 @@ template<typename DTYPE> int LossFunction<DTYPE>::ResetResult() {
     return TRUE;
 }
 
+/*!
+@brief
+@details
+@param
+@return
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int LossFunction<DTYPE>::ResetGradient() {
     if (m_Device == CPU) {
         if (m_aGradient) m_aGradient->Reset();

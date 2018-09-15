@@ -30,6 +30,12 @@
     # include "error_util.h"
 #endif  // ifndef __CUDNN__
 
+/*!
+@brief
+@details
+@todo 우선 순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 enum Device {
     CPU,
     GPU,

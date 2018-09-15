@@ -4,27 +4,50 @@
 #include "Tensor_utils.h"
 #include "Container.h"
 
+/*!
+@brief
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 enum Mode {
     TRAINING,
     ACCUMULATING,
     INFERENCING,
 };
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Operator {
 private:
-    Container<Operator<DTYPE> *> *m_apOutput;
-    Container<Operator<DTYPE> *> *m_apInput;
-    Container<Tensor<DTYPE> *> *m_aaResult;
-    Container<Tensor<DTYPE> *> *m_aaGradient;
-    std::string m_name;
-    Device m_Device;
-    int m_idOfDevice = -1;
-    Mode m_Mode;
-    int m_isParameter;
-    int m_isTrainable;
+    Container<Operator<DTYPE> *> *m_apOutput; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Container<Operator<DTYPE> *> *m_apInput; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Container<Tensor<DTYPE> *> *m_aaResult; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Container<Tensor<DTYPE> *> *m_aaGradient; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    std::string m_name; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Device m_Device; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_idOfDevice = -1; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Mode m_Mode; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_isParameter; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_isTrainable; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnHandle_t m_pCudnnHandle;
+    cudnnHandle_t m_pCudnnHandle; ///<   @todo 우선순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // __CUDNN__
 
 private:

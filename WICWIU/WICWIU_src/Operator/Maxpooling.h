@@ -3,26 +3,50 @@
 
 #include "../Operator.h"
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Maxpooling2D : public Operator<DTYPE>{
 private:
-    int m_stride[2];
-    int m_mask[2];
-    int m_padding[2];
+    int m_stride[2]; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_mask[2]; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_padding[2]; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Tensor<int> *indexOfMaxInput;
+    Tensor<int> *indexOfMaxInput; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc;
-    cudnnPoolingDescriptor_t m_aPoolingDesc;
-    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta;
+    cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnPoolingDescriptor_t m_aPoolingDesc; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
     // DTYPE *m_aHostInput, *m_aHostOutput, *m_aHostInputDelta, *m_aHostDelta;
 
-    float m_alpha;
-    float m_beta;
-    double m_coef;
+    float m_alpha; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    float m_beta; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    double m_coef; ///<   @todo 우선순위
+    // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // __CUDNN__
 
 public:
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Maxpooling2D(Operator<DTYPE> *pInput, int strideRow, int strideCol, int maskRow, int maskCol, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "Maxpooling2D::Maxpooling2D(Operator<DTYPE> *, int, int)" << '\n';
@@ -30,6 +54,14 @@ public:
         this->Alloc(pInput, strideRow, strideCol, maskRow, maskCol);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Maxpooling2D(Operator<DTYPE> *pInput, int strideRow, int strideCol, int maskRow, int maskCol, int padding, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "Maxpooling2D::Maxpooling2D(Operator<DTYPE> *, int, int, std::string)" << '\n';
@@ -37,6 +69,14 @@ public:
         this->Alloc(pInput, strideRow, strideCol, maskRow, maskCol, padding, padding);
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     ~Maxpooling2D() {
         #ifdef __DEBUG__
         std::cout << "Maxpooling2D::~Maxpooling2D()" << '\n';
@@ -46,6 +86,14 @@ public:
 #endif  // if __CUDNN__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, int strideRow, int strideCol, int maskRow, int maskCol, int padding1 = 0, int padding2 = 0) {
         #ifdef __DEBUG__
         std::cout << "Maxpooling2D::Alloc(Operator<DTYPE> *, int, int)" << '\n';
@@ -77,6 +125,14 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         Tensor<DTYPE> *input = this->GetInput()[0]->GetResult();
         Shape *shapeOfInput  = input->GetShape();
@@ -125,6 +181,14 @@ public:
 
 #endif  // if __CUDNN__
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
         delete indexOfMaxInput;
 #ifdef __CUDNN__
@@ -149,6 +213,14 @@ public:
 #endif  // if __CUDNN__
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     // 메모리 효율을 생각하면 time에 따라 취해야 할 액션이 다르다.
     int ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input = this->GetInput()[0]->GetResult();
@@ -212,6 +284,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *input_delta = this->GetInput()[0]->GetDelta();
 
@@ -242,6 +322,14 @@ public:
     }
 
 #ifdef __CUDNN__
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *result = this->GetResult();
@@ -257,6 +345,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input_delta = this->GetInput()[0]->GetDelta();
         Tensor<DTYPE> *this_delta  = this->GetDelta();

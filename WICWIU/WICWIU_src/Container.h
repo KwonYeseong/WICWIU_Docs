@@ -4,12 +4,29 @@ template<typename DTYPE> class Tensor;
 template<typename DTYPE> class Operator;
 template<typename DTYPE> class Tensorholder;
 
+/*!
+@class
+@details
+@todo 우선순위
+*/
+// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Container {
 private:
-    DTYPE *m_aElement;
-    int m_size;
+    DTYPE *m_aElement;///<   @todo 우선 순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_size;///<   @todo 우선 순위,
+    // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
+
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     Container() {
         #ifdef __DEBUG__
         std::cout << "Container<DTYPE>::Container()" << '\n';
@@ -18,6 +35,14 @@ public:
         m_size     = 0;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~Container() {
         if (m_aElement) {
             delete[] m_aElement;
@@ -25,6 +50,14 @@ public:
         }
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선 순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int Push(DTYPE pElement) {
         try {
             DTYPE *temp = new DTYPE[m_size + 1];
@@ -48,6 +81,14 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선 순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE Pop() {
         DTYPE  element = m_aElement[0];
         DTYPE *temp    = new DTYPE[m_size - 1];
@@ -66,6 +107,14 @@ public:
         return element;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선 순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE Pop(DTYPE pElement) {
         int index = -1;
 
@@ -102,6 +151,14 @@ public:
         return pElement;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선 순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int Reverse() {
         DTYPE *temp = new DTYPE[m_size];
 
@@ -117,29 +174,77 @@ public:
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선 순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int SetElement(DTYPE pElement, unsigned int index) {
         m_aElement[index] = pElement;
         return TRUE;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선 순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     int GetSize() {
         // std::cout << "Container<DTYPE>::GetSize()" << '\n';
         return m_size;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선 순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE GetLast() {
         // std::cout << "Container<DTYPE>::GetLast()" << '\n';
         return m_aElement[m_size - 1];
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선 순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE* GetRawData() const {
         return m_aElement;
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선 순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE GetElement(unsigned int index) {
         return m_aElement[index];
     }
 
+    /*!
+    @brief
+    @details
+    @param
+    @return
+    @todo 우선 순위
+    */
+    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE& operator[](unsigned int index) {
         return m_aElement[index];
     }
