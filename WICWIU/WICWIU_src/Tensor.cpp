@@ -707,7 +707,7 @@ template<typename DTYPE> void Tensor<DTYPE>::SetDeviceCPU() {
 /*!
 *@brief Tensor의 데이터를 파일에 저장
 *@details 장치를 CPU로 전환하고 m_aLongArray의 Save(fileForsave) 메소드 호출 @ref LongArray<DTYPE>::Save(FILE *fileForSave)
-*@param fileForload 불러오기 할 FILE에 대한 포인터
+*@param fileForSave 불러오기 할 FILE에 대한 포인터
 *@return 성공 시 TRUE
 *@see LongArray<DTYPE>::Save(FILE *fileForSave), Tensor<DTYPE>::SetDeviceCPU()
 */
