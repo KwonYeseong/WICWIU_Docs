@@ -6,35 +6,35 @@
 /*!
 @class
 @details
-@todo 우선순위
+@todo EXTRA
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Maxpooling2D : public Operator<DTYPE>{
 private:
-    int m_stride[2]; ///<   @todo 우선순위
+    int m_stride[2]; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_mask[2]; ///<   @todo 우선순위
+    int m_mask[2]; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_padding[2]; ///<   @todo 우선순위
+    int m_padding[2]; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Tensor<int> *indexOfMaxInput; ///<   @todo 우선순위
+    Tensor<int> *indexOfMaxInput; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc; ///<   @todo 우선순위
+    cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    cudnnPoolingDescriptor_t m_aPoolingDesc; ///<   @todo 우선순위
+    cudnnPoolingDescriptor_t m_aPoolingDesc; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta; ///<   @todo 우선순위
+    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
     // DTYPE *m_aHostInput, *m_aHostOutput, *m_aHostInputDelta, *m_aHostDelta;
 
-    float m_alpha; ///<   @todo 우선순위
+    float m_alpha; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    float m_beta; ///<   @todo 우선순위
+    float m_beta; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    double m_coef; ///<   @todo 우선순위
+    double m_coef; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // __CUDNN__
 
@@ -44,7 +44,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Maxpooling2D(Operator<DTYPE> *pInput, int strideRow, int strideCol, int maskRow, int maskCol, std::string pName) : Operator<DTYPE>(pInput, pName) {
@@ -59,7 +59,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Maxpooling2D(Operator<DTYPE> *pInput, int strideRow, int strideCol, int maskRow, int maskCol, int padding, std::string pName) : Operator<DTYPE>(pInput, pName) {
@@ -74,7 +74,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     ~Maxpooling2D() {
@@ -91,7 +91,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, int strideRow, int strideCol, int maskRow, int maskCol, int padding1 = 0, int padding2 = 0) {
@@ -130,7 +130,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
@@ -186,7 +186,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
@@ -218,7 +218,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     // 메모리 효율을 생각하면 time에 따라 취해야 할 액션이 다르다.
@@ -289,7 +289,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
@@ -327,7 +327,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime = 0) {
@@ -350,7 +350,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {
