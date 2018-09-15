@@ -11,7 +11,7 @@ template class Module<double>;
 @details
 @param
 @return
-@todo 우선순위
+@todo Constructor
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::Alloc() {
@@ -24,7 +24,7 @@ template<typename DTYPE> int Module<DTYPE>::Alloc() {
 @details
 @param
 @return
-@todo 우선순위
+@todo Constructor
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Module<DTYPE>::Delete() {
@@ -51,7 +51,7 @@ template<typename DTYPE> void Module<DTYPE>::Delete() {
 @details
 @param
 @return
-@todo 우선순위
+@todo Constructor
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Module<DTYPE>::Module(std::string pName) : Operator<DTYPE>(pName) {
@@ -70,7 +70,7 @@ template<typename DTYPE> Module<DTYPE>::Module(std::string pName) : Operator<DTY
 @details
 @param
 @return
-@todo 우선순위
+@todo Constructor
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Module<DTYPE>::~Module() {
@@ -81,28 +81,12 @@ template<typename DTYPE> Module<DTYPE>::~Module() {
     this->Delete();
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE> *Module<DTYPE>::SetInput(Operator<DTYPE> *pInput) {
     this->AddEdgebetweenOperators(pInput);
 
     return pInput;
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::SetInput(int pNumOfInput, ...) {
     Operator<DTYPE> *temp = NULL;
 
@@ -123,7 +107,7 @@ template<typename DTYPE> int Module<DTYPE>::SetInput(int pNumOfInput, ...) {
 @details
 @param
 @return
-@todo 우선순위
+@todo E_Graph
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::IsInput(Operator<DTYPE> *pOperator) {
@@ -142,7 +126,7 @@ template<typename DTYPE> int Module<DTYPE>::IsInput(Operator<DTYPE> *pOperator) 
 @details
 @param
 @return
-@todo 우선순위
+@todo E_Graph
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::IsValid(Operator<DTYPE> *pOperator) {
@@ -170,7 +154,7 @@ template<typename DTYPE> int Module<DTYPE>::IsValid(Operator<DTYPE> *pOperator) 
 @details
 @param
 @return
-@todo 우선순위
+@todo E_Graph
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Operator<DTYPE> *Module<DTYPE>::AnalyzeGraph(Operator<DTYPE> *pResultOperator) {
@@ -245,110 +229,38 @@ template<typename DTYPE> Operator<DTYPE> *Module<DTYPE>::AnalyzeGraph(Operator<D
     return pResultOperator;
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Operator<DTYPE> *> *Module<DTYPE>::GetExcutableOperatorContainer() {
     return m_aaExcutableOperator;
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::GetNumOfExcutableOperator() {
     return m_numOfExcutableOperator;
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *Module<DTYPE>::GetResult() const {
     return m_pLastOperator->GetResult();
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Tensor<DTYPE> *> *Module<DTYPE>::GetResultContainer() {
     return m_pLastOperator->GetResultContainer();
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *Module<DTYPE>::GetGradient() const {
     return m_pLastOperator->GetGradient();
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Tensor<DTYPE> *> *Module<DTYPE>::GetGradientContainer() {
     return m_pLastOperator->GetGradientContainer();
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *Module<DTYPE>::GetDelta() const {
     return m_pLastOperator->GetDelta();
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Container<Tensor<DTYPE> *> *Module<DTYPE>::GetDeltaContainer() {
     return m_pLastOperator->GetDeltaContainer();
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::SetModeTraining() {
     for (int i = 0; i < m_numOfExcutableOperator; i++) {
         (*m_aaExcutableOperator)[i]->SetModeTraining();
@@ -356,14 +268,6 @@ template<typename DTYPE> int Module<DTYPE>::SetModeTraining() {
     return TRUE;
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::SetModeAccumulating() {
     for (int i = 0; i < m_numOfExcutableOperator; i++) {
         (*m_aaExcutableOperator)[i]->SetModeAccumulating();
@@ -371,14 +275,6 @@ template<typename DTYPE> int Module<DTYPE>::SetModeAccumulating() {
     return TRUE;
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo 우선순위
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::SetModeInferencing() {
     for (int i = 0; i < m_numOfExcutableOperator; i++) {
         (*m_aaExcutableOperator)[i]->SetModeInferencing();
@@ -392,7 +288,7 @@ template<typename DTYPE> int Module<DTYPE>::SetModeInferencing() {
 @details
 @param
 @return
-@todo 우선순위
+@todo E_Train
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::ForwardPropagate(int pTime) {
@@ -407,7 +303,7 @@ template<typename DTYPE> int Module<DTYPE>::ForwardPropagate(int pTime) {
 @details
 @param
 @return
-@todo 우선순위
+@todo E_Train
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::BackPropagate(int pTime) {
@@ -422,7 +318,7 @@ template<typename DTYPE> int Module<DTYPE>::BackPropagate(int pTime) {
 @details
 @param
 @return
-@todo 우선순위
+@todo E_Train
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::ResetResult() {
@@ -437,7 +333,7 @@ template<typename DTYPE> int Module<DTYPE>::ResetResult() {
 @details
 @param
 @return
-@todo 우선순위
+@todo E_Train
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::ResetGradient() {
@@ -452,7 +348,7 @@ template<typename DTYPE> int Module<DTYPE>::ResetGradient() {
 @details
 @param
 @return
-@todo 우선순위
+@todo E_Graph
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Module<DTYPE>::PrintInformation() {
@@ -470,7 +366,7 @@ template<typename DTYPE> void Module<DTYPE>::PrintInformation() {
 @details
 @param
 @return
-@todo 우선순위
+@todo N_Graph
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Module<DTYPE>::SetDeviceCPU() {
@@ -496,7 +392,7 @@ template<typename DTYPE> void Module<DTYPE>::SetDeviceCPU() {
 @details
 @param
 @return
-@todo 우선순위
+@todo GPU
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Module<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnHandle, unsigned int idOfDevice) {
@@ -521,7 +417,7 @@ template<typename DTYPE> void Module<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnH
 @details
 @param
 @return
-@todo 우선순위
+@todo GPU
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::ForwardPropagateOnGPU(int pTime) {
@@ -536,7 +432,7 @@ template<typename DTYPE> int Module<DTYPE>::ForwardPropagateOnGPU(int pTime) {
 @details
 @param
 @return
-@todo 우선순위
+@todo GPU
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::BackPropagateOnGPU(int pTime) {

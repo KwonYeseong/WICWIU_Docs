@@ -6,19 +6,18 @@
 /*!
 @class
 @details
-@todo 우선순위
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class GradientDescentOptimizer : public Optimizer<DTYPE>{
 private:
-    Container<Operator<DTYPE> *> *m_ppParameter; ///<   @todo 우선순위
+    Container<Operator<DTYPE> *> *m_ppParameter; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Container<Tensor<DTYPE> *> *m_aaVelocity; ///<   @todo 우선순위
+    Container<Tensor<DTYPE> *> *m_aaVelocity; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_numOfParameter; ///<   @todo 우선순위
+    int m_numOfParameter; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    float m_momentum; ///<   @todo 우선순위
+    float m_momentum; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
@@ -27,7 +26,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     GradientDescentOptimizer(Container<Operator<DTYPE> *> *pParameterContainer, float pLearningRate, OptimizeDirection pOptimizeDirection) : Optimizer<DTYPE>(pParameterContainer, pLearningRate, pOptimizeDirection) {
@@ -47,7 +46,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     GradientDescentOptimizer(Container<Operator<DTYPE> *> *pParameterContainer, float pLearningRate, float momentum, OptimizeDirection pOptimizeDirection) : Optimizer<DTYPE>(pParameterContainer, pLearningRate, pOptimizeDirection) {
@@ -67,7 +66,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     GradientDescentOptimizer(Container<Operator<DTYPE> *> *pParameterContainer, float pLearningRate, float momentum, float weightDecayRate, OptimizeDirection pOptimizeDirection) : Optimizer<DTYPE>(pParameterContainer, pLearningRate, weightDecayRate, pOptimizeDirection) {
@@ -87,7 +86,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     ~GradientDescentOptimizer() {
@@ -101,7 +100,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc() {
@@ -116,7 +115,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(float momentum) {
@@ -145,7 +144,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Graph
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
@@ -161,7 +160,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     virtual int UpdateParameter() {
@@ -183,7 +182,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int UpdateParameter(Operator<DTYPE> *pParameter) {
@@ -207,7 +206,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int UpdateParameter(Operator<DTYPE> *pParameter, Tensor<DTYPE> *pVelocity) {
@@ -235,7 +234,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     virtual int UpdateParameterOnGPU() {
@@ -257,7 +256,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int UpdateParameterOnGPU(Operator<DTYPE> *pParameter) {
@@ -288,7 +287,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int UpdateParameterOnGPU(Operator<DTYPE> *pParameter, Tensor<DTYPE> *pVelocity) {

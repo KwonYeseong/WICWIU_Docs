@@ -6,23 +6,22 @@
 /*!
 @class
 @details
-@todo 우선순위
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE>
 class SoftmaxCrossEntropy : public LossFunction<DTYPE>{
 private:
-    Tensor<DTYPE> *m_aSoftmaxResult; ///<   @todo 우선순위
+    Tensor<DTYPE> *m_aSoftmaxResult; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE m_epsilon;  // for backprop ///<   @todo 우선순위
-    // 문서 작성자 : , 작성 날짜 : 2018-
-
-    int m_timesize; ///<   @todo 우선순위
+    DTYPE m_epsilon;  // for backprop ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    DTYPE **sum; ///<   @todo 우선순위
+    int m_timesize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE **max; ///<   @todo 우선순위
+
+    DTYPE **sum; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE **max; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
@@ -31,7 +30,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     SoftmaxCrossEntropy(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, DTYPE epsilon, std::string pName = "NO NAME") : LossFunction<DTYPE>(pOperator, pLabel, pName) {
@@ -46,7 +45,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     SoftmaxCrossEntropy(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, std::string pName = "NO NAME") : LossFunction<DTYPE>(pOperator, pLabel, pName) {
@@ -61,7 +60,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~SoftmaxCrossEntropy() {
@@ -76,7 +75,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     virtual int Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon) {
@@ -117,7 +116,7 @@ public:
         @details
         @param
         @return
-        @todo 우선순위
+        @todo GPU
         */
         // 문서 작성자 : , 작성 날짜 : 2018-
         void InitializeAttributeForGPU(unsigned int idOfDevice) {
@@ -131,7 +130,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     virtual void Delete() {
@@ -162,7 +161,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* ForwardPropagate(int pTime = 0) {
@@ -230,7 +229,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* BackPropagate(int pTime = 0) {
@@ -268,7 +267,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* ForwardPropagateOnGPU(int pTime = 0) {
@@ -313,7 +312,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* BackPropagateOnGPU(int pTime = 0) {
@@ -328,7 +327,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE Max(Tensor<DTYPE> *input, int start, int end) {

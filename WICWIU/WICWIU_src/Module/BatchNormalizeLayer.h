@@ -6,7 +6,6 @@
 /*!
 @class
 @details
-@todo 우선순위
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class BatchNormalizeLayer : public Module<DTYPE>{
@@ -17,7 +16,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     BatchNormalizeLayer(Operator<DTYPE> *pInput, int pIsChannelwise = FALSE, std::string pName = "NO NAME") {
@@ -29,7 +28,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~BatchNormalizeLayer() {}
@@ -39,7 +38,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, int pIsChannelwise, std::string pName) {

@@ -6,7 +6,7 @@
 /*!
 @brief
 @details
-@todo 우선순위
+@todo Variable
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 enum OptimizeDirection {
@@ -16,23 +16,23 @@ enum OptimizeDirection {
 
 template<typename DTYPE> class Optimizer {
 private:
-    float m_LearningRate; ///<   @todo 우선순위,
+    float m_LearningRate; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_OptimizeDirection;  // 1 or -1 ///<   @todo 우선순위,
+    int m_OptimizeDirection;  // 1 or -1 ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    float m_weightDecayRate; ///<   @todo 우선순위,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-
-    Container<Operator<DTYPE> *> *m_ppTrainableTensors; ///<   @todo 우선순위,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_TrainableTensorDegree; ///<   @todo 우선순위,
+    float m_weightDecayRate; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_idOfDevice = -1; ///<   @todo 우선순위,
+    Container<Operator<DTYPE> *> *m_ppTrainableTensors; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_TrainableTensorDegree; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+
+    int m_idOfDevice = -1; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnHandle_t m_pCudnnHandle; ///<   @todo 우선순위,
+    cudnnHandle_t m_pCudnnHandle; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // if __CUDNN__
 

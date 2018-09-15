@@ -6,34 +6,33 @@
 /*!
 @class
 @details
-@todo 우선순위
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class LossFunction {
 private:
-    Tensor<DTYPE> *m_aResult; ///<   @todo 우선순위,
+    Tensor<DTYPE> *m_aResult; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Tensor<DTYPE> *m_aGradient; ///<   @todo 우선순위,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-
-    Operator<DTYPE> *m_pInputOperator; ///<   @todo 우선순위,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    Tensor<DTYPE> *m_pInputTensor; ///<   @todo 우선순위,
+    Tensor<DTYPE> *m_aGradient; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Operator<DTYPE> *m_pLabel; ///<   @todo 우선순위,
+    Operator<DTYPE> *m_pInputOperator; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_pInputTensor; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    std::string m_name; ///<   @todo 우선순위,
+    Operator<DTYPE> *m_pLabel; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Device m_Device; ///<   @todo 우선순위,
+    std::string m_name; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_idOfDevice = -1; ///<   @todo 우선순위,
+
+    Device m_Device; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_idOfDevice = -1; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnHandle_t m_pCudnnHandle; ///<   @todo 우선순위,
+    cudnnHandle_t m_pCudnnHandle; ///<   @todo GPU
     // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // if __CUDNN__
 

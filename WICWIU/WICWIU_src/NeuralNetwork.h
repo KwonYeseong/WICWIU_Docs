@@ -6,41 +6,40 @@
 /*!
 @class
 @details
-@todo 우선순위
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class NeuralNetwork {
 private:
-    Container<Operator<DTYPE> *> *m_aaOperator; ///<   @todo 우선순위,
+    Container<Operator<DTYPE> *> *m_aaOperator; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Container<Operator<DTYPE> *> *m_apExcutableOperator; ///<   @todo 우선순위,
+    Container<Operator<DTYPE> *> *m_apExcutableOperator; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Container<Operator<DTYPE> *> *m_apInput; ///<   @todo 우선순위,
+    Container<Operator<DTYPE> *> *m_apInput; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Container<Operator<DTYPE> *> *m_apParameter; ///<   @todo 우선순위,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-
-    int m_Operatordegree; ///<   @todo 우선순위,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_ExcutableOperatorDegree; ///<   @todo 우선순위,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_InputDegree; ///<   @todo 우선순위,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_ParameterDegree; ///<   @todo 우선순위,
+    Container<Operator<DTYPE> *> *m_apParameter; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    LossFunction<DTYPE> *m_aLossFunction; ///<   @todo 우선순위,
+    int m_Operatordegree; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Optimizer<DTYPE> *m_aOptimizer; ///<   @todo 우선순위,
+    int m_ExcutableOperatorDegree; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_InputDegree; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_ParameterDegree; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    Device m_Device; ///<   @todo 우선순위,
+    LossFunction<DTYPE> *m_aLossFunction; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_idOfDevice = -1;  // 추후 수정  ///<   @todo 우선순위,
+    Optimizer<DTYPE> *m_aOptimizer; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+
+    Device m_Device; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_idOfDevice = -1;  // 추후 수정  ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnHandle_t m_cudnnHandle; ///<   @todo 우선순위,
+    cudnnHandle_t m_cudnnHandle; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // if __CUDNN__
 

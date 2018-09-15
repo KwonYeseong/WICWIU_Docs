@@ -7,14 +7,13 @@ template<typename DTYPE> class Tensorholder;
 /*!
 @class
 @details
-@todo 우선순위
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Container {
 private:
-    DTYPE *m_aElement;///<   @todo 우선 순위,
+    DTYPE *m_aElement;///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_size;///<   @todo 우선 순위,
+    int m_size;///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
@@ -24,7 +23,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Container() {
@@ -40,7 +39,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~Container() {
@@ -174,65 +173,25 @@ public:
         return TRUE;
     }
 
-    /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo 우선 순위
-    */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int SetElement(DTYPE pElement, unsigned int index) {
         m_aElement[index] = pElement;
         return TRUE;
     }
 
-    /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo 우선 순위
-    */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int GetSize() {
         // std::cout << "Container<DTYPE>::GetSize()" << '\n';
         return m_size;
     }
 
-    /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo 우선 순위
-    */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE GetLast() {
         // std::cout << "Container<DTYPE>::GetLast()" << '\n';
         return m_aElement[m_size - 1];
     }
 
-    /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo 우선 순위
-    */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE* GetRawData() const {
         return m_aElement;
     }
 
-    /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo 우선 순위
-    */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE GetElement(unsigned int index) {
         return m_aElement[index];
     }
