@@ -54,7 +54,7 @@ public:
     @details
     @param
     @return
-    @todo 우선 순위
+    @todo EXTRA
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Push(DTYPE pElement) {
@@ -85,7 +85,7 @@ public:
     @details
     @param
     @return
-    @todo 우선 순위
+    @todo E_Graph
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE Pop() {
@@ -111,7 +111,7 @@ public:
     @details
     @param
     @return
-    @todo 우선 순위
+    @todo E_Graph
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE Pop(DTYPE pElement) {
@@ -155,7 +155,7 @@ public:
     @details
     @param
     @return
-    @todo 우선 순위
+    @todo E_Graph
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Reverse() {
@@ -201,7 +201,7 @@ public:
     @details
     @param
     @return
-    @todo 우선 순위
+    @todo E_Graph
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE& operator[](unsigned int index) {
