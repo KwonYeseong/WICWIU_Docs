@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #ifndef __BATCH_NORMALIZE_LAYER__
 #define __BATCH_NORMALIZE_LAYER__    value
 
@@ -71,3 +72,6 @@ public:
 
 
 #endif  // __BATCH_NORMALIZE_LAYER__
+=======
+//삭제예정
+>>>>>>> 3717feeb284b83277a105b2347601e1b2f2d545d

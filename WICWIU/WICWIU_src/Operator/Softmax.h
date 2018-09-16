@@ -6,20 +6,20 @@
 /*!
 @class
 @details
-@todo 우선순위
+@todo EXTRA
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE>
 class Softmax : public Operator<DTYPE>{
-    DTYPE m_epsilon; ///<   @todo 우선순위
+    DTYPE m_epsilon; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_timesize; ///<   @todo 우선순위
+    int m_timesize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    DTYPE **sum; ///<   @todo 우선순위
+    DTYPE **sum; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE **max; ///<   @todo 우선순위
+    DTYPE **max; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
@@ -28,7 +28,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Softmax(Operator<DTYPE> *pOperator, DTYPE epsilon = 1e-6f) : Operator<DTYPE>(pOperator) {
@@ -43,7 +43,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Softmax(Operator<DTYPE> *pOperator, std::string pName) : Operator<DTYPE>(pOperator, pName) {
@@ -58,7 +58,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Softmax(Operator<DTYPE> *pOperator, DTYPE epsilon, std::string pName) : Operator<DTYPE>(pOperator, pName) {
@@ -73,7 +73,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     ~Softmax() {
@@ -87,7 +87,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     virtual int Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon = 1e-6f) {
@@ -120,7 +120,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     virtual void Delete() {
@@ -146,7 +146,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
@@ -209,7 +209,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
@@ -254,7 +254,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo N_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE Max(Tensor<DTYPE> *input, int start, int end) {
@@ -273,7 +273,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime = 0) {
@@ -286,7 +286,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {

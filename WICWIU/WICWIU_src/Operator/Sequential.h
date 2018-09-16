@@ -6,14 +6,14 @@
 /*!
 @class
 @details
-@todo 우선순위
+@todo EXTRA
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE>
 class Sequential : public Operator<DTYPE>{
-    Operator<DTYPE> **m_listOfOperator; ///<   @todo 우선순위
+    Operator<DTYPE> **m_listOfOperator; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_numOfOperator; ///<   @todo 우선순위
+    int m_numOfOperator; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
@@ -22,7 +22,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Sequential(int numOfOperator, ...) {
@@ -44,7 +44,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     ~Sequential() {
@@ -56,7 +56,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(int numOfOperator, va_list *ap) {
@@ -77,7 +77,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate() {
@@ -89,7 +89,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate() {

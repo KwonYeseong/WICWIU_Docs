@@ -6,23 +6,23 @@
 /*!
 @class
 @details
-@todo 우선순위
+@todo EXTRA
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class GlobalAvaragePooling2D : public Operator<DTYPE>{
 private:
-    int m_timesize; ///<   @todo 우선순위
+    int m_timesize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_batchsize; ///<   @todo 우선순위
+    int m_batchsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_channelsize; ///<   @todo 우선순위
+    int m_channelsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_rowsize; ///<   @todo 우선순위
+    int m_rowsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_colsize; ///<   @todo 우선순위
+    int m_colsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_divisor; ///<   @todo 우선순위
+    int m_divisor; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
@@ -31,7 +31,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     GlobalAvaragePooling2D(Operator<DTYPE> *pInput, std::string pName) : Operator<DTYPE>(pInput, pName) {
@@ -46,7 +46,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~GlobalAvaragePooling2D() {}
@@ -56,7 +56,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput) {
@@ -81,7 +81,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
@@ -116,7 +116,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
@@ -153,7 +153,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
@@ -166,7 +166,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {

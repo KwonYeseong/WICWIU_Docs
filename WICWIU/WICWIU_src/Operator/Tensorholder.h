@@ -6,7 +6,7 @@
 /*!
 @class
 @details
-@todo 우선순위
+@todo EXTRA
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Tensorholder : public Operator<DTYPE>{
@@ -16,7 +16,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Tensorholder(Tensor<DTYPE> *pTensor, std::string pName, int pTrainable = TRUE) : Operator<DTYPE>(pName) {
@@ -31,7 +31,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Tensorholder(int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize, std::string pName, int pTrainable = TRUE) : Operator<DTYPE>(pName) {
@@ -47,7 +47,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     ~Tensorholder() {
@@ -61,7 +61,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Tensor<DTYPE> *pTensor, int pTrainable) {
@@ -88,7 +88,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize, int pTrainable) {
@@ -118,7 +118,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo N_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void SetTensor(Tensor<DTYPE> *pTensor) {
@@ -130,7 +130,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo N_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void FeedTensor(Tensor<DTYPE> *pTensor) {

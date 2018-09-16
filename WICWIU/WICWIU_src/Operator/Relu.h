@@ -6,24 +6,24 @@
 /*!
 @class
 @details
-@todo 우선순위
+@todo EXTRA
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Relu : public Operator<DTYPE>{
 private:
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc; ///<   @todo 우선순위
+    cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    cudnnActivationDescriptor_t actDesc; ///<   @todo 우선순위
+    cudnnActivationDescriptor_t actDesc; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta; ///<   @todo 우선순위
+    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    float m_alpha; ///<   @todo 우선순위
+    float m_alpha; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    float m_beta; ///<   @todo 우선순위
+    float m_beta; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    double m_coef; ///<   @todo 우선순위
+    double m_coef; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #endif  // __CUDNN__
@@ -34,7 +34,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Relu(Operator<DTYPE> *pInput) : Operator<DTYPE>(pInput) {
@@ -49,7 +49,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Relu(Operator<DTYPE> *pInput, std::string pName) : Operator<DTYPE>(pInput, pName) {
@@ -64,7 +64,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     ~Relu() {
@@ -80,7 +80,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput) {
@@ -107,7 +107,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
@@ -153,7 +153,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
@@ -183,7 +183,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
@@ -219,7 +219,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
@@ -261,7 +261,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo EXTRA
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     inline DTYPE MAX(DTYPE data1, DTYPE data2) {
@@ -275,7 +275,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime = 0) {
@@ -298,7 +298,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {

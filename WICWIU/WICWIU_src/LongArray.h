@@ -19,7 +19,7 @@ private:
     // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
     int m_TimeSize; ///< TimeSize
     // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
-    int m_CapacityPerTime; ///< Capacity를 Time으로 눈 값.
+    int m_CapacityPerTime; ///< Capacity를 Time으로 나눈 값.
     // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
     Device m_Device; ///< 장치 사용 구분자 (CPU or GPU)
     // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08

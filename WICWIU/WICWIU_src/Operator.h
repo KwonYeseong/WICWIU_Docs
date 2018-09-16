@@ -7,7 +7,7 @@
 /*!
 @brief
 @details
-@todo 우선순위
+@todo EXTRA
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 enum Mode {
@@ -19,34 +19,34 @@ enum Mode {
 /*!
 @class
 @details
-@todo 우선순위
+@todo EXTRA
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Operator {
 private:
-    Container<Operator<DTYPE> *> *m_apOutput; ///<   @todo 우선순위,
+    Container<Operator<DTYPE> *> *m_apOutput; ///<   @todo Variable,
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Container<Operator<DTYPE> *> *m_apInput; ///<   @todo 우선순위,
+    Container<Operator<DTYPE> *> *m_apInput; ///<   @todo Variable,
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Container<Tensor<DTYPE> *> *m_aaResult; ///<   @todo 우선순위,
+    Container<Tensor<DTYPE> *> *m_aaResult; ///<   @todo Variable,
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Container<Tensor<DTYPE> *> *m_aaGradient; ///<   @todo 우선순위,
+    Container<Tensor<DTYPE> *> *m_aaGradient; ///<   @todo Variable,
     // 문서 작성자 : , 작성 날짜 : 2018-
-    std::string m_name; ///<   @todo 우선순위,
+    std::string m_name; ///<   @todo Variable,
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Device m_Device; ///<   @todo 우선순위,
+    Device m_Device; ///<   @todo Variable,
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_idOfDevice = -1; ///<   @todo 우선순위,
+    int m_idOfDevice = -1; ///<   @todo Variable,
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Mode m_Mode; ///<   @todo 우선순위,
+    Mode m_Mode; ///<   @todo Variable,
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_isParameter; ///<   @todo 우선순위,
+    int m_isParameter; ///<   @todo Variable,
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_isTrainable; ///<   @todo 우선순위,
+    int m_isTrainable; ///<   @todo Variable,
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnHandle_t m_pCudnnHandle; ///<   @todo 우선순위,
+    cudnnHandle_t m_pCudnnHandle; ///<   @todo Variable,
     // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // __CUDNN__
 

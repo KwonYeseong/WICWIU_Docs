@@ -6,36 +6,36 @@
 /*!
 @class
 @details
-@todo 우선순위
+@todo EXTRA
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Addall : public Operator<DTYPE>{
 private:
-    Shape *m_pLeftTenShape; ///<   @todo 우선순위
+    Shape *m_pLeftTenShape; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Shape *m_pRightTenShape; ///<   @todo 우선순위
+    Shape *m_pRightTenShape; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_timesize; ///<   @todo 우선순위
+    int m_timesize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_batchsize; ///<   @todo 우선순위
+    int m_batchsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_channelsize; ///<   @todo 우선순위
+    int m_channelsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_rowsize; ///<   @todo 우선순위
+    int m_rowsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_colsize; ///<   @todo 우선순위
+    int m_colsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t leftTensorDesc, rightTensorDesc, outputTensorDesc, leftDeltaDesc, rightDeltaDesc, deltaDesc; ///<   @todo 우선순위
+    cudnnTensorDescriptor_t leftTensorDesc, rightTensorDesc, outputTensorDesc, leftDeltaDesc, rightDeltaDesc, deltaDesc; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE *m_pDevLeft, *m_pDevRight, *m_pDevOutput, *m_pDevLeftDelta, *m_pDevRightDelta, *m_pDevDelta; ///<   @todo 우선순위
+    DTYPE *m_pDevLeft, *m_pDevRight, *m_pDevOutput, *m_pDevLeftDelta, *m_pDevRightDelta, *m_pDevDelta; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    DTYPE m_alpha; ///<   @todo 우선순위
+    DTYPE m_alpha; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE m_beta; ///<   @todo 우선순위
+    DTYPE m_beta; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #endif  // __CUDNN__
@@ -46,7 +46,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Addall(Operator<DTYPE> *pLeftInput, Operator<DTYPE> *pRightInput, std::string pName) : Operator<DTYPE>(pLeftInput, pRightInput, pName) {
@@ -61,7 +61,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     ~Addall() {
@@ -75,7 +75,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pLeftInput, Operator<DTYPE> *pRightInput) {
@@ -105,7 +105,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
@@ -147,7 +147,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
@@ -180,7 +180,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
@@ -212,7 +212,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
@@ -247,7 +247,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
@@ -277,7 +277,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {
@@ -309,37 +309,37 @@ public:
 /*!
 @class
 @details
-@todo 우선순위
+@todo Constructor
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class AddColWise : public Operator<DTYPE>{
 private:
-    Shape *m_pInputTenShape; ///<   @todo 우선순위
+    Shape *m_pInputTenShape; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Shape *m_pBiasTenShape; ///<   @todo 우선순위
+    Shape *m_pBiasTenShape; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 
-    int m_timesize; ///<   @todo 우선순위
+    int m_timesize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_batchsize; ///<   @todo 우선순위
+    int m_batchsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_channelsize; ///<   @todo 우선순위
+    int m_channelsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_rowsize; ///<   @todo 우선순위
+    int m_rowsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_colsize; ///<   @todo 우선순위
+    int m_colsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc; ///<   @todo 우선순위
+    cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta; ///<   @todo 우선순위
+    DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    DTYPE m_alpha; ///<   @todo 우선순위
+    DTYPE m_alpha; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE m_beta; ///<   @todo 우선순위
+    DTYPE m_beta; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #endif  // __CUDNN__
@@ -350,7 +350,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     AddColWise(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias, std::string pName) : Operator<DTYPE>(pInput, pBias, pName) {
@@ -365,7 +365,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     ~AddColWise() {
@@ -379,7 +379,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias) {
@@ -420,7 +420,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
@@ -462,7 +462,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
@@ -495,7 +495,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
@@ -528,7 +528,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
@@ -564,7 +564,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
@@ -594,7 +594,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {
@@ -626,36 +626,36 @@ public:
 /*!
 @class
 @details
-@todo 우선순위
+@todo Constructor
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class AddChannelWise : public Operator<DTYPE>{
 private:
-    Shape *m_pInputTenShape; ///<   @todo 우선순위
+    Shape *m_pInputTenShape; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Shape *m_pBiasTenShape; ///<   @todo 우선순위
+    Shape *m_pBiasTenShape; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    int m_timesize; ///<   @todo 우선순위
+    int m_timesize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_batchsize; ///<   @todo 우선순위
+    int m_batchsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_channelsize; ///<   @todo 우선순위
+    int m_channelsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_rowsize; ///<   @todo 우선순위
+    int m_rowsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_colsize; ///<   @todo 우선순위
+    int m_colsize; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc; ///<   @todo 우선순위
+    cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta; ///<   @todo 우선순위
+    DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    DTYPE m_alpha; ///<   @todo 우선순위
+    DTYPE m_alpha; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE m_beta; ///<   @todo 우선순위
+    DTYPE m_beta; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #endif  // __CUDNN__
@@ -666,7 +666,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     AddChannelWise(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias, std::string pName) : Operator<DTYPE>(pInput, pBias, pName) {
@@ -681,7 +681,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     ~AddChannelWise() {
@@ -695,7 +695,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias) {
@@ -736,7 +736,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
@@ -778,7 +778,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
@@ -811,7 +811,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
@@ -844,7 +844,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
@@ -879,7 +879,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
@@ -910,7 +910,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {

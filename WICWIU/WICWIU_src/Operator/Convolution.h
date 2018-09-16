@@ -7,50 +7,50 @@
 /*!
 @class
 @details
-@todo 우선순위
+@todo EXTRA
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Convolution2D : public Operator<DTYPE>{
 private:
-    int m_stride[2]; ///<   @todo 우선순위
+    int m_stride[2]; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_padding[2]; ///<   @todo 우선순위
+    int m_padding[2]; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t inputTensorDesc, outputTensorDesc, deltaDesc, inputDeltaDesc; ///<   @todo 우선순위
+    cudnnTensorDescriptor_t inputTensorDesc, outputTensorDesc, deltaDesc, inputDeltaDesc; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    cudnnConvolutionDescriptor_t convDesc; ///<   @todo 우선순위
+    cudnnConvolutionDescriptor_t convDesc; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    cudnnFilterDescriptor_t filterDesc, filterDeltaDesc; ///<   @todo 우선순위
+    cudnnFilterDescriptor_t filterDesc, filterDeltaDesc; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevFilter, *m_pDevInputDelta, *m_pDevDelta, *m_pDevFilterDelta; ///<   @todo 우선순위
-    // 문서 작성자 : , 작성 날짜 : 2018-
-
-    cudnnConvolutionFwdAlgo_t m_algo; ///<   @todo 우선순위
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    cudnnConvolutionBwdFilterAlgo_t m_filterAlgo; ///<   @todo 우선순위
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    cudnnConvolutionBwdDataAlgo_t m_dataAlgo; ///<   @todo 우선순위
+    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevFilter, *m_pDevInputDelta, *m_pDevDelta, *m_pDevFilterDelta; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    size_t m_sizeInBytes; ///<   @todo 우선순위
+    cudnnConvolutionFwdAlgo_t m_algo; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    size_t m_dataSizeInBytes; ///<   @todo 우선순위
+    cudnnConvolutionBwdFilterAlgo_t m_filterAlgo; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    size_t m_filterSizeInBytes; ///<   @todo 우선순위
-    // 문서 작성자 : , 작성 날짜 : 2018-
-
-    DTYPE m_alpha; ///<   @todo 우선순위
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE m_beta; ///<   @todo 우선순위
+    cudnnConvolutionBwdDataAlgo_t m_dataAlgo; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 
-    void *m_devWorkSpace; ///<   @todo 우선순위
+    size_t m_sizeInBytes; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    void *m_dataDevWorkSpace; ///<   @todo 우선순위
+    size_t m_dataSizeInBytes; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    void *m_filterDevWorkSpace; ///<   @todo 우선순위
+    size_t m_filterSizeInBytes; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+
+    DTYPE m_alpha; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE m_beta; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+
+    void *m_devWorkSpace; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    void *m_dataDevWorkSpace; ///<   @todo Variable
+    // 문서 작성자 : , 작성 날짜 : 2018-
+    void *m_filterDevWorkSpace; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // __CUDNN__
 
@@ -60,7 +60,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Convolution2D(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, std::string pName = "NO NAME") : Operator<DTYPE>(pInput, pWeight, pName) {
@@ -72,7 +72,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Convolution2D(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding, std::string pName = "NO NAME") : Operator<DTYPE>(pInput, pWeight, pName) {
@@ -84,7 +84,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Convolution2D(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding1, int padding2, std::string pName = "NO NAME") : Operator<DTYPE>(pInput, pWeight, pName) {
@@ -96,7 +96,8 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
+
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~Convolution2D() {
@@ -111,7 +112,8 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
+
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding1, int padding2) {
@@ -147,7 +149,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
@@ -266,7 +268,8 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo Constructor
+
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
@@ -314,7 +317,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
@@ -367,7 +370,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo E_Train
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
@@ -433,7 +436,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime = 0) {
@@ -459,7 +462,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo GPU
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {
@@ -487,27 +490,10 @@ public:
     }
 
 #endif  // if __CUDNN__
-
-    /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo 우선순위
-    */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int* GetStrideList() {
         return m_stride;
     }
 
-    /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo 우선순위
-    */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int* GetPaddingList() {
         return m_padding;
     }
