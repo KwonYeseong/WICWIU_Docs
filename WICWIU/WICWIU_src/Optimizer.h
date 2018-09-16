@@ -6,7 +6,6 @@
 /*!
 @brief
 @details
-@todo Variable
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 enum OptimizeDirection {
