@@ -16,7 +16,7 @@ private:
     // 문서 작성자 : , 작성 날짜 : 2018-
     Container<Operator<DTYPE> *> *m_apInput; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    Container<Operator<DTYPE> *> *m_apParameter; ///<   @todo Variable
+    Container<Operator<DTYPE> *> *m_apParameter; ///<   @todo Variable   //// Optimizer를 추가할 때, Optimizer에게 파라미터 리스트를 넘겨줌
     // 문서 작성자 : , 작성 날짜 : 2018-
 
     int m_Operatordegree; ///<   @todo Variable

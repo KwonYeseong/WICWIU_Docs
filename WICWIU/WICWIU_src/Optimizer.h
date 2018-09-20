@@ -17,9 +17,9 @@ template<typename DTYPE> class Optimizer {
 private:
     float m_LearningRate; ///<   @todo Variable
     // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_OptimizeDirection;  // 1 or -1 ///<   @todo Variable
+    int m_OptimizeDirection;  // 1(Ascent) or -1(Descent) ///<   @todo Variable   ////
     // 문서 작성자 : , 작성 날짜 : 2018-
-    float m_weightDecayRate; ///<   @todo Variable
+    float m_weightDecayRate; ///<   @todo Variable   //// Legularization, Overfitting을 막음
     // 문서 작성자 : , 작성 날짜 : 2018-
 
     Container<Operator<DTYPE> *> *m_ppTrainableTensors; ///<   @todo Variable
@@ -46,8 +46,8 @@ public:
     int                           Alloc(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, float pWeightDecayRate, OptimizeDirection pOptimizeDirection);
     int                           Delete();
 
-    virtual int                   UpdateParameter();
-    virtual int                   UpdateParameter(Operator<DTYPE> *pTrainableTensor) = 0;
+    virtual int                   UpdateParameter(); //// 보툥 사용하는 메소드
+    virtual int                   UpdateParameter(Operator<DTYPE> *pTrainableTensor) = 0; //// 잘 사용하지 않음
 
     void                          SetLearningRate(float pLearningRate);
     void                          SetTrainableTensorDegree(int pTrainableTensorDegree);

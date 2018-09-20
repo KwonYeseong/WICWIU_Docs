@@ -43,7 +43,7 @@ public:
     Container<Operator<DTYPE> *>      * GetExcutableOperatorContainer();
     int                                 GetNumOfExcutableOperator();
 
-    virtual Tensor<DTYPE>             * GetResult() const;
+    virtual Tensor<DTYPE>             * GetResult() const; ////Getter가 virtual로 선언 됨, 마지막 operator의 result를 가져오기 위해서
     virtual Container<Tensor<DTYPE> *>* GetResultContainer();
 
     virtual Tensor<DTYPE>             * GetGradient() const;

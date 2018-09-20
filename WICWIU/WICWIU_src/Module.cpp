@@ -296,7 +296,7 @@ template<typename DTYPE> int Module<DTYPE>::ForwardPropagate(int pTime) {
         (*m_aaExcutableOperator)[i]->ForwardPropagate(pTime);
     }
     return TRUE;
-}
+} ////순서대로 실행시킴, 우리가 제공하는 Operator가 아니면 Module을 사용할 수 없음
 
 /*!
 @brief
@@ -315,7 +315,9 @@ template<typename DTYPE> int Module<DTYPE>::BackPropagate(int pTime) {
 
 /*!
 @brief
-@details
+@details 한 루프(A pair of Forward & backward)마다 초기화 필요, Result가 학습에 이미 사용되었다고 가정, Excutable의 경우만
+         Forward -> get Result / Backward -> get Gradient / Update Parameter /
+         Parameter Random number / 0 in operators
 @param
 @return
 @todo E_Train
@@ -330,7 +332,7 @@ template<typename DTYPE> int Module<DTYPE>::ResetResult() {
 
 /*!
 @brief
-@details
+@details 한 루프(A pair of Forward & backward)마다 초기화 필요, Gradient가 학습에 이미 사용되었다고 가정, Excutable의 경우만
 @param
 @return
 @todo E_Train
