@@ -19,13 +19,14 @@ private:
     // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-09
     int *m_aDim;///< Shape 클래스를 구성하는 Dimension 멤버변수, 각 축의 차원
     // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-09
-    Device m_Device;///< 장치 사용 구분자, CPU or GPU, Device 참고
+    Device m_Device;///< 장치 사용 구분자, CPU 또는 GPU, Device 참고
     // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-09
-    int m_idOfDevice = -1;///< GPU 사용 시, 사용하려는 GPU의 번호
+    int m_idOfDevice = -1;///< GPU 사용 시, 사용하려는 GPU의 번호. CPU의 경우 -1
     // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-09
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t m_desc;
+    cudnnTensorDescriptor_t m_desc; ///<   @todo GPU
+    // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // if __CUDNN__
 
 private:

@@ -28,9 +28,9 @@ private:
     // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
     LongArray<DTYPE> *m_aLongArray; ///< Tensor를 구성하는 LongArray 클래스, 텐서의 원소들의 값을 저장
     // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
-    Device m_Device; ///< 장치 사용 구분자, CPU or GPU, Device 참고
+    Device m_Device; ///< 장치 사용 구분자, CPU 또는 GPU, Device 참고
     // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
-    int m_idOfDevice = -1; ///< GPU 사용 시, 사용하려는 GPU의 번호
+    int m_idOfDevice = -1; ///< GPU 사용 시, 사용하려는 GPU의 번호. CPU의 경우 -1
     // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
     IsUseTime m_IsUseTime; ///< time 축 사용 유무, IsUseTime 참고
     // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-03
