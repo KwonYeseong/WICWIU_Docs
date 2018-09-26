@@ -9,7 +9,6 @@ template class Module<double>;
 /*!
 @brief
 @details
-@param
 @return
 @todo Constructor
 */
@@ -22,8 +21,7 @@ template<typename DTYPE> int Module<DTYPE>::Alloc() {
 /*!
 @brief
 @details
-@param
-@return
+@return 없음
 @todo Constructor
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
@@ -49,8 +47,8 @@ template<typename DTYPE> void Module<DTYPE>::Delete() {
 /*!
 @brief
 @details
-@param
-@return
+@param pName
+@return 없음
 @todo Constructor
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
@@ -105,7 +103,7 @@ template<typename DTYPE> int Module<DTYPE>::SetInput(int pNumOfInput, ...) {
 /*!
 @brief
 @details
-@param
+@param pOperator
 @return
 @todo E_Graph
 */
@@ -124,7 +122,7 @@ template<typename DTYPE> int Module<DTYPE>::IsInput(Operator<DTYPE> *pOperator) 
 /*!
 @brief
 @details
-@param
+@param pOperator
 @return
 @todo E_Graph
 */

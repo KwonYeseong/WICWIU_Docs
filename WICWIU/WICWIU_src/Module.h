@@ -10,18 +10,18 @@
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Module : public Operator<DTYPE>{
 private:
-    Container<Operator<DTYPE> *> *m_aaExcutableOperator; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_numOfExcutableOperator; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Container<Operator<DTYPE> *> *m_aaExcutableOperator; ///< Module을 구성하는 Operator들 중, Tensorholder를 제외한 나머지 operator들의 포인터를 저장하는 Container 멤버 변수
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
+    int m_numOfExcutableOperator; ///< Module을 구성하는 Operator들 중, Tensorholder를 제외한 나머지 operator들의 개수
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
-    Operator<DTYPE> *m_pLastOperator; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Operator<DTYPE> *m_pLastOperator; ///< Module을 구성하는 Operator들 중, 순전파 순서 상 마지막에 해당하는 operator의 포인터
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
-    Device m_Device; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    unsigned int m_idOfDevice = 0; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Device m_Device; ///< 장치 사용 구분자, CPU 또는 GPU, Device 참고
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
+    unsigned int m_idOfDevice = 0; ///< GPU 사용 시, 사용하려는 GPU의 번호. CPU의 경우 -1
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
 private:
     int  Alloc();

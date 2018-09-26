@@ -11,32 +11,32 @@
 template<typename DTYPE> class NeuralNetwork {
 private:
     Container<Operator<DTYPE> *> *m_aaOperator; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
     Container<Operator<DTYPE> *> *m_apExcutableOperator; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
     Container<Operator<DTYPE> *> *m_apInput; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
     Container<Operator<DTYPE> *> *m_apParameter; ///<   @todo Variable   //// Optimizer를 추가할 때, Optimizer에게 파라미터 리스트를 넘겨줌
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
     int m_Operatordegree; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
     int m_ExcutableOperatorDegree; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
     int m_InputDegree; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
     int m_ParameterDegree; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
     LossFunction<DTYPE> *m_aLossFunction; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
     Optimizer<DTYPE> *m_aOptimizer; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
-    Device m_Device; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_idOfDevice = -1;  // 추후 수정  ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Device m_Device; ///< 장치 사용 구분자, CPU 또는 GPU, Device 참고
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
+    int m_idOfDevice = -1;  // 추후 수정  ///< GPU 사용 시, 사용하려는 GPU의 번호. CPU의 경우 -1
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
 #ifdef __CUDNN__
     cudnnHandle_t m_cudnnHandle; ///<   @todo Variable

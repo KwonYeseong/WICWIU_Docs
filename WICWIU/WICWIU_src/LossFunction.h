@@ -15,26 +15,27 @@ Network의 output과 Label을 비교해서 계산하는 function
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class LossFunction {
 private:
-    Tensor<DTYPE> *m_aResult; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    Tensor<DTYPE> *m_aGradient; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_aResult; ///< LossFunction에서 얻어진 결과 값을 저장하는 Tensor에 대한 포인터
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
+    Tensor<DTYPE> *m_aGradient; ///< LossFunction에서 얻어진 결과 값의 Gradient를 저장하는 Tensor에 대한 포인터
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
-    Operator<DTYPE> *m_pInputOperator; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    Tensor<DTYPE> *m_pInputTensor; ///<   @todo Variable  ////Tensor 꺼내는 작업 Overhead가 크기 때문에 미리 빼 놓음
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Operator<DTYPE> *m_pInputOperator; ///< LossFunction의 Input에 해당하는 Operator, 즉 NeuralNetwork의 Output에 해당하는 Operator에 대한 포인터
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
+    Tensor<DTYPE> *m_pInputTensor; ///< NeuralNetwork의 Output에 해당하는 Operator의 Result Tensor에 대한 포인터  ////Tensor 꺼내는 작업 Overhead가 크기 때문에 미리 빼 놓음
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
-    Operator<DTYPE> *m_pLabel; ///<   @todo Variable  //// 매번 바뀜
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Operator<DTYPE> *m_pLabel; ///< 학습 데이터에 대한 Label 값에 대한 포인터  //// 매번 바뀜
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
-    std::string m_name; ///<   @todo Variable  //// no name
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    std::string m_name; ///< LossFunction의 이름을 저장하는 string  //// no name
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
-    Device m_Device; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_idOfDevice = -1; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Device m_Device; ///< 장치 사용 구분자, CPU 또는 GPU, Device 참고
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
+    int m_idOfDevice = -1; ///< GPU 사용 시, 사용하려는 GPU의 번호. CPU의 경우 -1
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
+
 
 #ifdef __CUDNN__
     cudnnHandle_t m_pCudnnHandle; ///<   @todo GPU
