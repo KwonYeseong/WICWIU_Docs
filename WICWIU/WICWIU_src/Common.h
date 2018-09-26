@@ -31,11 +31,11 @@
 #endif  // ifndef __CUDNN__
 
 /*!
-@brief
-@details
-@todo Variable
+@brief 장치 사용 구분자, CPU 또는 GPU
+@details 학습 시 사용하는 장치를 구분하기 위해 사용하는 열거형 변수, CPU 또는 GPU
+@todo 추가 설명 요
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 enum Device {
     CPU,
     GPU,
