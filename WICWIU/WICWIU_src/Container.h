@@ -144,13 +144,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Graph
+    @brief Queue를 역순으로 재할당해주는 메소드
+    @details Queue의 Element를 반대 순서로 저장하는 새로운 Queue를 할당하고, 기존의 Queue를 할당 해제한다.
+    @return TRUE
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
     int Reverse() {
         DTYPE *temp = new DTYPE[m_size];
 
@@ -191,7 +189,7 @@ public:
 
     /*!
     @brief []연산자 오버로딩
-    @details
+    @details Queue에서 파라미터로 받은 인덱스에 해당하는 ELement를 반환한다.
     @param index 찾고자 하는 Queue의 Element의 인덱스
     @return m_aElement[index]
     */
