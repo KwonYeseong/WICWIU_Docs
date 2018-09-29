@@ -241,7 +241,7 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::IsValid(Operator<DTYPE> *pOpe
 }
 
 /*!
-@brief 
+@brief
 @details BFS 로 그래프 분석
 @details Result 부터 BFS 순서대로 그래프 탐색
 @details Queue, push pop
@@ -252,11 +252,7 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::IsValid(Operator<DTYPE> *pOpe
 @details isParameter? Parameter operator : Excutable operator
 @details continue readability
 @details reverse 정순으로 세팅하기 위해
-<<<<<<< HEAD
 @param pResultOperator 신경망의
-=======
-@param pResultOperator 신경망의 
->>>>>>> 79a9c21581e6e2cc2bfcdab23fc17e7e67eddde2
 @return 매개변수로 받은
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
