@@ -4,23 +4,22 @@
 #include "../Operator.h"
 
 /*!
-@class
-@details
-@todo EXTRA
+@class ReShape class
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-24
 template<typename DTYPE>
 class ReShape : public Operator<DTYPE>{
 private:
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief ReShape의 생성자
+    @details 파라미터로 받은 pInput, pRowSize, pColSize으로 Alloc한다.
+    @param pInput ReShape할 Operator.
+    @param pRowSize ReShape으로 새로 만들어질 Tensor의 rowsize.
+    @param pColSize ReShape으로 새로 만들어질 Tensor의 colsize.
+    @paramp pName 사용자가 부여한 Operator의 이름.
+    @ref int Alloc(Operator<DTYPE> *pInput, int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ReShape(Operator<DTYPE> *pInput, int pRowSize, int pColSize, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "ReShape::ReShape(Operator *)" << '\n';
@@ -29,13 +28,15 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief ReShape의 생성자
+    @details 파라미터로 받은 pInput, pRowSize, pColSize으로 Alloc한다.
+    @param pInput ReShape할 Operator.
+    @param pChannelSize ReShape으로 새로 만들어질 Tensor의 channelsize
+    @param pRowSize ReShape으로 새로 만들어질 Tensor의 rowsize.
+    @param pColSize ReShape으로 새로 만들어질 Tensor의 colsize.
+    @paramp pName 사용자가 부여한 Operator의 이름.
+    @ref int Alloc(Operator<DTYPE> *pInput, int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ReShape(Operator<DTYPE> *pInput, int pChannelSize, int pRowSize, int pColSize, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "ReShape::ReShape(Operator *)" << '\n';
@@ -44,13 +45,16 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief ReShape의 생성자
+    @details 파라미터로 받은 pInput, pRowSize, pColSize으로 Alloc한다.
+    @param pInput ReShape할 Operator.
+    @param pBatchSize ReShape으로 새로 만들어질 Tensor의 batchsize.
+    @param pChannelSize ReShape으로 새로 만들어질 Tensor의 channelsize.
+    @param pRowSize ReShape으로 새로 만들어질 Tensor의 rowsize.
+    @param pColSize ReShape으로 새로 만들어질 Tensor의 colsize.
+    @paramp pName 사용자가 부여한 Operator의 이름.
+    @ref int Alloc(Operator<DTYPE> *pInput, int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ReShape(Operator<DTYPE> *pInput, int pBatchSize, int pChannelSize, int pRowSize, int pColSize, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "ReShape::ReShape(Operator *)" << '\n';
@@ -59,13 +63,17 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief ReShape의 생성자
+    @details 파라미터로 받은 pInput, pRowSize, pColSize으로 Alloc한다.
+    @param pInput ReShape할 Operator.
+    @param pTimeSize ReShape으로 새로 만들어질 Tensor의 timesize.
+    @param pBatchSize ReShape으로 새로 만들어질 Tensor의 batchsize.
+    @param pChannelSize ReShape으로 새로 만들어질 Tensor의 channelsize.
+    @param pRowSize ReShape으로 새로 만들어질 Tensor의 rowsize.
+    @param pColSize ReShape으로 새로 만들어질 Tensor의 colsize.
+    @paramp pName 사용자가 부여한 Operator의 이름.
+    @ref int Alloc(Operator<DTYPE> *pInput, int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ReShape(Operator<DTYPE> *pInput, int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "ReShape::ReShape(Operator *)" << '\n';
@@ -74,11 +82,9 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief ReShape의 소멸자.
+    @details Delete 매소드를 사용한다.
+    @ref void Delete()
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     ~ReShape() {
@@ -90,13 +96,18 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 파라미터로 받은 값들로 Shape의 dim들을 바꾼다.
+    @details result에 파라미터로 받은 값들로 result의 shape을 바꾸어 넣고,
+    @details Delta도 마찬가지로 받은 Dimension 정보들로 새로운 Tensor를 생성하여 넣는다,
+    @param pInput ReShape할 Operator.
+    @param pTimeSize ReShape으로 새로 만들어질 Tensor의 timesize.
+    @param pBatchSize ReShape으로 새로 만들어질 Tensor의 batchsize.
+    @param pChannelSize ReShape으로 새로 만들어질 Tensor의 channelsize.
+    @param pRowSize ReShape으로 새로 만들어질 Tensor의 rowsize.
+    @param pColSize ReShape으로 새로 만들어질 Tensor의 colsize.
+    @paramp pName 사용자가 부여한 Operator의 이름.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize) {
         #ifdef __DEBUG__
         std::cout << "ReShape::Alloc(Operator *, Operator *)" << '\n';
@@ -122,23 +133,17 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief  Delete 매소드.
+    @details 별다른 기능은 없다.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {}
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief ReShape의 ForwardPropagate 매소드
+    @details input값을 result에 저장한다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int  ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *result = this->GetResult();
@@ -168,13 +173,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief ReShape의 BackPropagate 매소드.
+    @details input_delta에 this_delta값을 더한다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *this_delta  = this->GetDelta();
         Tensor<DTYPE> *input_delta = this->GetInput()[0]->GetDelta();

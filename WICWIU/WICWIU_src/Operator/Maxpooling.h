@@ -4,49 +4,40 @@
 #include "../Operator.h"
 
 /*!
-@class
+@class Maxpooling2D class
 @details
-@todo EXTRA
+
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-25
 template<typename DTYPE> class Maxpooling2D : public Operator<DTYPE>{
 private:
-    int m_stride[2]; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_mask[2]; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_padding[2]; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_stride[2]; ///<  stride 값
+    int m_mask[2]; ///< mask size
+    int m_padding[2]; ///< paading size
 
     Tensor<int> *indexOfMaxInput; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #ifdef __CUDNN__
     cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     cudnnPoolingDescriptor_t m_aPoolingDesc; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    // DTYPE *m_aHostInput, *m_aHostOutput, *m_aHostInputDelta, *m_aHostDelta;
 
     float m_alpha; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     float m_beta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     double m_coef; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // __CUDNN__
 
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Maxpooling2D의 생성자
+    @details 파라미터로 받은 pInput, strideRow, strideCol, maskRow, maskCol으로 Alloc한다.
+    @param pInput Maxpooling2D할 대상 Operator.
+    @param strideRow Row stirde값
+    @param strideCol Colunm stride값
+    @param maskRow Filter의 Row size
+    @param maskCol Filter의 Colunm size
+    @param pName 사용자가 부여한 Operator이름
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Maxpooling2D(Operator<DTYPE> *pInput, int strideRow, int strideCol, int maskRow, int maskCol, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "Maxpooling2D::Maxpooling2D(Operator<DTYPE> *, int, int)" << '\n';
@@ -55,13 +46,16 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Maxpooling2D의 생성자
+    @details 파라미터로 받은 pInput, strideRow, strideCol, maskRow, maskCol으로 Alloc한다.
+    @param pInput Maxpooling2D할 대상 Operator.
+    @param strideRow Row stirde값
+    @param strideCol Colunm stride값
+    @param maskRow Filter의 Row size
+    @param maskCol Filter의 Colunm size
+    @param padding padding size
+    @param pName 사용자가 부여한 Operator이름
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Maxpooling2D(Operator<DTYPE> *pInput, int strideRow, int strideCol, int maskRow, int maskCol, int padding, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "Maxpooling2D::Maxpooling2D(Operator<DTYPE> *, int, int, std::string)" << '\n';
@@ -70,13 +64,8 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Maxpooling2D의 소멸자
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ~Maxpooling2D() {
         #ifdef __DEBUG__
         std::cout << "Maxpooling2D::~Maxpooling2D()" << '\n';
@@ -87,13 +76,18 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 파라미터로 받은 변수로부터 맴버 변수들을 초기화 한다.
+    @details Result와 Gradient를 저장하기 위해 pInput의 Shape과 같은 dim을 갖는 Tensor를 생성한다.
+    @details m_stride, m_mask, m_padding값들을 초기화 하고 rowsize, colsize를 결정한다.
+    @param pInput 생성 할 Tensor의 Shape정보를 가진 Operator.
+    @param strideRow Row stirde값.
+    @param strideCol Colunm stride값.
+    @param maskRow Filter의 Row size.
+    @param maskCol Filter의 Colunm size.
+    @param padding1 row_padding 값.
+    @param padding2 col_padding 값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, int strideRow, int strideCol, int maskRow, int maskCol, int padding1 = 0, int padding2 = 0) {
         #ifdef __DEBUG__
         std::cout << "Maxpooling2D::Alloc(Operator<DTYPE> *, int, int)" << '\n';
@@ -214,13 +208,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief Maxpooling2D의 ForwardPropagate 매소드.
+    @details Filter(temprow * tempcol)의 범위 중 가장 큰 값을 result에 저장하고, index는 indexOfMaxInput에 저장한다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     // 메모리 효율을 생각하면 time에 따라 취해야 할 액션이 다르다.
     int ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input = this->GetInput()[0]->GetResult();
@@ -285,13 +277,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief Maxpooling2D의 BackPropagate 매소드.
+    @details 계산한 delta값을 input_delta에 더한다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *input_delta = this->GetInput()[0]->GetDelta();
 

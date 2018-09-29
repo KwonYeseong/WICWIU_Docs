@@ -5,8 +5,8 @@
 #include "Container.h"
 
 /*!
-@brief
-@details
+@brief Operator의 현재 상태를 나타내는  enum class
+@details TRAINING:학습 중, ACCUMULATING:, INFERENCING:accuracy를 구하는 중
 @todo EXTRA
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
@@ -24,26 +24,17 @@ enum Mode {
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Operator {
 private:
-    Container<Operator<DTYPE> *> *m_apOutput; ///<   @todo Variable,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    Container<Operator<DTYPE> *> *m_apInput; ///<   @todo Variable,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    Container<Tensor<DTYPE> *> *m_aaResult; ///<   @todo Variable,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    Container<Tensor<DTYPE> *> *m_aaGradient; ///<   @todo Variable,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    std::string m_name; ///<   @todo Variable,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    Device m_Device; ///<   @todo Variable,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_idOfDevice = -1; ///<   @todo Variable,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    Mode m_Mode; ///<   @todo Variable,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_isParameter; ///<   @todo Variable,
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_isTrainable; ///<   @todo Variable,
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Container<Operator<DTYPE> *> *m_apOutput; ///< Operator의 m_aaResult값을 사용할 Operator들의 주소 값.
+    Container<Operator<DTYPE> *> *m_apInput; ///< Operator에 input으로  들어오는 Operator들의 주소 값.
+    Container<Tensor<DTYPE> *> *m_aaResult; ///< Operator의 결과 값.
+    Container<Tensor<DTYPE> *> *m_aaGradient; ///< Operator의 Gradiuent값들의 Array.
+    std::string m_name; ///< Operator에 사용자가 부여한 이름.
+    Device m_Device; ///< Operator가 사용하고 있는 Device, 해당 Device의 메모리에 Operator가 있다.
+    int m_idOfDevice = -1; ///< m_Device가 GPU일 경우 사용하는 GPU번호.
+    Mode m_Mode; ///< Operator의 Mode.
+    int m_isParameter; ///< Operator가 파라미터인지 알려주는 값.
+    int m_isTrainable; ///< Operator가 학습가능한 Operator인지 알려주는 값.
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 
 #ifdef __CUDNN__
     cudnnHandle_t m_pCudnnHandle; ///<   @todo Variable,

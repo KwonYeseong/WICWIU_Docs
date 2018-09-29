@@ -4,51 +4,37 @@
 #include "../Operator.h"
 
 /*!
-@class
-@details
-@todo EXTRA
+@class Tensor의 모든 값들을 서로 더하는 class
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
 template<typename DTYPE> class Addall : public Operator<DTYPE>{
 private:
-    Shape *m_pLeftTenShape; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    Shape *m_pRightTenShape; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Shape *m_pLeftTenShape; ///< 연산 할 Tensor의 Shape
+    Shape *m_pRightTenShape; ///< 연산 할 Tensor의 Shape
 
-    int m_timesize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_batchsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_channelsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_rowsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_colsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_timesize; ///< timetime
+    int m_batchsize; ///< batchbatch
+    int m_channelsize; ///< channelchannel
+    int m_rowsize; ///< rowrow
+    int m_colsize; ///< colcol
 
 #ifdef __CUDNN__
     cudnnTensorDescriptor_t leftTensorDesc, rightTensorDesc, outputTensorDesc, leftDeltaDesc, rightDeltaDesc, deltaDesc; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE *m_pDevLeft, *m_pDevRight, *m_pDevOutput, *m_pDevLeftDelta, *m_pDevRightDelta, *m_pDevDelta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-
     DTYPE m_alpha; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE m_beta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-
 #endif  // __CUDNN__
 
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Addall의 생성자
+    @details pLeftInput, pRightInput을 Alloc시킨다.
+    @param pLeftInput Alloc할 대상 Operator.
+    @param pRightInput Alloc할 대상 Operator.
+    @param pName Operator에 사용자가 부여한 이름.
+    @ref int Alloc(Operator<DTYPE> *pLeftInput, Operator<DTYPE> *pRightInput)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     Addall(Operator<DTYPE> *pLeftInput, Operator<DTYPE> *pRightInput, std::string pName) : Operator<DTYPE>(pLeftInput, pRightInput, pName) {
         #ifdef __DEBUG__
         std::cout << "Addall::Addall(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -57,13 +43,9 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Addall의 소멸자.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     ~Addall() {
         #ifdef __DEBUG__
         std::cout << "Addall::~Addall()" << '\n';
@@ -71,13 +53,14 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 파라미터로 들어온 pLeftInput을 이용해 맴버 변수들을 초기화한다.
+    @details 파라미터로 들어온 pLeftInput과 m_pRightInput의 Shape정보를 맴버변수에 저장하고 다른 맴버 변수들은 pLeftInput의 Shape값으로 초기화한다.
+    @details Result값과 gradient값을 저장 할 Tensor를 새로 만든다.
+    @param 생성 할 Tensor의 Shape정보를 가진 Operator
+    @param pRightInput 연산에 사용 할 inputTensor.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int Alloc(Operator<DTYPE> *pLeftInput, Operator<DTYPE> *pRightInput) {
         #ifdef __DEBUG__
         std::cout << "Addall::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -139,7 +122,6 @@ public:
 
         checkCudaErrors(cudaDeviceSynchronize());
     }
-
 #endif  // if __CUDNN__
 
     /*!
@@ -176,13 +158,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief Addall의 forwardPropagate 매소드.
+    @details Container에 저장한 left, right의 Result값을 서로 더한다.
+    @param pTime 더할 텐서의 m_timesize값, default는 0으로 사용한다.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -208,13 +189,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief Addall의 BackPropagate 매소드.
+    @details Container에 저장한 pLeftInput, pRightInput의 Gradient값에 계산한 Gradient값을 각각 더한다.
+    @param pTime 더할 텐서의 m_timesize값, default는 0으로 사용한다.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int BackPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -307,52 +287,36 @@ public:
 };
 
 /*!
-@class
-@details
-@todo Constructor
+@class Tensor의 값 중 Colunm에만 값을 더하는 class
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class AddColWise : public Operator<DTYPE>{
 private:
-    Shape *m_pInputTenShape; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    Shape *m_pBiasTenShape; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Shape *m_pInputTenShape; ///< 더해질 Tensor의 Shape.
+    Shape *m_pBiasTenShape; ///< 더할 Bias의 Shape.
 
-
-    int m_timesize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_batchsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_channelsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_rowsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_colsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_timesize; ///< timetime
+    int m_batchsize; ///< batchbatch
+    int m_channelsize; ///< channelchannel
+    int m_rowsize; ///< rowrow
+    int m_colsize; ///< colcol
 
 #ifdef __CUDNN__
     cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-
     DTYPE m_alpha; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE m_beta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #endif  // __CUDNN__
 
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief AddColWise의 생성자
+    @details pInput, pBias을 Alloc시킨다.
+    @param pInput Alloc할 대상 Operator.
+    @param pBais Alloc할 대상 Operator.
+    @param pName Operator에 사용자가 부여한 이름.
+    @ref int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     AddColWise(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias, std::string pName) : Operator<DTYPE>(pInput, pBias, pName) {
         #ifdef __DEBUG__
         std::cout << "AddColWise::AddColWise(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -361,13 +325,8 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief AddColWise의 소멸자
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ~AddColWise() {
         #ifdef __DEBUG__
         std::cout << "AddColWise::~AddColWise()" << '\n';
@@ -375,13 +334,14 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 파라미터로 들어온 pInput, pBias를 이용해 맴버 변수들을 초기화 한다
+    @details 파라미터로 들어온 pInput, pBias의 Shape정보를 맴버 변수에 저장하고 다른 맴버 변수들은 pInput의 Shape값으로 초기화 한다.
+    @details Result값과 gradient값을 저장 할 Tensor를 새로 만든다.
+    @param 생성 할 Tensor의 Shape정보를 가진 Operator.
+    @param pBias 더할 Operator.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias) {
         #ifdef __DEBUG__
         std::cout << "AddColWise::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -397,13 +357,9 @@ public:
         m_colsize     = (*m_pInputTenShape)[4];
 
         #ifdef __DEBUG__
-
         if ((*m_pBiasTenShape)[0] != 1) printf("Receive invalid bias shape in %s (%s %d), cannot handling\n", __FUNCTION__, __FILE__, __LINE__);
-
         if ((*m_pBiasTenShape)[1] != 1) printf("Receive invalid bias shape in %s (%s %d), cannot handling\n", __FUNCTION__, __FILE__, __LINE__);
-
         if ((*m_pBiasTenShape)[2] != 1) printf("Receive invalid bias shape in %s (%s %d), cannot handling\n", __FUNCTION__, __FILE__, __LINE__);
-
         if ((*m_pBiasTenShape)[3] != 1) printf("Receive invalid bias shape in %s (%s %d), cannot handling\n", __FUNCTION__, __FILE__, __LINE__);
         #endif  // __DEBUG__
 
@@ -491,13 +447,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief AddColWise의 forwardPropagate 매소드.
+    @details Container에 저장한 Input, bias의 Result값 중 Colunm값을 서로 더한다.
+    @param pTime input의 Shape 중 m_timesize값, default는 0으로 사용한다.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -524,13 +479,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief AddColWise의 BackPropagate 매소드.
+    @details Container에 저장한 pInput, pBias의 Gradient값애 계산을 통해 구한 gradient값을 각각 더한다.
+    @param pTime input의 Shape 중 m_timesize값, default는 0으로 사용한다.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int BackPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -631,44 +585,33 @@ public:
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class AddChannelWise : public Operator<DTYPE>{
 private:
-    Shape *m_pInputTenShape; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    Shape *m_pBiasTenShape; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Shape *m_pInputTenShape; ///< 더해질 Tensor의 Shape
+    Shape *m_pBiasTenShape; ///< 더 할 Tensor의 Shape
 
-    int m_timesize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_batchsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_channelsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_rowsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_colsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_timesize; ///<   @todo timetime
+    int m_batchsize; ///<   @todo batchbatch
+    int m_channelsize; ///<   @todo channelchannel
+    int m_rowsize; ///<   @todo rowrow
+    int m_colsize; ///<   @todo colcol
 
 #ifdef __CUDNN__
     cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
 
     DTYPE m_alpha; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE m_beta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-
 #endif  // __CUDNN__
 
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief AddChannelWise의 생성자
+    @details pInput, pBias을 Alloc시킨다.
+    @param pInput Alloc할 대상 Operator.
+    @param pBias Alloc할 대상 Operator.
+    @param pName Operator에 사용자가 부여한 이름.
+    @ref int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     AddChannelWise(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias, std::string pName) : Operator<DTYPE>(pInput, pBias, pName) {
         #ifdef __DEBUG__
         std::cout << "AddChannelWise::AddChannelWise(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -677,13 +620,8 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief AddChannelWise의 소멸자.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ~AddChannelWise() {
         #ifdef __DEBUG__
         std::cout << "AddChannelWise::~AddChannelWise()" << '\n';
@@ -691,13 +629,14 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 파라미터로 들어온 pInput, pBias를 이용해 맴버 변수들을 초기화 한다
+    @details 파라미터로 들어온 pInput, pBias의 Shape정보를 맴버 변수에 저장하고 다른 맴버 변수들은 pInput의 Shape값으로 초기화 한다.
+    @details Result값과 gradient값을 저장 할 Tensor를 새로 만든다.
+    @param 생성 할 Tensor의 Shape정보를 가진 Operator.
+    @param pBias 더할 Operator.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias) {
         #ifdef __DEBUG__
         std::cout << "AddColWise::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -713,13 +652,9 @@ public:
         m_colsize     = (*m_pInputTenShape)[4];
 
         #ifdef __DEBUG__
-
         if ((*m_pBiasTenShape)[0] != 1) printf("Receive invalid bias shape in %s (%s %d), cannot handling\n", __FUNCTION__, __FILE__, __LINE__);
-
         if ((*m_pBiasTenShape)[1] != 1) printf("Receive invalid bias shape in %s (%s %d), cannot handling\n", __FUNCTION__, __FILE__, __LINE__);
-
         if ((*m_pBiasTenShape)[3] != 1) printf("Receive invalid bias shape in %s (%s %d), cannot handling\n", __FUNCTION__, __FILE__, __LINE__);
-
         if ((*m_pBiasTenShape)[4] != 1) printf("Receive invalid bias shape in %s (%s %d), cannot handling\n", __FUNCTION__, __FILE__, __LINE__);
         #endif  // __DEBUG__
 
@@ -807,13 +742,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief AddChannelWise의 forwardPropagate 매소드.
+    @details Container에 저장한 Input, bias의 Result값 중 Channel값을 서로 더한다.
+    @param pTime input의 Shape 중 m_timesize값, default는 0으로 사용한다.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -840,13 +774,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief AddColWise의 BackPropagate 매소드.
+    @details Container에 저장한 pInput, pBias의 Gradient값애 계산을 통해 구한 gradient값을 각각 더한다.
+    @param pTime input의 Shape 중 m_timesize값, default는 0으로 사용한다.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int BackPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 

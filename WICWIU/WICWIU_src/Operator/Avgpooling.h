@@ -4,36 +4,30 @@
 #include "../Operator.h"
 
 /*!
-@class
-@details
-@todo EXTRA
+@class GlobalAvaragePooling2D class
+@details Row * Colunm 공간을 GlobalAvaragePooling하는 클래스.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
 template<typename DTYPE> class GlobalAvaragePooling2D : public Operator<DTYPE>{
 private:
-    int m_timesize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_batchsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_channelsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_rowsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_colsize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_timesize; ///< timetime
+    int m_batchsize; ///< batchbatch
+    int m_channelsize; ///< channelchannel
+    int m_rowsize; ///< rowrow
+    int m_colsize; ///< colcol
 
-    int m_divisor; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_divisor; ///< Average를 결정 짓는 값. ex) row_size * col_size
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
 
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief GlobalAvaragePooling2D의 생성자.
+    @details 파라미터로 받은 pInput으로 Alloc한다.
+    @param pInput GlobalAvaragePooling2D할 대상 Operator.
+    @param pName 사용자가 부여한 Operator이름.
+    @ref int Alloc(Operator<DTYPE> *pInput).
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     GlobalAvaragePooling2D(Operator<DTYPE> *pInput, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "GlobalAvaragePooling2D::GlobalAvaragePooling2D(Operator<DTYPE> *, std::string)" << '\n';
@@ -42,23 +36,16 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief GlobalAvaragePooling2D의 소멸자.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~GlobalAvaragePooling2D() {}
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 파라미터로 받은 pInput으로부터 맴버 변수들을 초기화 한다.
+    @details Result와 Gradient를 저장하기 위해 pInput의 Shape과 같은 dim을 갖는 Tensor를 생성한다.
+    @param pInput 생성 할 Tensor의 Shape정보를 가진 Operator
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput) {
         Shape *pInputTenShape = pInput->GetResult()->GetShape();
 
@@ -77,13 +64,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief GlobalAvaragePooling2D의 ForwardPropagate 매소드
+    @details input의 row, col상의 값들들 모두 더하고 m_divisor로 나눈 값을 result Tensor에 저장한다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -107,18 +92,15 @@ public:
             }
         }
 
-
         return TRUE;
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief GlobalAvaragePooling2D의 BackPropagate 매소드
+    @details Input_grad에 계산한 Gradient / m_divisor 한 값을 더한다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner         = this->GetInputContainer();
         Container<Tensor<DTYPE> *>   *input_gradient_container = (*input_contatiner)[0]->GetGradientContainer();

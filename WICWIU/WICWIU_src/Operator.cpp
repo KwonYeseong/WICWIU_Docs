@@ -8,13 +8,11 @@ template class Operator<double>;
 //////////////////////////////////////////////////////////////////////////////// for private method
 
 /*!
-@brief
-@details
-@param
-@return
-@todo Constructor
+@brief Operator의 맴버 변수들중 포인터들을 메모리에 할당하는 매소드.
+@details 맴버변수 m_apOutput, m_apInput, m_aaResult, m_aaGradient들을 메모리에 할당한다
+@return 성공시 TRUE.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::Alloc() {
     m_apOutput   = new Container<Operator<DTYPE> *>();
     m_apInput    = new Container<Operator<DTYPE> *>();
@@ -25,11 +23,12 @@ template<typename DTYPE> int Operator<DTYPE>::Alloc() {
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo Constructor
+@brief Operator와 다수의 다른 Operator들을 연결시키는 매소드.
+@details AddEdgebetweenOperators매소드를 통해 파라미터로 전달받은 Operator의 주소값을 이용해을 연결시킨다.
+@param numInput 연결 할 Operator의 갯수.
+@param ... Operator와 연결할 input Operator들.
+@return 성공 시 TRUE, 실패 시 FALSE.
+@ref Operator<DTYPE>::AddEdgebetweenOperators(Operator<DTYPE> *pInput)
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::Alloc(int numInput, ...) {
@@ -71,13 +70,10 @@ template<typename DTYPE> int Operator<DTYPE>::Alloc(int numInput, ...) {
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo Constructor
+@brief Operator를 메모리에 삭제하는 매소드.
+@details 메모리에 할당했던 변수들을 삭제하고 포인터들을 NULL로 초기화한다.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> void Operator<DTYPE>::Delete() {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Delete()" << '\n';
@@ -124,14 +120,13 @@ template<typename DTYPE> void Operator<DTYPE>::Delete() {
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo E_Graph
+@brief Operator의 m_apInput을 설정하는 함수.
+@details 다른 Operator의 주소 값을 받아 Operator의 input값(m_apInput)으로 설정한다.
+@param pInput input으로 설정 할 Operator들의 주소 값.
+@return 성공 시 TRUE, 실패 시 FALSE
+@ref int Push(DTYPE pElement)
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
-// Add Graph Edge
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddInputEdge(Operator<DTYPE> *pInput) {
     try {
         m_apInput->Push(pInput);
@@ -144,13 +139,13 @@ template<typename DTYPE> int Operator<DTYPE>::AddInputEdge(Operator<DTYPE> *pInp
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo E_Graph
+@brief Operator의 m_apOutput을 설정하는 함수.
+@details 다른 Operator의 주소 값을 받아 Operator의 output값(m_apOutput)으로 설정한다.
+@param pOutput Operator의 output을 input으로 사용할 Operator들의 주소 값.
+@return 성공 시 TRUE, 실패 시 FALSE
+@ref int Push(DTYPE pElement)
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddOutputEdge(Operator<DTYPE> *pOutput) {
     try {
         m_apOutput->Push(pOutput);
@@ -165,13 +160,11 @@ template<typename DTYPE> int Operator<DTYPE>::AddOutputEdge(Operator<DTYPE> *pOu
 //////////////////////////////////////////////////////////////////////////////// for public method
 
 /*!
-@brief
-@details
-@param
-@return
-@todo Constructor
+@brief Operator의 생성자.
+@details 파라미터로 전달 받은 pName을 m_name으로 설정 하고 나머지는 변수들은 NULL, CPU, TRAINING으로 초기화 한다.
+@param pName 사용자가 설정 할 Operator의 이름.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> Operator<DTYPE>::Operator(std::string pName) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Operator()" << '\n';
@@ -189,13 +182,13 @@ template<typename DTYPE> Operator<DTYPE>::Operator(std::string pName) {
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo Constructor
+@brief Operator의 생성자.
+@details파라미터로 전달 받은 pName을 m_name으로 설정 하고 나머지는 변수들은 NULL, CPU, TRAINING으로 초기화 한 뒤, AddEdgebetweenOperators를 통해 Operator들을 서로 연결한다.
+@param pInput Operator와 연결 할 Operator들의 주소 값들.
+@param pName 사용자가 설정 할 Operator의 이름.
+@ref Operator<DTYPE>::AddEdgebetweenOperators(int numInput, ...)
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput, std::string pName) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Operator()" << '\n';
@@ -214,13 +207,14 @@ template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput, std:
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo Constructor
+@brief Operator의 생성자.
+@details파라미터로 전달 받은 pName을 m_name으로 설정 하고 나머지는 변수들은 NULL, CPU, TRAINING으로 초기화 한 뒤, AddEdgebetweenOperators를 통해 Operator들을 서로 연결한다.
+@param pInput0 Operator와 연결 할 Operator들의 주소 값들.
+@param pInput1 Operator와 연결 할 Operator들의 주소 값들.
+@param pName 사용자가 설정 할 Operator의 이름.
+@ref Operator<DTYPE>::AddEdgebetweenOperators(int numInput, ...)
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput0, Operator<DTYPE> *pInput1, std::string pName) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Operator()" << '\n';
@@ -239,13 +233,15 @@ template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput0, Ope
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo Constructor
+@brief Operator의 생성자.
+@details파라미터로 전달 받은 pName을 m_name으로 설정 하고 나머지는 변수들은 NULL, CPU, TRAINING으로 초기화 한 뒤, AddEdgebetweenOperators를 통해 Operator들을 서로 연결한다.
+@param pInput0 Operator와 연결 할 Operator들의 주소 값들.
+@param pInput1 Operator와 연결 할 Operator들의 주소 값들.
+@param pInput2 Operator와 연결 할 Operator들의 주소 값둘.
+@param pName 사용자가 설정 할 Operator의 이름.
+@ref Operator<DTYPE>::AddEdgebetweenOperators(int numInput, ...)
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput0, Operator<DTYPE> *pInput1, Operator<DTYPE> *pInput2, std::string pName) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Operator()" << '\n';
@@ -264,13 +260,10 @@ template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput0, Ope
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo Constructor
+@brief Operator의 소멸자
+@details Delete 매소드를 이용해 삭제한다.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> Operator<DTYPE>::~Operator() {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::~Operator()" << '\n';
@@ -279,13 +272,13 @@ template<typename DTYPE> Operator<DTYPE>::~Operator() {
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo E_Graph
+@brief Operator와 다른 Operator들을 서로 연결한다.
+@details AddInputEdge, AddOutputEdge 매소드를 이옹해 Operator와 다른 Operator 연결한다.
+@param pInput 연결 할 다른 Operator의 주소 값.
+@ref int Operator<DTYPE>::AddInputEdge(Operator<DTYPE> *pInput), int Operator<DTYPE>::AddOutputEdge(Operator<DTYPE> *pOutput)
+@return 성공 시 TRUE.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddEdgebetweenOperators(Operator<DTYPE> *pInput) {
     this->AddInputEdge(pInput);
     pInput->AddOutputEdge(this);
@@ -293,13 +286,14 @@ template<typename DTYPE> int Operator<DTYPE>::AddEdgebetweenOperators(Operator<D
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo E_Graph
+@brief Operator와 다른 Operator들을 서로 연결한다.
+@details AddEdgebetweenOperators 매소드를 이옹해 Operator와 다수의 다른 Operator들을 연결한다.
+@param numInput 연결 할 input들의 갯수.
+@param ... 연결할 다수의 다른 Operator.
+@ref int Operator<DTYPE>::AddEdgebetweenOperators(Operator<DTYPE> *pInput)
+@return 성공 시 TRUE, 실패 시 FALSE.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddEdgebetweenOperators(int numInput, ...) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Alloc(Tensor<DTYPE> *)" << '\n';
@@ -350,13 +344,12 @@ template<typename DTYPE> int Operator<DTYPE>::SetResult(Tensor<DTYPE> *pTensor) 
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo N_Train
+@brief 파라미터로 받은 Tensor를 결과 값으로 설정한다.
+@details 파라미터로 받은 pTensor를 m_aaResult애 저장한다.
+@param pTensor m_aaResult에 저장 할 Tensor.
+@return 성공 시 TRUE.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddResult(Tensor<DTYPE> *pTensor) {
     m_aaResult->Push(pTensor);
     return TRUE;
@@ -374,13 +367,12 @@ template<typename DTYPE> int Operator<DTYPE>::SetGradient(Tensor<DTYPE> *pTensor
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo N_Train
+@brief 파라미터로 받은 Tensor를 gradient값으로 설정한다.
+@details 파라미터로 받은 pTensor를 m_aaGradient에 저장한다.
+@param pTensor m_aaGradient에 저장 할 Tensor.
+@return 성공 시 TRUE.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddGradient(Tensor<DTYPE> *pTensor) {
     m_aaGradient->Push(pTensor);
     return TRUE;
@@ -398,13 +390,12 @@ template<typename DTYPE> int Operator<DTYPE>::SetDelta(Tensor<DTYPE> *pTensor) {
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo N_Train
+@brief 파라미터로 받은 Tensor를 Delta값으로 설정한다.
+@details 파라미터로 받은 pTensor를 m_aaGradient에 저장한다.
+@param pTensor m_aaGradient에 저장 할 Tensor.
+@return 성공 시 TRUE.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddDelta(Tensor<DTYPE> *pTensor) {
     m_aaGradient->Push(pTensor);
     return TRUE;
@@ -506,13 +497,11 @@ template<typename DTYPE> int Operator<DTYPE>::GetIsTrainable() {
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo E_Train
+@brief  ForwardPropagate 매소드. 실제 구현은 파생 클래스에서 정의된다.
+@param pTime ForwardPropagate할 데이터의 Time값.
+@return 성공 시 TRUE.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+
 template<typename DTYPE> int Operator<DTYPE>::ForwardPropagate(int pTime) {
     #ifdef __DEBUG__
     std::cout << "thread number : " << pThreadNum << '\n';
@@ -522,13 +511,11 @@ template<typename DTYPE> int Operator<DTYPE>::ForwardPropagate(int pTime) {
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo E_Train
+@brief  BackwardPropagate 매소드. 실제 구현은 파생 클래스에서 정의된다.
+@param pTime forwardPropagate했던 데이터의 Time값.
+@return 성공 시 TRUE.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::BackPropagate(int pTime) {
     #ifdef __DEBUG__
     std::cout << "thread number : " << pThreadNum << '\n';

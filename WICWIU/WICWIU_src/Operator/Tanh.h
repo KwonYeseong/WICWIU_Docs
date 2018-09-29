@@ -4,22 +4,18 @@
 #include "../Operator.h"
 
 /*!
-@class
-@details
-@todo EXTRA
+@class Hyperbolic Tan Operator 클래스
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE>
 class Tanh : public Operator<DTYPE>{
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Tanh의 생성자
+    @details 파라미터로 받은 pInput으로 Alloc한다.
+    @param pInput Alloc할 대상 Operator
+    @param pName Operator에 사용자가 부여한 이름.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-24
     Tanh(Operator<DTYPE> *pInput, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "Tanh::Tanh(Operator *)" << '\n';
@@ -28,25 +24,18 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Tanh의 소멸자.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ~Tanh() {
         std::cout << "Tanh::~Tanh()" << '\n';
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 파라미터로 받은 pInput으로부터 맴버 변수들을 초기화 한다.
+    @details Result와 Gradient를 저장하기 위해 pInput의 Shape과 같은 dim을 갖는 Tensor를 생성한다.
+    @param pInput 생성 할 Tensor의 Shape정보를 가진 Operator
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput) {
         #ifdef __DEBUG__
         std::cout << "Tanh::Alloc(Operator *, Operator *)" << '\n';
@@ -66,13 +55,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief Tanh의 ForwardPropagate 매소드
+    @details input의 Tensor값들을 Tanh값을 취한 뒤 result에 저장한다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *result = this->GetResult();
@@ -103,11 +90,10 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief Tanh의 BackPropagate 매소드.
+    @details result값들을 (tanh)'식에 맞추어 input_delta에 더한다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {

@@ -4,22 +4,19 @@
 #include "../Operator.h"
 
 /*!
-@class
-@details
-@todo EXTRA
+@class Sigmoid Operator 클래스
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-25
 template<typename DTYPE>
 class Sigmoid : public Operator<DTYPE>{
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Sigmoid의 생성자.
+    @details 파라미터로 받은 pInput으로 Alloc한다.
+    @param pInput Alloc할 대상 Operator
+    @param pName Operator에 사용자가 부여한 이름.
+    @ref int Alloc(Operator<DTYPE> *pInput)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Sigmoid(Operator<DTYPE> *pInput, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "Sigmoid::Sigmoid(Operator *)" << '\n';
@@ -28,25 +25,18 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Sigmoid의 소멸자.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ~Sigmoid() {
         std::cout << "Sigmoid::~Sigmoid()" << '\n';
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 파라미터로 받은 pInput으로부터 맴버 변수들을 초기화 한다.
+    @details Result와 Gradient를 저장하기 위해 pInput의 Shape과 같은 dim을 갖는 Tensor를 생성한다.
+    @param pInput 생성 할 Tensor의 Shape정보를 가진 Operator
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput) {
         #ifdef __DEBUG__
         std::cout << "Sigmoid::Alloc(Operator *, Operator *)" << '\n';
@@ -66,13 +56,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief Sigmoid의 ForwardPropagate 매소드.
+    @details input의 Tensor값들을  SIGMOID값을 취한 뒤 result에 저장한다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *result = this->GetResult();
@@ -103,13 +91,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief SIGMOID의 BackPropagate 매소드.
+    @details result값들을 (Sigmoid)'식에 맞추어 input_delta에 더한다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *result      = this->GetResult();
         Tensor<DTYPE> *this_delta  = this->GetDelta();
@@ -172,11 +158,10 @@ public:
 #endif  // __CUDNN__
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief SIGMOID 함수
+    @details 1.0/(1.0 + e^(-x))
+    @param data SIGMOID할 값
+    @return data를 SIGMOID함수에 넣은 결과 값.
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     inline DTYPE SIGMOID(DTYPE data) {
