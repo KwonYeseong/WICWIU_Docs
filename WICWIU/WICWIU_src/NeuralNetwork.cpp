@@ -148,7 +148,7 @@ template<typename DTYPE> NeuralNetwork<DTYPE>::NeuralNetwork() {
 @brief NeuralNetwork 클래스 소멸자
 @details 동적으로 할당 받은 NeuralNetwork 클래스의 멤버 변수들을 할당 해제하고 클래스를 소멸시킨다.
 @return 없음
-@see NeuralNetwork::~NeuralNetwork()
+@see NeuralNetwork::Delete()
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
 template<typename DTYPE> NeuralNetwork<DTYPE>::~NeuralNetwork() {
@@ -160,10 +160,10 @@ template<typename DTYPE> NeuralNetwork<DTYPE>::~NeuralNetwork() {
 }
 
 /*!
-@brief Input 지정
-@details
-@param
-@return
+@brief Operator를 신경망의 최초 Input에 추가하는 메소드
+@details 매개 변수로 받은 Operator를 NeuralNetwork 클래스의 Operator, Input Container에 추가하고 각 degree를 1만큼 증가시킨다.
+@param pInput Input으로 추가하고자 하는 Operator
+@return 매개변수로 받은 Operator
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
 template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::SetInput(Operator<DTYPE> *pInput) {
@@ -176,10 +176,11 @@ template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::SetInput(Operato
 }
 
 /*!
-@brief
-@details
-@param
-@return
+@brief Operator 리스트를 신경망의 최초 Input에 추가하는 메소드
+@details Operator 개수와 Operator 리스트를 매개변수로 받아서, 각각의 Operator에 대해서 NeuralNetwork::SetInput(Operator<DTYPE> *pInput)를 호출한다.
+@param pNumOfInput Input에 추가하고자 하는 Operator의 개수
+@param ... Input에 추가하고자 하는 Operator의 리스트
+@return TRUE
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
 template<typename DTYPE> int NeuralNetwork<DTYPE>::SetInput(int pNumOfInput, ...) {
@@ -198,11 +199,10 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::SetInput(int pNumOfInput, ...
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo E_Graph
+@brief 해당 Operator가 Input인지 확인하는 메소드
+@details 매개변수로 받은 Opeartor가 Input Container에 포함되어 있는 지 확인한다.
+@param pOperator Input 여부를 확인하고자 하는 Operator
+@return Input container에 포함되어 있는 경우 TRUE, 포함되어 있지 않는 경우 FALSE를 반환한다.
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
 template<typename DTYPE> int NeuralNetwork<DTYPE>::IsInput(Operator<DTYPE> *pOperator) {
@@ -214,9 +214,9 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::IsInput(Operator<DTYPE> *pOpe
 }
 
 /*!
-@brief
+@brief 해당 Operator가 신경망 그래프에서
 @details
-@param
+@param pOperator
 @return
 @todo E_Graph
 */
@@ -253,9 +253,8 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::IsValid(Operator<DTYPE> *pOpe
 @details isParameter? Parameter operator : Excutable operator
 @details continue readability
 @details reverse 정순으로 세팅하기 위해
-@param
-@return
-@todo E_Graph
+@param pResultOperator 신경망의 
+@return 매개변수로 받은
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
 template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::AnalyzeGraph(Operator<DTYPE> *pResultOperator) {
@@ -333,11 +332,9 @@ template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::AnalyzeGraph(Ope
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo E_Graph
+@brief 특정 Loss Function을 매개 변수로 받아 이를 신경망의 Loss Function로 지정해주는 메소드
+@param pLossFunction 신경망의 Loss Function로 지정하고자 하는 Loss Function
+@return 매개변수로 받은 Loss Function
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
 template<typename DTYPE> LossFunction<DTYPE> *NeuralNetwork<DTYPE>::SetLossFunction(LossFunction<DTYPE> *pLossFunction) {
@@ -346,11 +343,9 @@ template<typename DTYPE> LossFunction<DTYPE> *NeuralNetwork<DTYPE>::SetLossFunct
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo E_Graph
+@brief 특정 Optimizer를 매개 변수로 받아 이를 신경망의 Optimizer로 지정해주는 메소드
+@param pLossFunction 신경망의 Optimizer로 지정하고자 하는 Optimizer
+@return 매개변수로 받은 Optimizer
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
 template<typename DTYPE> Optimizer<DTYPE> *NeuralNetwork<DTYPE>::SetOptimizer(Optimizer<DTYPE> *pOptimizer) {
@@ -361,7 +356,8 @@ template<typename DTYPE> Optimizer<DTYPE> *NeuralNetwork<DTYPE>::SetOptimizer(Op
 /*!
 @brief
 @details setInput 이후 Feed 순서대로, ... 같은 타입
-@param
+@param pNumOfInput
+@param ...
 @return
 @todo E_Graph
 */
@@ -416,7 +412,7 @@ template<typename DTYPE> Optimizer<DTYPE> *NeuralNetwork<DTYPE>::GetOptimizer() 
 /*!
 @brief
 @details BFS 구조의 Queue, 순서대로 실행
-@param
+@param pTime
 @return
 @todo E_Graph
 */
@@ -433,7 +429,7 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ForwardPropagate(int pTime) {
 /*!
 @brief
 @details BFS 구조의 Queue, 역순으로 실행
-@param
+@param pTime
 @return
 @todo E_Graph
 */
@@ -448,9 +444,8 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::BackPropagate(int pTime) {
 }
 
 /*!
-@brief
+@brief 신경망 내부의 Excutable Operator와
 @details
-@param
 @return
 @todo E_Graph
 */
@@ -467,7 +462,6 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::SetDeviceCPU() {
 /*!
 @brief
 @details
-@param
 @return
 @todo E_Graph
 */
@@ -481,7 +475,6 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::SetModeTraining() {
 /*!
 @brief
 @details
-@param
 @return
 @todo E_Graph
 */
@@ -495,7 +488,6 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::SetModeAccumulating() {
 /*!
 @brief
 @details
-@param
 @return
 @todo E_Graph
 */
@@ -509,7 +501,6 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::SetModeInferencing() {
 /*!
 @brief
 @details
-@param
 @return
 @todo E_Train
 */
@@ -528,7 +519,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::Training() {
 @brief
 @details Device CPU를 사용하고 있나, GPU를 쓰고 있나
         각 장치 별 메소드를 사용하겠다
-@param
 @return
 @todo E_Train
 */
@@ -549,7 +539,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::Testing() {
 @details 한 레이어에 여러 오퍼레이터가 존재하는 경우, ex) Result들의 합을 찾아야 하는 경우, += 사용하는 경우 많음
 @details Excutable Operator들의 result를 reset함
 @details
-@param
 @return
 @todo E_Train
 */
@@ -571,7 +560,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::TrainingOnCPU() {
 /*!
 @brief
 @details ForwardPropagate만 실행, Gradient reset하지 않음
-@param
 @return
 @todo E_Train
 */
@@ -587,7 +575,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::TestingOnCPU() {
 /*!
 @brief
 @details
-@param
 @return
 @todo GPU
 */
@@ -614,7 +601,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::TrainingOnGPU() {
 /*!
 @brief
 @details
-@param
 @return
 @todo GPU
 */
@@ -636,7 +622,7 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::TestingOnGPU() {
 /*!
 @brief
 @details
-@param
+@param numOfClass
 @return
 @todo E_Train
 */
@@ -673,7 +659,10 @@ template<typename DTYPE> float NeuralNetwork<DTYPE>::GetAccuracy(int numOfClass)
 /*!
 @brief
 @details
-@param
+@param data
+@param ba
+@param ti
+@param numOfClass
 @return
 @todo E_Train
 */
@@ -701,7 +690,7 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::GetMaxIndex(Tensor<DTYPE> *da
 /*!
 @brief
 @details
-@param
+@param numOfClass
 @return
 @todo E_Train
 */
@@ -741,7 +730,10 @@ template<typename DTYPE> float NeuralNetwork<DTYPE>::GetTop5Accuracy(int numOfCl
 /*!
 @brief
 @details
-@param
+@param data
+@param ba
+@param ti
+@param numOfClass
 @return
 @todo E_Train
 */
@@ -781,7 +773,6 @@ template<typename DTYPE> int* NeuralNetwork<DTYPE>::GetTop5Index(Tensor<DTYPE> *
 /*!
 @brief
 @details
-@param
 @return
 @todo E_Train
 */
@@ -804,8 +795,7 @@ template<typename DTYPE> float NeuralNetwork<DTYPE>::GetLoss() {
 /*!
 @brief
 @details
-@param
-@return
+@return 없음
 @todo E_Graph
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
@@ -824,7 +814,6 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::PrintGraphInformation() {
 /*!
 @brief
 @details
-@param
 @return
 @todo E_Train
 */
@@ -839,7 +828,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetOperatorResult() {
 /*!
 @brief
 @details
-@param
 @return
 @todo E_Train
 */
@@ -854,7 +842,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetOperatorGradient() {
 /*!
 @brief
 @details
-@param
 @return
 @todo E_Train
 */
@@ -867,7 +854,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetLossFunctionResult() {
 /*!
 @brief
 @details
-@param
 @return
 @todo E_Train
 */
@@ -880,7 +866,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetLossFunctionGradient() {
 /*!
 @brief
 @details
-@param
 @return
 @todo E_Train
 */
@@ -913,7 +898,7 @@ template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::SerchOperator(st
 /*!
 @brief
 @details
-@param
+@param fileForSave
 @return
 @todo E_Train
 */
@@ -929,7 +914,7 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::Save(FILE *fileForSave) {
 /*!
 @brief
 @details
-@param
+@param fileForLoad
 @return
 @todo E_Train
 */
@@ -946,7 +931,7 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::Load(FILE *fileForLoad) {
 /*!
 @brief
 @details
-@param
+@param pTime
 @return
 @todo GPU
 */
@@ -963,7 +948,7 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ForwardPropagateOnGPU(int pTi
 /*!
 @brief
 @details
-@param
+@param pTime
 @return
 @todo GPU
 */
@@ -980,7 +965,7 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::BackPropagateOnGPU(int pTime)
 /*!
 @brief
 @details
-@param
+@param idOfDevice
 @return
 @todo GPU
 */
@@ -1015,7 +1000,7 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::SetDeviceGPU(unsigned int id
 /*!
 @brief
 @details
-@param
+@param idOfDevice
 @return
 @todo GPU
 */
