@@ -5,7 +5,7 @@
 
 /*!
 @class
-@details
+@details Static, Batch size cover하기 힘듬
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Module : public Operator<DTYPE>{
