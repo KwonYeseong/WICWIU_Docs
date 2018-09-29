@@ -3,6 +3,9 @@
 
 //////////////////////////////////////////////////////////////////////////////// for private method
 
+//// Alloc에서만 동적 할당함, 메모리 누수 방지를 위해
+//// try and catch 실험적으로 Alloc에 구현해 둠
+//// ap 시작 주소, pRank 개수
 /*!
 @brief Shape 클래스를 동적 할당하는 메소드
 @details Shape의 Rank와 각 축의 Dimension을 매개변수로 받아 Shape 클래스를 동적으로 할당한다.
@@ -47,8 +50,8 @@ int Shape::Alloc(int pRank, ...) {
 }
 
 /*!
-@brief Shape 클래스를 깊은 복사하여 동적으로 할당하는 메소드
-@param pShape 깊은 복사하고자 하는 Shape 클래스
+@brief Shape 클래스를 깊은 복사(Deep Copy)하여 동적으로 할당하는 메소드
+@param pShape 깊은 복사(Deep Copy)하고자 하는 Shape 클래스
 @return 할당 성공 시 TRUE, 할당 실패 시 FALSE
 */// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-10
 int Shape::Alloc(Shape *pShape) {
@@ -101,6 +104,12 @@ void Shape::Delete() {
 }
 
 #ifdef __CUDNN__
+//// setDeviceGPU
+//// createTensorDescriptor 메모리 할당
+//// setTensor4dDescriptor로만 적어놨는데
+//// m_Rank == 5 -> setTensor5dDescriptor 로 수정해야 함
+//// m_Rank < 4 할당 못 함
+
 /*!
 @brief GPU을 사용하기 위해 GPU 메모리에 해당 Shape 클래스의 정보를 동적으로 할당하는 메소드
 @details cuda와 cudnn 라이브러리를 이용하여, 매개변수로 받은 GPU 번호에 해당되는 GPU의 메모리 공간에 Descriptor 변수를 할당한다
@@ -132,6 +141,8 @@ int Shape::AllocOnGPU(unsigned int idOfDevice) {
     return TRUE;
 }
 
+//// Destroy -> Free
+//// Free, m_desc NULL로 초기화
 /*!
 @brief Descriptor를 동적으로 할당했던 GPU 메모리 공간을 반환하는 메소드
 @details cudnn 라이브러리를 사용하여, Descriptor 동적 할당에 사용했던 메모리 공간을 반환하고 해당 메모리 공간을 NULL로 초기화한다.
@@ -151,6 +162,9 @@ void Shape::DeleteOnGPU() {
     }
 }
 
+//// GPU 동기화
+//// Descriptor 지우고 다시 할당 받음, 주소 값이 변형 됨
+//// 수정 보완 필요
 /*!
 @brief
 @details
@@ -178,6 +192,7 @@ int Shape::ReShapeOnGPU() {
 
 //////////////////////////////////////////////////////////////////////////////// for public method
 
+//// 멤버 변수를 초기화하고 동적으로 할당
 /*!
 @brief 5D-Shape 생성자
 @details 5개의 축의 Dimension을 매개변수로 받아 Shape 클래스를 생성하는 생성자
@@ -299,8 +314,8 @@ Shape::Shape(int pSize0) {
 }
 
 /*!
-@brief Shape 클래스를 매개변수로 받아 깊은 복사하는 Shape 생성자
-@param pShape
+@brief Shape 클래스를 매개변수로 받아 깊은 복사(Deep Copy)하는 Shape 생성자
+@param pShape 깊은 복사(Deep Copy)의 대상이 되는 Shape 클래스
 @return 없음
 @see Shape::Alloc(Shape *pShape)
 */
@@ -414,6 +429,7 @@ int& Shape::operator[](int pRanknum) {
     }
 }
 
+//// 5차원 텐서를 다른 5차원 텐서로 바꿔주는 메소드
 /*!
 @brief
 @details
@@ -434,6 +450,8 @@ int Shape::ReShape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4) {
     return ReShape(5, pSize0, pSize1, pSize2, pSize3, pSize4);
 }
 
+//// 가변인자를 이용해서 텐서를 다른 차원의 텐서로 바꿔주는 메소드
+//// 변경 가능 여부 확인을 하고
 /*!
 @brief
 @details
@@ -501,6 +519,7 @@ int Shape::SetDeviceCPU() {
 
 #ifdef __CUDNN__
 
+//// Descriptor가 할당되어 있지 않은 경우에 할당, 존재하는 경우 할당하지 않음
 /*!
 @brief Shape 클래스의 Device 멤버 변수를 GPU로 변경한다.
 @details CPU에서 GPU로 전환 시, 매개변수로 받은 번호에 해당하는 GPU의 메모리에 필요한 공간을 동적으로 할당한다.
@@ -521,8 +540,9 @@ int Shape::SetDeviceGPU(unsigned int idOfDevice) {
     return TRUE;
 }
 
+//// 특이하게 & 타입으로 정의되어 있음
 /*!
-@brief 
+@brief
 @details
 @return
 */
@@ -557,6 +577,7 @@ cudnnTensorDescriptor_t& Shape::GetDescriptor() {
 
 #endif  // __CUDNN__
 
+//// << 오버로딩, Shape의 주소값 대신 정의한 대로 출력시켜줌
 /*!
 @brief 삭제 예정
 */

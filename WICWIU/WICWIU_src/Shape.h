@@ -25,7 +25,7 @@ private:
     // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-09
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t m_desc; ///<   @todo GPU
+    cudnnTensorDescriptor_t m_desc; ///<   @todo GPU    //// CUDNN에서 shape와 같은 의미의 변수, Tensor Data를 넘겨주면서 Shape도 같이 넘겨줘야 함, 포인터 주소값, Maybe Structure 확인 필요
     // 문서 작성자 : , 작성 날짜 : 2018-
 #endif  // if __CUDNN__
 
