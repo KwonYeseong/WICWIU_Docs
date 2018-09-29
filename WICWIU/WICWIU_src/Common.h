@@ -18,6 +18,7 @@
 #include <time.h>
 #include <pthread.h>
 
+// TRUE 1, FALSE 0으로 Define 되어 있음
 // define
 #ifndef TRUE
     # define TRUE     1
