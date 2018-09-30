@@ -4,21 +4,20 @@
 #include "../Operator.h"
 
 /*!
-@class
-@details
-@todo EXTRA
+@class Gradient없이 Operator의 Result만 사용하기 위한 클래스.
+@details 주로 Network의 input, label값을 저장하기 위해 구현되었다.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Tensorholder : public Operator<DTYPE>{
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Tensorholder의 생성자.
+    @details 파라미터로 받은 pTensor, pTrainable으로 Alloc한다.
+    @param pTensor Alloc에 사용할 Tensor, 결론적으로 Tensorholder의 Result로 설정된다.
+    @param pName 사용자가 부여한 Tensorholder의 이름.
+    @param pTrainable 생성 할 Operator(Tensorholder)가 Trainable인지 알리는 변수. default로 TRUE를 사용한다.
+    @ref int Alloc(Tensor<DTYPE> *pTensor, int pTrainable)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 권예성, 작성 날짜 : 2018-10-1
     Tensorholder(Tensor<DTYPE> *pTensor, std::string pName, int pTrainable = TRUE) : Operator<DTYPE>(pName) {
         #ifdef __DEBUG__
         std::cout << "Tensorholder<DTYPE>::Tensorholder(Tensor<DTYPE> *, std::string)" << '\n';
@@ -27,11 +26,17 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Tensorholder의 생성자.
+    @details 파리미터로 받은 pTimeSize, pBatchSize, pChannelSize, pRowSize, pColSize, pTrainable로 Alloc한다.
+    @details 파라미터로 받은 변수들은 Alloc에서 생성 할 Tensor의 Shape을 결정한다.
+    @param pTimeSize Alloc에 사용 할 timesize.
+    @param pBatchSize Alloc에 사용 할 batchsize.
+    @param pChannelSize Alloc에 사용 할 channelsize.
+    @param pRowSize Alloc에 사용 할 rowsize
+    @param pColSize Alloc에 사용 할 colsize
+    @param pName 사용자가 부여한 Tensorholder의 이름.
+    @param pTrainable 생성 할 Operator(Tensorholder)가 Trainable인지 알리는 변수. default로 TRUE를 사용한다.
+    @ref int Alloc(int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize, int pTrainable)
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     Tensorholder(int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize, std::string pName, int pTrainable = TRUE) : Operator<DTYPE>(pName) {
@@ -43,13 +48,9 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Tensorholder의 소멸자.
+    @details 딱히 하는 일은 없다.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ~Tensorholder() {
         #ifdef __DEBUG__
         std::cout << "Tensorholder<DTYPE>::~Tensorholder()" << '\n';
@@ -57,13 +58,17 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 파라미터로 뱓은 pTensor로 Tensorholder를 설정한다.
+    @details 파라미터로 받은 pTensor를 Result값으로 설정한다.
+    @details SetIsTensorholder를 통해 Tensorholder임을 설정하고, pTensor의 Shape과 같은 Shape을 갖는 Tensor를 만들어 Gradient로 설정한다.
+    @param pTensor Tensorholder의 Result로 저장 될값을 가진 Tensor.
+    @param pTrainable Training이 가능한지 아닌지 알리는 변수
+    @return 성공 시 TRUE.
+    @ref int Operator<DTYPE>::ResetResult()
+    @ref int Operator<DTYPE>::SetIsTensorholder(int pIsParameter)
+    @ref int Operator<DTYPE>::SetIsTrainable(int pIsTrainable)
+    @ref int Operator<DTYPE>::AddGradient(Tensor<DTYPE> *pTensor)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Tensor<DTYPE> *pTensor, int pTrainable) {
         #ifdef __DEBUG__
         std::cout << "Tensorholder<DTYPE>::Alloc(Tensor<DTYPE> *, std::string)" << '\n';
@@ -84,13 +89,22 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 파라미터로 뱓은 변수들로 pTensor를 생성하고 Tensorholder를 설정한다.
+    @details 파라미터로 받은 변수들로 pTensor를 생성하고 Result로 설정한다.
+    @details 생성한 pTensor의 Shape과 같은 Tensor를 생성하여 Gradient로 설정한다.
+    @param pTimeSize 생성할 pTensor의 timesize
+    @param pBatchSize 생성할 pTensor의 batchsize
+    @param pChannelSize 생성할 pTensor의 channelsize
+    @param pRowSize 생성할 pTensor의 rowsize
+    @param pColSize 생성할 pTensor의 colsize
+    @param pTrainable Training이 가능한지 아닌지 알리는 변수
+    @return 성공 시 TRUE.
+    @ref int Operator<DTYPE>::ResetResult()
+    @ref int Operator<DTYPE>::SetIsTensorholder(int pIsParameter)
+    @ref int Operator<DTYPE>::SetIsTrainable(int pIsTrainable)
+    @ref Shape *Tensor<DTYPE>::GetShape()
+    @ref int Operator<DTYPE>::AddGradient(Tensor<DTYPE> *pTensor)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize, int pTrainable) {
         #ifdef __DEBUG__
         std::cout << "Placeholder<DTYPE>::Alloc(Tensor<DTYPE> *)" << '\n';
@@ -114,25 +128,17 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo N_Train
+    @brief 파라미터로 받은 Tensor를 Result로 설정한다.
+    @param pTensor Result로 설정 할 Tensor.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void SetTensor(Tensor<DTYPE> *pTensor) {
         this->SetResult(pTensor);
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo N_Train
+    @brief 라미터로 받은 Tensor를 Result로 설정한다.
+    @param pTensor Result로 설정 할 Tensor.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void FeedTensor(Tensor<DTYPE> *pTensor) {
         this->SetResult(pTensor);
     }
