@@ -7,8 +7,8 @@ template class NeuralNetwork<double>;
 //////////////////////////////////////////////////////////////////////////////// for private method
 
 /*!
-@brief NeuralNetwork 클래스 안의 Container 멤버 변수들을 동적으로 할당해주는 메소드
-@details Operator, Excutable Operator, Input, Parameter Container들 각각에 대해 메모리를 동적으로 할당한다.
+@brief NeuralNetwork 클래스의 Container 멤버 변수들을 동적으로 할당해주는 메소드
+@details NeuralNetwork 클래스의 Operator, Excutable Operator, Input, Parameter Container들 각각에 대해 메모리를 동적으로 할당한다.
 @return TRUE
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
@@ -22,7 +22,7 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::Alloc() {
 
 /*!
 @brief 동적으로 할당 받은 NeuralNetwork 클래스의 멤버 변수들을 할당 해제하는 메소드
-@details 동적으로 할당 받은 Operator, Excutable Operator, Input, Parameter Container들과 LossFunction, Optimizer의 메모리를 할당 해제한다.
+@details 동적으로 할당 받은 NeuralNetwork 클래스의 Operator, Excutable Operator, Input, Parameter Container들과 LossFunction, Optimizer의 메모리를 할당 해제한다.
 @return 없음
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
@@ -113,8 +113,9 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::DeleteOnGPU() {
 /*!
 @brief NeuralNetwork 클래스 생성자
 @details 각 멤버 변수들을 초기화하고 NeuralNetwork 클래스를 생성한다.
-@details 각 포인터들을 NULL 값으로, 각 정수 타입 변수들은 0으로, Device는 CPU로 초기화한다.
+@details 각 포인터들을 NULL 값으로, 각 정수 타입 변수들은 0으로, Device는 CPU로 초기화하고 NeuralNetwork<DTYPE>::Alloc() 메소드를 호출한다.
 @return 없음
+@see NeuralNetwork<DTYPE>::Alloc()
 */
 // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
 template<typename DTYPE> NeuralNetwork<DTYPE>::NeuralNetwork() {
@@ -199,8 +200,8 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::SetInput(int pNumOfInput, ...
 }
 
 /*!
-@brief 해당 Operator가 Input인지 확인하는 메소드
-@details 매개변수로 받은 Opeartor가 Input Container에 포함되어 있는 지 확인한다.
+@brief 해당 Operator가 신경망의 Input인지 확인하는 메소드
+@details 매개변수로 받은 Operator가 NeuralNetwork의 Input Container에 포함되어 있는 지 확인한다.
 @param pOperator Input 여부를 확인하고자 하는 Operator
 @return Input container에 포함되어 있는 경우 TRUE, 포함되어 있지 않는 경우 FALSE를 반환한다.
 */
@@ -782,7 +783,7 @@ template<typename DTYPE> float NeuralNetwork<DTYPE>::GetLoss() {
 }
 
 /*!
-@brief 그래프의 각 구성 요소에 대해 정보를 출력하는 메소드
+@brief 신경망 그래프의 각 구성 요소에 대해 정보를 출력하는 메소드
 @return 없음
 @see Operator<DTYPE>::PrintInformation() LossFunction<DTYPE>::GetName()
 */
@@ -801,7 +802,7 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::PrintGraphInformation() {
 
 /*!
 @brief 연산에 참여하는 Operator들의 Result Container를 초기화시킨다.
-@details 연산에게 참여하는 각 Operator들에서 Operator<DTYPE>::ResetResult() 메소드를 호출한다.
+@details Excutable Operator Container에 포함되어 있는 각 Operator들에서 Operator<DTYPE>::ResetResult() 메소드를 호출한다.
 @return TRUE
 @todo 추가 설명 요
 */
@@ -815,7 +816,7 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetOperatorResult() {
 
 /*!
 @brief 연산에 참여하는 Operator들의 Gradient Container를 초기화시킨다.
-@details 연산에게 참여하는 각 Operator들에서 Operator<DTYPE>::ResetGradient() 메소드를 호출한다.
+@details Excutable Operator Container에 포함되어 있는 각 Operator들에서 Operator<DTYPE>::ResetGradient() 메소드를 호출한다.
 @return TRUE
 @todo 추가 설명 요
 */
