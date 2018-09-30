@@ -10,9 +10,9 @@
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Module : public Operator<DTYPE>{
 private:
-    Container<Operator<DTYPE> *> *m_aaExcutableOperator; ///< Module을 구성하는 Operator들 중, Tensorholder를 제외한 나머지 operator들의 포인터를 저장하는 Container 멤버 변수
+    Container<Operator<DTYPE> *> *m_aaExcutableOperator; ///< Module을 구성하는 Operator들 중, 연산에 참여하는 Operator들의 포인터를 저장하는 Container 멤버 변수
     // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
-    int m_numOfExcutableOperator; ///< Module을 구성하는 Operator들 중, Tensorholder를 제외한 나머지 operator들의 개수
+    int m_numOfExcutableOperator; ///< Module을 구성하는 Operator들 중, 연산에 참여하는 Operator들의 개수
     // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
     Operator<DTYPE> *m_pLastOperator; ///< Module을 구성하는 Operator들 중, 순전파 순서 상 마지막에 해당하는 operator의 포인터
