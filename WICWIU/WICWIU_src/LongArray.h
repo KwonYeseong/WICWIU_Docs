@@ -15,19 +15,15 @@ template<typename DTYPE> class LongArray {
 private:
     DTYPE **m_aaHostLongArray; ///< 메모리에 올라가 있는 데이터의 주소 값.
 
-    int m_CapacityOfLongArray; ///< LongArray의 용량.
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
-    int m_TimeSize; ///< TimeSize
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
-    int m_CapacityPerTime; ///< Capacity를 Time으로 나눈 값.
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
+    int m_CapacityOfLongArray; ///< LongArray의 총 용량.
+    int m_TimeSize; ///< Tensor의 TimeSize
+    int m_CapacityPerTime; ///< Time으로 나누어진 data의 Capacity
+
     Device m_Device; ///< 장치 사용 구분자 (CPU or GPU)
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
-    int m_idOfDevice = -1; ///< GPU사용 시, 사용하려는 GPU번호.
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
+    int m_idOfDevice = -1; ///< GPU사용 시, 사용하려는 GPU의 번호.
 
 #ifdef __CUDNN__
-    DTYPE **m_aaDevLongArray; ///< GPU메모리(Vram)에 올라가있는 데이터의 주소 값.
+    DTYPE **m_aaDevLongArray; ///< GPU메모리에 올라가있는 데이터의 주소 값. m_aaHostLongArray와 비슷한 역할을 한다.
 #endif  // __CUDNN
 
 private:

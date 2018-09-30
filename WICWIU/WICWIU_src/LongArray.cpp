@@ -7,8 +7,9 @@ template class LongArray<unsigned char>;
 
 /*!
 @brief LongArray의 맴버 변수들을 초기화하는 메소드
-@details pTimeSize을 m_TimeSize, pCapacityPerTime을 m_CapacityPerTime로 대입하고
-@details 2차원 포인터 array인 m_aaHostLongArray가 가리키는 모든 값을 0.f로 초기화 한다.
+@details pTimeSize을 m_TimeSize, pCapacityPerTime을 m_CapacityPerTime를 초기화 하고,
+@details m_CapacityOfLongArray크기의 데이터를 m_CapacityPerTime만큼 m_TimeSize개의 블럭으로 나누어 메모리(RAM)에 할당한다.
+@details 할당된 메모리는 0.f로 초기화한다.
 @param pTimeSize Alloc할 LongArray의 TimeSize.
 @param pCapacity Alloc할 LongArray의 Capacity.
 @return 성공 시 TRUE.
@@ -78,8 +79,8 @@ template<typename DTYPE> int LongArray<DTYPE>::Alloc(LongArray *pLongArray) {
 
 /*!
 @brief LongArray를 삭제하는 메소드.
-@details m_aaHostLongArray의 포인터를 모두 NULL포인터로 만든 후 삭제한다.
-@return 없음.
+@details m_aaHostLongArray가 가리키는 메모리(RAM)들을 free시키고 포인터는 NULL로 초기화한다.
+@ref void LongArray<DTYPE>::DeleteOnGPU()
 */
 // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
 template<typename DTYPE> void LongArray<DTYPE>::Delete() {
@@ -106,6 +107,13 @@ template<typename DTYPE> void LongArray<DTYPE>::Delete() {
 
 #ifdef __CUDNN__
 
+/*!
+@brief LongArray를 GPU메모리에 할당하는 매소드.
+@details m_aaHostLongArray와 비슷한 m_aaDevLongArray를 이용하여
+@details cudaSetDevice를 통해 GPU를 지정하고 cudaMalloc을 통해 GPU메모리에 LongArray를 할당한다.
+@param idOfDevice LongArray를 할당할 GPU번호.
+@return 성공 시 TRUE
+*/
 template<typename DTYPE> int LongArray<DTYPE>::AllocOnGPU(unsigned int idOfDevice) {
     # if __DEBUG__
     std::cout << "LongArray<DTYPE>::AllocOnGPU()" << '\n';
@@ -123,6 +131,10 @@ template<typename DTYPE> int LongArray<DTYPE>::AllocOnGPU(unsigned int idOfDevic
     return TRUE;
 }
 
+/*!
+@brief LongArray를 GPU메모리에서 삭제하는 매소드.
+@details  cudaFree를 통해 GPU메모리에 할당 된 m_aaDevLongArray가 가리키는 데모리를 삭제한다.
+*/
 template<typename DTYPE> void LongArray<DTYPE>::DeleteOnGPU() {
     # if __DEBUG__
     std::cout << "LongArray<DTYPE>::DeleteOnGPU()" << '\n';
@@ -140,6 +152,11 @@ template<typename DTYPE> void LongArray<DTYPE>::DeleteOnGPU() {
     }
 }
 
+/*!
+@brief 메모리(RAM)에 있는 LongArray를 GPU메모리로 복사한다.
+@details cudaMemcpy를 통해 m_aaHostLongArray가 가리키는 내용을 m_aaDevLongArray로 복사한다.
+@return 성공 시 TRUE
+*/
 template<typename DTYPE> int LongArray<DTYPE>::MemcpyCPU2GPU() {
     # if __DEBUG__
     std::cout << "LongArray<DTYPE>::MemcpyCPU2GPU()" << '\n';
@@ -153,6 +170,11 @@ template<typename DTYPE> int LongArray<DTYPE>::MemcpyCPU2GPU() {
     return TRUE;
 }
 
+/*!
+@brief GPU메모리에 있는 LongArray를 메모리(RAM)로 복사한다.
+@details cudaMemcpy를 통해 m_aaDevLongArray가 가리키는 내용을 m_aaHostLongArray로 복사한다.
+@return 성공 시 TRUE
+*/
 template<typename DTYPE> int LongArray<DTYPE>::MemcpyGPU2CPU() {
     # if __DEBUG__
     std::cout << "LongArray<DTYPE>::MemcpyGPU2CPU()" << '\n';
@@ -258,7 +280,7 @@ template<typename DTYPE> int LongArray<DTYPE>::GetCapacityPerTime() {
 /*!
 @brief LongArray의 특정 원소의 값을 반환하는 메소드.
 @details 메모리에 있는 LongArray데이터 중 index번째 있는 원소의 값을 반환한다.
-@details 단, m_Device가 GPU일 시 CPU로 바꿔 준 후 값을 찾아 반환한다.
+@details 단, m_Device가 GPU이면 바로 값을 꺼내올 수 없기 때문에 CPU로 바꿔 준 후 값을 찾아 반환한다.
 @return m_aaHostLongArray[index / m_CapacityPerTime][index % m_CapacityPerTime]
 @see LongArray<DTYPE>::SetDeviceCPU()
 */
@@ -286,9 +308,10 @@ template<typename DTYPE> DTYPE LongArray<DTYPE>::GetElement(unsigned int index) 
 }
 
 /*!
-@brief []연산자 오버로딩
+@brief []연산자 Overloading
 @details m_aLongArray의 특정 위치에 있는 값을 return할 수 있게 한다.
 @details 단, m_Device가 GPU일 시 CPU로 바꿔 준 후 값을 찾아 반환한다.
+@details GetElement와 다르게 주소값을 반환하기 때문에 LongArray의 값을 변경 할 수 있다.
 @see LongArray<DTYPE>::SetDeviceCPU()
 */
 // 문서 작성자 : 권예성, 작성 날짜 : 2018-09-08
@@ -334,7 +357,7 @@ template<typename DTYPE> int LongArray<DTYPE>::GetDeviceID() {
 
 /*!
 @brief m_aaHostLongArray중 pTime에 있는 LongArray를 반환하는 메소드.
-@details m_TimeSize개의 time Dimension중 pTime번째의 LongArray를 반환한다.
+@details m_CapacityOfLongArray를 m_TimeSize로 나눈 LongArray블럭 중 pTime번째의 LongArray블럭을 반환한다.
 @details 단, m_Device가 GPU일 시 CPU로 바꿔 준 후 값을 찾아 반환한다.
 @return m_aaHostLongArray[pTime]
 @see LongArray<DTYPE>::SetDeviceCPU()
