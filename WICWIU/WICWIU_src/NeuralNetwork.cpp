@@ -178,7 +178,7 @@ template<typename DTYPE> Operator<DTYPE> *NeuralNetwork<DTYPE>::SetInput(Operato
 
 /*!
 @brief Operator 리스트를 신경망의 Input에 추가하는 메소드
-@details Operator 개수와 Operator 리스트를 매개변수로 받아서, 각각의 Operator에 대해서 NeuralNetwork::SetInput(Operator<DTYPE> *pInput)를 호출한다.
+@details Operator 개수와 Operator 리스트를 매개변수로 받아서, 각각의 Operator에 대해서 NeuralNetwork<DTYPE>::SetInput(Operator<DTYPE> *pInput)를 호출한다.
 @param pNumOfInput Input에 추가하고자 하는 Operator의 개수
 @param ... Input에 추가하고자 하는 Operator의 리스트
 @return TRUE
@@ -257,11 +257,11 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::IsValid(Operator<DTYPE> *pOpe
 /*!
 @brief 학습 가능한 형태로 신경망 그래프를 구성해주는 메소드
 @details 신경망의 Output에 해당하는 Operator를 매개변수로 받아 너비 우선 탐색으로 신경망 그래프를 구성한다.
-@details 매개변수로 받은 신경망의 Output에 해당하는 Operator를 시작으로 신경망의 Input에 해당하는 Output까지 역순으로 NeuralNetwork 클래스의 Container 멤버 변수들에 Operator들을 추가한다.
-@details NeuralNetwork 클래스의 Container 멤버 변수들에 Operator들을 모두 추가한 후, 각 Container들의 역순으로 변경한다.
+@details 매개변수로 받은 신경망의 Output에 해당하는 Operator를 시작으로 신경망의 Input에 해당하는 Operator까지 역순으로 NeuralNetwork 클래스의 Container 멤버 변수들에 Operator들을 추가한다.
+@details NeuralNetwork 클래스의 Container 멤버 변수들에 Operator들을 모두 추가한 후, 각 Container들을 역순으로 변경한다.
 @details Operator 탐색 순서는 너비 우선 탐색을 따르며, 매개변수로 받은 Output Operator부터 해당 Operator의 Input Operator 리스트를 너비 우선 탐색 방식을 이용해 순서대로 진행한다.
 @details 신경망의 각 Operator들은 Operator Container에 순서대로 추가되며, 연산에 참여하는 Operator의 경우 Excutable Conatainer에 학습 파라미터에 해당하는 Operator의 경우 Parameter Container에 순서대로 추가된다.
-@details 각 Operator들은 NeuralNetwork::IsValid(Operator<DTYPE> *pOperator) 메소드를 이용하여 신경망 그래프 안에서의 중복 여부를 확인하며 중복되는 경우 그래프에 추가하지 않는다.
+@details 각 Operator들은 NeuralNetwork<DTYPE>::IsValid(Operator<DTYPE> *pOperator) 메소드를 이용하여 신경망 그래프 안에서의 중복 여부를 확인하며 중복되는 경우 그래프에 추가하지 않는다.
 @param pResultOperator 그래프를 구성하고자 하는 신경망의 Output에 해당하는 Operator
 @return 매개변수로 받은 그래프를 구성하고자 하는 신경망의 Output에 해당하는 Operator
 */
