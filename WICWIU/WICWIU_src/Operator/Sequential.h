@@ -4,17 +4,13 @@
 #include "../Operator.h"
 
 /*!
-@class
-@details
-@todo EXTRA
+@class Sequential class
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-24
 template<typename DTYPE>
 class Sequential : public Operator<DTYPE>{
     Operator<DTYPE> **m_listOfOperator; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int m_numOfOperator; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
     /*!
@@ -40,13 +36,8 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Sequential의 소멸자.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ~Sequential() {
         std::cout << "Sequential::~Sequential()" << '\n';
     }

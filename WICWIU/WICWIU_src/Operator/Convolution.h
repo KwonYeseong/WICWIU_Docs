@@ -5,17 +5,14 @@
 #include <cstdio>
 
 /*!
-@class
+@class Convolution class
 @details
-@todo EXTRA
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-10-07
 template<typename DTYPE> class Convolution2D : public Operator<DTYPE>{
 private:
-    int m_stride[2]; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    int m_padding[2]; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_stride[2]; ///< stride값. [0]은 row, [1]은 colunm을 각각 의미한다.
+    int m_padding[2]; ///< padding값 [0]은 height, [1]은 width를 각각 의미한다.
 
 #ifdef __CUDNN__
     cudnnTensorDescriptor_t inputTensorDesc, outputTensorDesc, deltaDesc, inputDeltaDesc; ///<   @todo Variable
@@ -56,50 +53,56 @@ private:
 
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Convolution2의 생성자.
+    @details 파라미터로 받은 pInput, pWeight, stride1, stride2로 Alloc한다.
+    @param pInput Convolution할 Operator
+    @param pWeight Convolution할 weight.
+    @param stride1 stride row값
+    @param stride2 stride colunm값
+    @param pName 사용자가 부여한 Operator이름.
+    @ref int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding1, int padding2)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Convolution2D(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, std::string pName = "NO NAME") : Operator<DTYPE>(pInput, pWeight, pName) {
         Alloc(pInput, pWeight, stride1, stride2, 0, 0);
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Convolution2의 생성자.
+    @details 파라미터로 받은 pInput, pWeight, stride1, stride2, padding로 Alloc한다.
+    @param pInput Convolution할 Operator
+    @param pWeight Convolution할 weight.
+    @param stride1 stride row값
+    @param stride2 stride colunm값
+    @param padding padding 할 값. height, width 모두 이 값으로 한다.
+    @param pName 사용자가 부여한 Operator이름.
+    @ref int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding1, int padding2)
+
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Convolution2D(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding, std::string pName = "NO NAME") : Operator<DTYPE>(pInput, pWeight, pName) {
         Alloc(pInput, pWeight, stride1, stride2, padding, padding);
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Convolution2의 생성자.
+    @details 파라미터로 받은 pInput, pWeight, stride1, stride2, padding1, padding2로 Alloc한다.
+    @param pInput Convolution할 Operator
+    @param pWeight Convolution할 weight.
+    @param stride1 stride row값
+    @param stride2 stride colunm값
+    @param padding1 height padding값
+    @param padding2 height padding값
+    @param pName 사용자가 부여한 Operator이름.
+    @ref int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding1, int padding2)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Convolution2D(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding1, int padding2, std::string pName = "NO NAME") : Operator<DTYPE>(pInput, pWeight, pName) {
         Alloc(pInput, pWeight, stride1, stride2, padding1, padding2);
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
-
+    @brief Convolution2의 소멸자.
+    @details Delete매소드를 사용해 GPU에 할당했던 값들을 해제한다.
+    @ref void Delete()
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~Convolution2D() {
         #ifdef __DEBUG__
         std::cout << "Convolution2D::~Convolution2D()" << '\n';
@@ -108,14 +111,18 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
+    @brief 파라미터로 받은 pInput, pWeight, stride1, stride2, padding1, padding2으로 맴버 변수들을 초기화 한다.
+    @details pInput과 pWeight의 Shape과 stride, padding값으로 output으로 Result와 Delta로 사용 할 Tensor의 Shape을 정의한다.
+    @param pInput Convolution할 Operator
+    @param pWeight Convolution할 weight.
+    @param stride1 stride row값
+    @param stride2 stride colunm값
+    @param padding1 height padding값
+    @param padding2 height padding값
     @return
     @todo Constructor
 
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding1, int padding2) {
         int outputWidth  = 0;
         int outputHeight = 0;
@@ -263,15 +270,11 @@ public:
 
 #endif  // if __CUDNN__
 
-    /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
-
-    */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+/*!
+@brief GPU에 할당했던 메모리를 해제하고 각 포인터들을 NULL로 초기화한다.
+@details inputTensorDesc, outputTensorDesc,deltaDesc, inputDeltaDesc, convDesc, filterDesc,filterDeltaDesc들을 삭제하고 NULL로 초기화한다.
+@details m_devWorkSpace, m_dataDevWorkSpace, m_filterDevWorkSpace들이 가리키는 메모리를 해제한다.
+*/
     void Delete() {
 #ifdef __CUDNN__
 
@@ -313,13 +316,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief Convolution2D의 ForwardPropagate 소드.
+    @details weight(filter size = rowsizeOfWeight *  colsizeOfWeight)로 input의 데이터를 stride값 만큼씩 이동하면서 곱한 값을 result에 더한다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input = this->GetInput()[0]->GetResult();
         Shape *shapeOfInput  = input->GetShape();

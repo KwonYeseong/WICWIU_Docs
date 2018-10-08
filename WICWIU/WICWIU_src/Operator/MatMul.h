@@ -5,61 +5,44 @@
 #include <cstdio>
 
 /*!
-@class
-@details
-@todo EXTRA
+@class  MatMul class
+@details 행렬간의 곱샘 연산을 수행하는 클래스
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예, 작성 날짜 : 2018-10-07
 template<typename DTYPE> class MatMul : public Operator<DTYPE>{
 private:
 #ifdef __CUDNN__
     cudnnTensorDescriptor_t inputTensorDesc, outputTensorDesc, deltaDesc, inputDeltaDesc; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     cudnnConvolutionDescriptor_t convDesc; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     cudnnFilterDescriptor_t filterDesc, filterDeltaDesc; ///<  @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevFilter, *m_pDevInputDelta, *m_pDevDelta, *m_pDevFilterDelta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    // DTYPE *m_pHostInput, *m_pHostOutput, *m_pHostFilter, *m_pHostInputDelta, *m_pHostDelta, *m_pHostFilterDelta;
 
     cudnnConvolutionFwdAlgo_t m_algo; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     cudnnConvolutionBwdFilterAlgo_t m_filterAlgo; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     cudnnConvolutionBwdDataAlgo_t m_dataAlgo; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
 
     size_t m_sizeInBytes; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     size_t m_dataSizeInBytes; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     size_t m_filterSizeInBytes; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
 
     DTYPE m_alpha; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE m_beta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
 
     void *m_devWorkSpace; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void *m_dataDevWorkSpace; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void *m_filterDevWorkSpace; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
 
 #endif  // __CUDNN__
 
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief MatMul의 생성자.
+    @details 파라미터로 받은 pWeight와 pInput으로 Alloc한다.
+    @param pWeight MatMul할 weight.
+    @param pInput Matmul할 input Operator.
+    @param pName 사용자가 부여한 Operator이름.
+    @ref int Alloc(Operator<DTYPE> *pWeight, Operator<DTYPE> *pInput)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     MatMul(Operator<DTYPE> *pWeight, Operator<DTYPE> *pInput, std::string pName) : Operator<DTYPE>(pWeight, pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "MatMul::MatMul(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -68,14 +51,10 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
-
+    @brief MatMul의 소멸자
+    @details Delete매소드를 사용해 GPU에 할당했던 값들을 해제한다.
+    @ref void Delete()
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual ~MatMul() {
         #ifdef __DEBUG__
         std::cout << "Convolution2D::~Convolution2D()" << '\n';
@@ -84,14 +63,14 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
-
+    @brief 파라미터로 받은 pWeight, pInput으로 맴버 변수들을 초기화 한다.
+    @details timesize, batchsize, channelsize, row_size는 pInput의 Shape과 같게,  colsize는 pWeight와 같게 초기화한다.
+    @details input x weight을 하기 때문에 rowsize는 pInput의 Shape을, colsize는 pWeight의 Shape을 받는다.
+    @details Result와 Delta를 저장하기 위해 input의 rowsize, weight의 colsize를 갖는 Tensor를 생성한다.
+    @param pWeight MatMul할 weight.
+    @param pInput Matmul할 input Operator.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int Alloc(Operator<DTYPE> *pWeight, Operator<DTYPE> *pInput) {
         #ifdef __DEBUG__
         std::cout << "MatMul::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -118,7 +97,6 @@ public:
     @return
     @todo GPU
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         Operator<DTYPE> *pWeight = this->GetInput()[0];
         Operator<DTYPE> *pInput  = this->GetInput()[1];
@@ -233,13 +211,10 @@ public:
 
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief GPU에 할당했던 메모리를 해제하고 각 포인터들을 NULL로 초기화한다.
+    @details inputTensorDesc, outputTensorDesc,deltaDesc, inputDeltaDesc, convDesc, filterDesc,filterDeltaDesc들을 삭제하고 NULL로 초기화한다.
+    @details m_devWorkSpace, m_dataDevWorkSpace, m_filterDevWorkSpace들이 가리키는 메모리를 해제한다.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
 #ifdef __CUDNN__
 
@@ -282,11 +257,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief MatMul의 ForwardPropagate매소드.
+    @details weight의 각 row의 값들과 input의 Colunm의 각 값들을 곱하여 result에 더한다.
+    @details [2 x 3] x [3 x 1일때  3이 hiddensize
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
@@ -331,13 +306,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief MatMul의 BackPropagate 매소드.
+    @details input_delta의 input_index에 weight * this_delta값을 더해주고,
+    @details weight_gradient에는 input * this_delta값을 더해준다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *weight = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *input  = this->GetInput()[1]->GetResult();

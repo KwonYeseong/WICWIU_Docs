@@ -4,33 +4,26 @@
 #include "../Operator.h"
 
 /*!
-@class
-@details
-@todo EXTRA
+@class Softmax class
+@detilas 각 dim의 값들을 확률 값으로 계산해 주는 Operator
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
+// 문서 작성자 : 권예성, 작성 날짜 : 2018-10-01
 template<typename DTYPE>
 class Softmax : public Operator<DTYPE>{
     DTYPE m_epsilon; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
 
     int m_timesize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-
     DTYPE **sum; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE **max; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
 
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Softmax의 생성자.
+    @details 파라미터로 받은 pOperator, epsilon을 Alloc시킨다.
+    @param pOperator Softmax할 대상 Operator, 이 매소드에서 Alloc시킨다.
+    @param epsilon ForwardPropagate에 사용힐 값. 0으로 나누어지는 것을 방지하는 역할을 한다.
+    @ref virtual int Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon = 1e-6f
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Softmax(Operator<DTYPE> *pOperator, DTYPE epsilon = 1e-6f) : Operator<DTYPE>(pOperator) {
         #ifdef __DEBUG__
         std::cout << "Softmax::Softmax(Operator *)" << '\n';
@@ -39,13 +32,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Softmax의 생성자.
+    @details 파라미터로 받은 pOperator을 Alloc한다.
+    @param pOperator Softmax할 대상 Operator, 이 매소드에서 Alloc시킨다.
+    @param pName 사용자가 Operator에 부여한 이름.
+    @ref virtual int Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon = 1e-6f
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Softmax(Operator<DTYPE> *pOperator, std::string pName) : Operator<DTYPE>(pOperator, pName) {
         #ifdef __DEBUG__
         std::cout << "Softmax::Softmax(Operator *)" << '\n';
@@ -54,13 +46,13 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Softmax의 생성자.
+    @details 파라미터로 받은 pOperator, epsilon을 Alloc시킨다.
+    @param pOperator Softmax할 대상 Operator, 이 매소드에서 Alloc시킨다.
+    @prram epsilon ForwardPropagate에 사용힐 값. 0으로 나누어지는 것을 방지하는 역할을 한다.
+    @param pName 사용자가 Operator에 부여한 이름.
+    @ref virtual int Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon = 1e-6f
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Softmax(Operator<DTYPE> *pOperator, DTYPE epsilon, std::string pName) : Operator<DTYPE>(pOperator, pName) {
         #ifdef __DEBUG__
         std::cout << "Softmax::Softmax(Operator *)" << '\n';
@@ -69,13 +61,9 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Softmax의 소멸자.
+    @details 딱히 하는 일은 없다.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ~Softmax() {
         #ifdef __DEBUG__
         std::cout << "Softmax::~Softmax()" << '\n';
@@ -83,13 +71,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 파라미터로 받은 pOperator로 맴버변수들을 초기화 하고 Result, Gradient를 설정한다.
+    @details input으로 받은 Operator의 Shape정보들로 맴버 변수드을 초기화 하고, 같은 Shape을 갖는 Tensor를 만들어 Result와 Gradient로 설정한다.
+    @param pOperator Softmax할 Operator
+    @param epsilon 0으로 나누어지는 것을 방지하기위해 softmax식의 분모에 더하는 값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual int Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon = 1e-6f) {
         Operator<DTYPE> *pInput = pOperator;
 
@@ -116,13 +103,8 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Alloc매소드에서 할당했던 sum, max를 삭제하고 포인터를 NULL로 초기화 한다.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual void Delete() {
         if (sum) {
             for (int i = 0; i < m_timesize; i++) {
@@ -142,13 +124,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief Softmax의 ForwardPropagate 매소드
+    @details max값을 계산하고, exp()한 모든 값들을 더해 sum을 구한 뒤, 각각의 exp(input)한 값을 sum으로 나누어주어 확률값을 구하고 result에 저장한다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -205,13 +185,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief softmax의 BackPropagate 매소드.
+    @details softmax의 미분 값을 delta값과 곱하여 input_delta에 넣어준다.
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *result      = this->GetResult();
         Tensor<DTYPE> *this_delta  = this->GetGradient();
@@ -250,13 +228,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo N_Train
+    @brief 파라미터로 받은 Tensor에서 가장 큰 값을 반환하는 함수.
+    @param input 가장 큰 값을 찾을 대상 Tensor.
+    @param start 값을 찾을 Tensor안에서의 시작위치.
+    @param end 값을 찾을 Tensor안에서의 종료위치.
+    @return input Tensor의 값들 중 가장 큰 값..
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE Max(Tensor<DTYPE> *input, int start, int end) {
         DTYPE max = (*input)[start];
 
