@@ -18,13 +18,15 @@ private:
 
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief HingeLoss LossFunction 클래스 생성자
+    @details LossFunction 클래스의 생성자를 호출하고, Operator와 theta을 매개변수로 전달하여 HingeLoss<DTYPE>::Alloc(Operator<DTYPE> *pOperator, float theta) 메소드를 호출한다.
+    @param pOperator HingeLoss<DTYPE>::Alloc(Operator<DTYPE> *pOperator, float theta) 메소드의 매개변수로 전달할 Operator
+    @param pLabel LossFunction의 입력 레이블에 해당하는 Operator
+    @param theta 값을 지정하지 않을 시 1.f로 초기화
+    @return 없음
+    @see HingeLoss<DTYPE>::Alloc(Operator<DTYPE> *pOperator, float theta)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     HingeLoss(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, float theta = 1.f) : LossFunction<DTYPE>(pOperator, pLabel) {
         #ifdef __DEBUG__
         std::cout << "HingeLoss::HingeLoss(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -33,13 +35,15 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief HingeLoss LossFunction 클래스 생성자
+    @details LossFunction 클래스의 생성자를 호출하고, Operator와 1.f에 해당하는 theta 값 매개변수로 전달하여 HingeLoss<DTYPE>::Alloc(Operator<DTYPE> *pOperator, float theta) 메소드를 호출한다.
+    @param pOperator HingeLoss<DTYPE>::Alloc(Operator<DTYPE> *pOperator, float theta) 메소드의 매개변수로 전달할 Operator
+    @param pLabel LossFunction의 입력 레이블에 해당하는 Operator
+    @param pName LossFunction의 이름
+    @return 없음
+    @see HingeLoss<DTYPE>::Alloc(Operator<DTYPE> *pOperator, float theta)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     HingeLoss(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, std::string pName) : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "HingeLoss::HingeLoss(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -48,13 +52,14 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief HingeLoss LossFunction 클래스 생성자
+    @details LossFunction 클래스의 생성자를 호출하고, Operator와 theta을 매개변수로 전달하여 HingeLoss<DTYPE>::Alloc(Operator<DTYPE> *pOperator, float theta) 메소드를 호출한다.
+    @param pOperator HingeLoss<DTYPE>::Alloc(Operator<DTYPE> *pOperator, float theta) 메소드의 매개변수로 전달할 Operator
+    @param pLabel LossFunction의 입력 레이블에 해당하는 Operator
+    @param theta
+    @see HingeLoss<DTYPE>::Alloc(Operator<DTYPE> *pOperator, float theta)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     HingeLoss(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, float theta, std::string pName) : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "HingeLoss::HingeLoss(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -63,13 +68,10 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief HingeLoss LossFunction 클래스 소멸자
+    @return 없음
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     ~HingeLoss() {
         #ifdef __DEBUG__
         std::cout << "HingeLoss::~HingeLoss()" << '\n';
@@ -77,13 +79,15 @@ public:
     }
 
     /*!
-    @brief
+    @brief HingeLoss Lossfunction의 멤버 변수들을 동적 할당하는 메소드
+    @details 매개변수로 전달받은 Operator를 Input Operator에 할당하고 초기화 된 Result 텐서를 동적으로 할당 및 생성한다.
     @details
-    @param
-    @return
-    @todo Constructor
+    @param pOperator CrossEntropy LossFunction의 입력에 해당하는 Operator
+    @param theta
+    @return TRUE
+    @todo 추가 요
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     int Alloc(Operator<DTYPE> *pOperator, float theta) {
         #ifdef __DEBUG__
         std::cout << "HingeLoss::Alloc(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -107,13 +111,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 동적으로 할당받은 LossFunction의 멤버 변수들을 할당 해제하는 메소드
+    @details Index for BackPropagation Tensor가 존재할 경우 Tensor의 메모리를 할당 해제하고 0으로 초기화한다.
+    @return 없음
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     void Delete() {
         if (m_aindexForBackProp) {
             delete m_aindexForBackProp;

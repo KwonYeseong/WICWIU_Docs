@@ -26,13 +26,16 @@ private:
 
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief SoftmaxCrossEntropy LossFunction 클래스 생성자
+    @details LossFunction 클래스의 생성자를 호출하고, Operator와 epsilon을 매개변수로 전달하여 SoftmaxCrossEntropy<DTYPE>::Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon) 메소드를 호출한다.
+    @param pOperator SoftmaxCrossEntropy<DTYPE>::Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon) 메소드의 매개변수로 전달할 Operator
+    @param pLabel LossFunction의 입력 레이블에 해당하는 Operator
+    @param epsilon
+    @param pName LossFunction의 이름, 지정하지 않을 시 "NO NAME"으로 초기화
+    @return 없음
+    @see SoftmaxCrossEntropy<DTYPE>::Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     SoftmaxCrossEntropy(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, DTYPE epsilon, std::string pName = "NO NAME") : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "SoftmaxCrossEntropy::SoftmaxCrossEntropy(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -41,13 +44,15 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief SoftmaxCrossEntropy LossFunction 클래스 생성자
+    @details LossFunction 클래스의 생성자를 호출하고, Operator와 1e-6f에 해당하는 epsilon 값을 매개변수로 전달하여 SoftmaxCrossEntropy<DTYPE>::Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon) 메소드를 호출한다.
+    @param pOperator SoftmaxCrossEntropy<DTYPE>::Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon) 메소드의 매개변수로 전달할 Operator
+    @param pLabel LossFunction의 입력 레이블에 해당하는 Operator
+    @param pName LossFunction의 이름, 지정하지 않을 시 "NO NAME"으로 초기화
+    @return 없음
+    @see SoftmaxCrossEntropy<DTYPE>::Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     SoftmaxCrossEntropy(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, std::string pName = "NO NAME") : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "SoftmaxCrossEntropy::SoftmaxCrossEntropy(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -56,13 +61,10 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief SoftmaxCrossEntropy LossFunction 클래스 소멸자
+    @return 없음
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     virtual ~SoftmaxCrossEntropy() {
         #ifdef __DEBUG__
         std::cout << "SoftmaxCrossEntropy::~SoftmaxCrossEntropy()" << '\n';
@@ -77,7 +79,7 @@ public:
     @return
     @todo Constructor
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-
     virtual int Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon) {
         #ifdef __DEBUG__
         std::cout << "SoftmaxCrossEntropy::Alloc(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';

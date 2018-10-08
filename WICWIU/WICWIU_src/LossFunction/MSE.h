@@ -12,13 +12,15 @@ template<typename DTYPE>
 class MSE : public LossFunction<DTYPE>{
 public:
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief MSE(Mean Squared Error) LossFunction 클래스 생성자
+    @details LossFunction 클래스의 생성자를 호출하고, Operator를 매개변수로 전달하여 MSE<DTYPE>::Alloc(Operator<DTYPE> *pOperator) 메소드를 호출한다.
+    @param pOperator MSE<DTYPE>::Alloc(Operator<DTYPE> *pOperator) 메소드의 매개변수로 전달할 Operator
+    @param pLabel LossFunction의 입력 레이블에 해당하는 Operator
+    @param pName LossFunction의 이름
+    @return 없음
+    @see MSE<DTYPE>::Alloc(Operator<DTYPE> *pOperator)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     MSE(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, std::string pName) : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "MSE::MSE(Operator<DTYPE> *, MetaParameter *, std::string)" << '\n';
@@ -27,13 +29,10 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief MSE(Mean Squared Error) LossFunction 클래스 소멸자
+    @return 없음
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     virtual ~MSE() {
         #ifdef __DEBUG__
         std::cout << "MSE::~MSE()" << '\n';
@@ -41,13 +40,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief MSE(Mean Squared Error) LossFunction의 멤버 변수들을 동적 할당하는 메소드
+    @details 매개변수로 전달받은 Operator를 Input Operator에 할당하고 초기화 된 Result 텐서를 동적으로 할당 및 생성한다.
+    @param pOperator MSE LossFunction의 입력에 해당하는 Operator
+    @return TRUE
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     virtual int Alloc(Operator<DTYPE> *pOperator) {
         #ifdef __DEBUG__
         std::cout << "MSE::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -69,13 +67,12 @@ public:
     }
 
     /*!
-    @brief
+    @brief MSE(Mean Squared Error) LossFunction의 순전파를 수행하는 메소드
     @details
-    @param
+    @param pTime
     @return
-    @todo E_Train
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     Tensor<DTYPE>* ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetTensor();
         Tensor<DTYPE> *label  = this->GetLabel()->GetResult();
@@ -103,13 +100,12 @@ public:
     }
 
     /*!
-    @brief
+    @brief MSE(Mean Squared Error) LossFunction의 역전파를 수행하는 메소드
     @details
-    @param
+    @param pTime
     @return
-    @todo E_Train
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     Tensor<DTYPE>* BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *input       = this->GetTensor();
         Tensor<DTYPE> *label       = this->GetLabel()->GetResult();
@@ -172,7 +168,7 @@ public:
     @details
     @param
     @return
-    @todo 우선순위
+    @todo EXTRA
     */
     // 문서 작성자 : , 작성 날짜 : 2018-
     inline DTYPE Error(DTYPE pred, DTYPE ans) {
