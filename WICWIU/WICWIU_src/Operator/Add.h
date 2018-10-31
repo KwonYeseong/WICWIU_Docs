@@ -4,7 +4,7 @@
 #include "../Operator.h"
 
 /*!
-@class Tensor의 모든 값들을 서로 더하는 class
+@class Addall Tensor의 모든 값들을 서로 더하는 class
 */
 // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
 template<typename DTYPE> class Addall : public Operator<DTYPE>{
@@ -287,7 +287,7 @@ public:
 };
 
 /*!
-@class Tensor의 값 중 Colunm에만 값을 더하는 class
+@class AddColWise Tensor의 값 중 Colunm에만 값을 더하는 class
 */
 template<typename DTYPE> class AddColWise : public Operator<DTYPE>{
 private:
@@ -578,9 +578,7 @@ public:
 };
 
 /*!
-@class
-@details
-@todo Constructor
+@class  AddChannelWise Tensor의 channel값만 서로
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class AddChannelWise : public Operator<DTYPE>{

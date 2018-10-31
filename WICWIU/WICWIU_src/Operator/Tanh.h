@@ -4,7 +4,7 @@
 #include "../Operator.h"
 
 /*!
-@class Hyperbolic Tan Operator 클래스
+@class Tanh Hyperbolic Tan Operator 클래스
 */
 template<typename DTYPE>
 class Tanh : public Operator<DTYPE>{

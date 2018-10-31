@@ -4,7 +4,7 @@
 #include "../Operator.h"
 
 /*!
-@class GlobalAvaragePooling2D class
+@class GlobalAvaragePooling2D GlobalAvaragePooling2D class
 @details Row * Colunm 공간을 GlobalAvaragePooling하는 클래스.
 */
 // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23

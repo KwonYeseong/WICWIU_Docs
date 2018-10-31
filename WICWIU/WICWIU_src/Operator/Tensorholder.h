@@ -4,7 +4,7 @@
 #include "../Operator.h"
 
 /*!
-@class Gradient없이 Operator의 Result만 사용하기 위한 클래스.
+@class Tensorholder Gradient없이 Operator의 Result만 사용하기 위한 클래스.
 @details 주로 Network의 input, label값을 저장하기 위해 구현되었다.
 */
 template<typename DTYPE> class Tensorholder : public Operator<DTYPE>{
