@@ -5,7 +5,7 @@
 #include <cstdio>
 
 /*!
-@class Convolution class
+@class Convolution2D  Convolution2D class
 @details
 */
 // 문서 작성자 : 권예성, 작성 날짜 : 2018-10-07
