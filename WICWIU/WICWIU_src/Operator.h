@@ -37,8 +37,7 @@ private:
     // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 
 #ifdef __CUDNN__
-    cudnnHandle_t m_pCudnnHandle; ///<   @todo Variable,
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnHandle_t m_pCudnnHandle; ///< cudnn 라이브러리를 가리키는 포인터.
 #endif  // __CUDNN__
 
 private:

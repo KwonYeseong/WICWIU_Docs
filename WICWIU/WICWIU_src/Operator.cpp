@@ -570,13 +570,8 @@ template<typename DTYPE> int Operator<DTYPE>::ResetGradient() {
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo EXTRA
+@brief Operator정보(이름과 Shape)를 출력한다.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Operator<DTYPE>::PrintInformation() {
     std::cout << this->GetName() << " : ";
     std::cout << this->GetResult()->GetShape() << '\n';
@@ -610,14 +605,6 @@ template<typename DTYPE> int Operator<DTYPE>::SetGradientOnCPU() {
     return TRUE;
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo EXTRA
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::Save(FILE *fileForSave) {
     int size = m_aaResult->GetSize();
 
@@ -628,14 +615,6 @@ template<typename DTYPE> int Operator<DTYPE>::Save(FILE *fileForSave) {
     return TRUE;
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo EXTRA
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::Load(FILE *fileForLoad) {
     int size = m_aaResult->GetSize();
 
@@ -674,31 +653,14 @@ template<typename DTYPE> int Operator<DTYPE>::SetGradientOnGPU(unsigned int idOf
     return TRUE;
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo GPU
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Operator<DTYPE>::InitializeAttributeForGPU(unsigned int idOfDevice) {}
 
-// template<typename DTYPE> void Operator<DTYPE>::SetDeviceGPU(unsigned int idOfDevice) {
-// this->SetDevice(GPU);
-// this->SetDeviceID(idOfDevice);
-// this->SetResultOnGPU(idOfDevice);
-// this->SetGradientOnGPU(idOfDevice);
-// }
-
 /*!
-@brief
-@details
-@param
-@return
-@todo GPU
+@brief Operator가 GPU에서 연산 될 수 있도록 하는 매소드.
+@details Operator의 정보들을 지정된 GPU의 메모리로 복사한다.
+@param pCudnnHandle cudnn 라이브러리를 가리키는 포인터.
+@param idOfDevice 사용 할 GPU 번호
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Operator<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnHandle, unsigned int idOfDevice) {
     checkCudaErrors(cudaSetDevice(idOfDevice));
     this->SetCudnnHandle(pCudnnHandle);
@@ -709,26 +671,15 @@ template<typename DTYPE> void Operator<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudn
     this->InitializeAttributeForGPU(idOfDevice);
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo GPU
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> cudnnHandle_t& Operator<DTYPE>::GetCudnnHandle() {
     return m_pCudnnHandle;
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo GPU
+@brief  ForwardPropagateOnGPU 매소드. 실제 구현은 파생 클래스에서 정의된다.
+@param pTime ForwardPropagate할 데이터의 Time값.
+@return 성공 시 TRUE.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::ForwardPropagateOnGPU(int pTime) {
     # if __DEBUG__
     std::cout << "Operator<DTYPE>::ForwardPropagateOnGPU(int)" << '\n';
@@ -738,13 +689,10 @@ template<typename DTYPE> int Operator<DTYPE>::ForwardPropagateOnGPU(int pTime) {
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo GPU
+@brief  BackwardPropagateOnGPU 매소드. 실제 구현은 파생 클래스에서 정의된다.
+@param pTime ForwardPropagate할 데이터의 Time값.
+@return 성공 시 TRUE.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::BackPropagateOnGPU(int pTime) {
     # if __DEBUG__
     std::cout << "Operator<DTYPE>::BackPropagateOnGPU(int)" << '\n';
