@@ -129,26 +129,18 @@ public:
 
 #ifdef __CUDNN__
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief Sigmoid은 CPU코드에서만 작동한다.
+    @return 성공 시 TURE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
         this->ForwardPropagate(pTime);
         return TRUE;
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief Sigmoid은 CPU코드에서만 작동한다.
+    @return 성공 시 TURE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {
         this->BackPropagate(pTime);
 
