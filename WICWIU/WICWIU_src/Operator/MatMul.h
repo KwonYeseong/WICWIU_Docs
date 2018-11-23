@@ -8,7 +8,6 @@
 @class  MatMul class
 @details 행렬간의 곱샘 연산을 수행하는 클래스
 */
-// 문서 작성자 : 권예, 작성 날짜 : 2018-10-07
 template<typename DTYPE> class MatMul : public Operator<DTYPE>{
 private:
 #ifdef __CUDNN__
@@ -90,13 +89,12 @@ public:
     }
 
 #ifdef __CUDNN__
-    /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
-    */
+/*!
+@brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
+@details
+@details TensorDesriptor들을 생성하고, TensorDesriptor들의 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
+@param idOfDevice 사용할 GPU의 id
+*/
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         Operator<DTYPE> *pWeight = this->GetInput()[0];
         Operator<DTYPE> *pInput  = this->GetInput()[1];
@@ -259,7 +257,7 @@ public:
     /*!
     @brief MatMul의 ForwardPropagate매소드.
     @details weight의 각 row의 값들과 input의 Colunm의 각 값들을 곱하여 result에 더한다.
-    @details [2 x 3] x [3 x 1일때  3이 hiddensize
+    @details [2 x 3] x [3 x 1]일때  3이 hiddensize
     @param pTime pInput의 m_timesize값, default는 0을 사용.
     @return 성공 시 TRUE.
     */

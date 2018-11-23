@@ -5,8 +5,6 @@
 
 /*!
 @class Maxpooling2D class
-@details
-
 */
 // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-25
 template<typename DTYPE> class Maxpooling2D : public Operator<DTYPE>{
@@ -119,14 +117,12 @@ public:
     }
 
 #ifdef __CUDNN__
-    /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
-    */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+/*!
+@brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
+@details Activation 함수를 Maxpooling2D로 지정gksek.
+@details TensorDesriptor들을 생성하고, TensorDesriptor들으 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
+@param idOfDevice 사용할 GPU의 id
+*/
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         Tensor<DTYPE> *input = this->GetInput()[0]->GetResult();
         Shape *shapeOfInput  = input->GetShape();
@@ -176,13 +172,9 @@ public:
 #endif  // if __CUDNN__
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief Delete 메소드
+    @details cudnnDescriptor들을 GPU메모리에서 해제하고 포인터를 null로 초기화한다.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
         delete indexOfMaxInput;
 #ifdef __CUDNN__
@@ -312,14 +304,13 @@ public:
     }
 
 #ifdef __CUDNN__
-    /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
-    */
-    // 문서 작성자 : , 작성 날짜 : 2018-
+/*!
+@brief GPU에서 작동하는 ForwardPropagate 메소드.
+@details 지정한 Activation(Maxpooling2D) functiondml ForwardPropagate연산을 실행한다.
+@details m_pDevOutput에 결과 값을 저장한다.
+@param pTime 연산 할 Tensor가 위치한 Time값.
+@return 성공 시 TRUE.
+*/
     int ForwardPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *result = this->GetResult();
@@ -336,13 +327,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 작동하는 BackPropagate메소드.
+    @details 지정한 Activation function(Maxpooling2D)의 BackPropagate연산을 실행한다.
+    @details m_pDevDelta에 결과 값을 저장한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input_delta = this->GetInput()[0]->GetDelta();
         Tensor<DTYPE> *this_delta  = this->GetDelta();

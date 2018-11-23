@@ -119,9 +119,6 @@ public:
     @param stride2 stride colunm값
     @param padding1 height padding값
     @param padding2 height padding값
-    @return
-    @todo Constructor
-
     */
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding1, int padding2) {
         int outputWidth  = 0;
@@ -152,13 +149,11 @@ public:
 
 #ifdef __CUDNN__
     /*!
-    @brief
+    @brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
     @details
-    @param
-    @return
-    @todo GPU
+    @details TensorDesriptor들을 생성하고, TensorDesriptor들의 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
+    @param idOfDevice 사용할 GPU의 id
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         Operator<DTYPE> *pInput  = this->GetInput()[0];
         Operator<DTYPE> *pWeight = this->GetInput()[1];
@@ -316,7 +311,7 @@ public:
     }
 
     /*!
-    @brief Convolution2D의 ForwardPropagate 소드.
+    @brief Convolution2D의 ForwardPropagate 메소드.
     @details weight(filter size = rowsizeOfWeight *  colsizeOfWeight)로 input의 데이터를 stride값 만큼씩 이동하면서 곱한 값을 result에 더한다.
     @param pTime pInput의 m_timesize값, default는 0을 사용.
     @return 성공 시 TRUE.
@@ -367,13 +362,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo E_Train
+    @brief CONVOLUTION_2D의 BackPropagate 메소드.
+    @details Convolution의 미분 값을 input_delta와 weight_gradient에 더해 넣는다.
+    @details 추가 설명 요함!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *input       = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *input_delta = this->GetInput()[0]->GetDelta();
@@ -433,13 +427,11 @@ public:
 
 #ifdef __CUDNN__
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 동작하는 ForwardPropagate 메소드.
+    @details cudnn이 제공하는 Convolution ForwardPropagate 메소드를 실행한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *weight = this->GetInput()[1]->GetResult();
@@ -459,13 +451,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 동작하는 BackwardPropagate 메소드.
+    @details cudnn이 제공하는 Convolution BackwardPropagate 메소드를 실행한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input           = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *input_delta     = this->GetInput()[0]->GetDelta();

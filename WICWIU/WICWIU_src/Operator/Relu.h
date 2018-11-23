@@ -84,13 +84,11 @@ public:
 
 #ifdef __CUDNN__
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
+    @details Activation 함수를 Relu로 지정한다.
+    @details TensorDesriptor들을 생성하고, TensorDesriptor들의 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
+    @param idOfDevice 사용할 GPU의 id
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         Operator<DTYPE> *pInput = this->GetInput()[0];
 
@@ -130,13 +128,9 @@ public:
 #endif  // if __CUDNN__
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 메모리를 헤제하는 Delete 메소드
+    @details cudnnDescriptor들을 GPU메모리에서 해제하고 포인터를 null로 초기화한다.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
 #ifdef __CUDNN__
 
@@ -161,8 +155,7 @@ public:
 
     /*!
     @brief Relu의 ForwardPropagate 매소드.
-    @details input의 Tensor값들 중 0.f이상의 값은 그대로 result에 저장하고,
-    @details 0.f미만의 값은 0.f로 저장한다.
+    @details input의 Tensor값들 중 0.f이상의 값은 그대로 result에 저장하고, 0.f미만의 값은 0.f로 저장한다.
     @param pTime pInput의 m_timesize값, default는 0을 사용.
     @return 성공 시 TRUE.
     */
@@ -248,13 +241,12 @@ public:
 
 #ifdef __CUDNN__
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 동작하는 ForwardPropagate 메소드.
+    @details 지정한 Activation(Relu) functiondml ForwardPropagate연산을 실행한다.
+    @details m_pDevOutput에 결과 값을 저장한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *result = this->GetResult();
@@ -271,13 +263,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 동작하는 BackPropagate메소드.
+    @details 지정한 Activation function(Relu)의 BackPropagate연산을 실행한다.
+    @details m_pDevDelta에 결과 값을 저장한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *result      = this->GetResult();
         Tensor<DTYPE> *this_delta  = this->GetGradient();

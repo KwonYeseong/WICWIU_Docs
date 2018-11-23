@@ -9,7 +9,6 @@
 @details TRAINING:학습 중, ACCUMULATING:, INFERENCING:accuracy를 구하는 중
 @todo EXTRA
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 enum Mode {
     TRAINING,
     ACCUMULATING,
@@ -17,11 +16,9 @@ enum Mode {
 };
 
 /*!
-@class
-@details
-@todo EXTRA
+@class Operator class 
+@details 프래임워크의 가장 작은 연산 단위.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Operator {
 private:
     Container<Operator<DTYPE> *> *m_apOutput; ///< Operator의 m_aaResult값을 사용할 Operator들의 주소 값.

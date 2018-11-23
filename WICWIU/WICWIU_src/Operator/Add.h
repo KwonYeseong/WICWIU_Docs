@@ -84,13 +84,10 @@ public:
 
 #ifdef __CUDNN__
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
+    @details TensorDesriptor들을 생성하고, TensorDesriptor들의 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
+    @param idOfDevice 사용할 GPU의 id
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         m_alpha = 1;
         m_beta  = 0;
@@ -125,13 +122,9 @@ public:
 #endif  // if __CUDNN__
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 메모리를 헤제하는 Delete 메소드.
+    @details cudnnDescriptor들을 GPU메모리에서 해제하고 포인터를 null로 초기화한다.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
 #ifdef __CUDNN__
 
@@ -223,13 +216,11 @@ public:
 
 #ifdef __CUDNN__
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 동작하는 Addall ForwardPropagate 메소드.
+    @details cudnnAddTensor를 이용히여  m_pDevLeft, m_pDevRight의 값을 더하여 m_pDevOutput에 저장한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -253,13 +244,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 동작하는 Addall BackwardPropagate 메소드.
+    @details cudnnAddTensor를 이용히여 m_pDevDelta값을 m_pDevLeftDelta, m_pDevRightDelta에 저장한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -372,13 +361,10 @@ public:
 
 #ifdef __CUDNN__
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
+    @details TensorDesriptor들을 생성하고, TensorDesriptor들의 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
+    @param idOfDevice 사용할 GPU의 id
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         m_alpha = 1;
         m_beta  = 0;
@@ -414,13 +400,9 @@ public:
 #endif  // if __CUDNN__
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 메모리를 헤제하는 Delete 메소드.
+    @details cudnnDescriptor들을 GPU메모리에서 해제하고 포인터를 null로 초기화한다.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
 #ifdef __CUDNN__
 
@@ -514,13 +496,11 @@ public:
 
 #ifdef __CUDNN__
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 동작하는 AddColWise ForwardPropagate 메소드.
+    @details cudnnAddTensor를 이용히여  m_pDevInput, m_pDevBias의 값을 더하여 m_pDevOutput에 저장한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -544,13 +524,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 동작하는 AddColWise BackwardPropagate 메소드.
+    @details cudnnAddTensor를 이용히여 m_pDevDelta값을 m_pDevInputDelta, m_pDevBiasDelta에 저장한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -665,13 +643,10 @@ public:
 
     #ifdef __CUDNN__
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
+    @details TensorDesriptor들을 생성하고, TensorDesriptor들의 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
+    @param idOfDevice 사용할 GPU의 id
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         m_alpha = 1;
         m_beta  = 0;
@@ -707,13 +682,9 @@ public:
     #endif  // if __CUDNN__
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo Constructor
+    @brief 메모리를 헤제하는 Delete 메소드.
+    @details cudnnDescriptor들을 GPU메모리에서 해제하고 포인터를 null로 초기화한다.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     void Delete() {
     #ifdef __CUDNN__
 
@@ -806,13 +777,11 @@ public:
 
 #ifdef __CUDNN__
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 동작하는 AddChannelWise ForwardPropagate 메소드.
+    @details cudnnAddTensor를 이용히여  m_pDevInput, m_pDevBias값을 더하여 m_pDevOutput에 저장한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -837,13 +806,11 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 동작하는 AddChannelWise BackwardPropagate 메소드.
+    @details cudnnAddTensor를 이용히여  m_pDevDelta값을 m_pDevOutput, m_pDevBiasDelta에 저장한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
