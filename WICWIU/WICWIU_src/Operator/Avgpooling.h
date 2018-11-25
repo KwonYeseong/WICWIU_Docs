@@ -7,17 +7,15 @@
 @class GlobalAvaragePooling2D GlobalAvaragePooling2D class
 @details Row * Colunm 공간을 GlobalAvaragePooling하는 클래스.
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
 template<typename DTYPE> class GlobalAvaragePooling2D : public Operator<DTYPE>{
 private:
-    int m_timesize; ///< timetime
-    int m_batchsize; ///< batchbatch
-    int m_channelsize; ///< channelchannel
-    int m_rowsize; ///< rowrow
-    int m_colsize; ///< colcol
+    int m_timesize; ///< time의 dimension 크기
+    int m_batchsize; ///< batch의 dimension 크기
+    int m_channelsize; ///< channel의 dimension 크기
+    int m_rowsize; ///< row의 dimension 크기
+    int m_colsize; ///< col의 dimension 크기
 
-    int m_divisor; ///< Average를 결정 짓는 값. ex) row_size * col_size
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
+    int m_divisor; ///< Average를 구할때 나누는 값 값. ex) row_size * col_size
 
 public:
     /*!
@@ -27,7 +25,6 @@ public:
     @param pName 사용자가 부여한 Operator이름.
     @ref int Alloc(Operator<DTYPE> *pInput).
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     GlobalAvaragePooling2D(Operator<DTYPE> *pInput, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "GlobalAvaragePooling2D::GlobalAvaragePooling2D(Operator<DTYPE> *, std::string)" << '\n';

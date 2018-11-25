@@ -15,7 +15,6 @@ public:
     @param pInput Alloc할 대상 Operator
     @param pName Operator에 사용자가 부여한 이름.
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-24
     Tanh(Operator<DTYPE> *pInput, std::string pName) : Operator<DTYPE>(pInput, pName) {
         #ifdef __DEBUG__
         std::cout << "Tanh::Tanh(Operator *)" << '\n';
@@ -95,7 +94,6 @@ public:
     @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *result      = this->GetResult();
         Tensor<DTYPE> *this_delta  = this->GetDelta();

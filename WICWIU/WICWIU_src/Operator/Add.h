@@ -6,17 +6,16 @@
 /*!
 @class Addall Tensor의 모든 값들을 서로 더하는 class
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
 template<typename DTYPE> class Addall : public Operator<DTYPE>{
 private:
     Shape *m_pLeftTenShape; ///< 연산 할 Tensor의 Shape
     Shape *m_pRightTenShape; ///< 연산 할 Tensor의 Shape
 
-    int m_timesize; ///< timetime
-    int m_batchsize; ///< batchbatch
-    int m_channelsize; ///< channelchannel
-    int m_rowsize; ///< rowrow
-    int m_colsize; ///< colcol
+    int m_timesize; ///< time의 dimension 크기
+    int m_batchsize; ///< batch의 dimension 크기
+    int m_channelsize; ///< channel의 dimension 크기
+    int m_rowsize; ///< row의 dimension 크기
+    int m_colsize; ///< col의 dimension 크기
 
 #ifdef __CUDNN__
     cudnnTensorDescriptor_t leftTensorDesc, rightTensorDesc, outputTensorDesc, leftDeltaDesc, rightDeltaDesc, deltaDesc; ///<   @todo Variable
@@ -34,7 +33,6 @@ public:
     @param pName Operator에 사용자가 부여한 이름.
     @ref int Alloc(Operator<DTYPE> *pLeftInput, Operator<DTYPE> *pRightInput)
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     Addall(Operator<DTYPE> *pLeftInput, Operator<DTYPE> *pRightInput, std::string pName) : Operator<DTYPE>(pLeftInput, pRightInput, pName) {
         #ifdef __DEBUG__
         std::cout << "Addall::Addall(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -45,7 +43,6 @@ public:
     /*!
     @brief Addall의 소멸자.
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     ~Addall() {
         #ifdef __DEBUG__
         std::cout << "Addall::~Addall()" << '\n';
@@ -60,7 +57,6 @@ public:
     @param pRightInput 연산에 사용 할 inputTensor.
     @return 성공 시 TRUE.
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int Alloc(Operator<DTYPE> *pLeftInput, Operator<DTYPE> *pRightInput) {
         #ifdef __DEBUG__
         std::cout << "Addall::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -156,7 +152,6 @@ public:
     @param pTime 연산 할 Tensor가 위치한 Time값. default는 0으로 사용한다.
     @return 성공 시 TRUE.
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -187,7 +182,6 @@ public:
     @param pTime 연산 할 Tensor가 위치한 Time값. default는 0으로 사용한다.
     @return 성공 시 TRUE.
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int BackPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -330,7 +324,6 @@ public:
     @param pBias 더할 Operator.
     @return 성공 시 TRUE.
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias) {
         #ifdef __DEBUG__
         std::cout << "AddColWise::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -434,7 +427,6 @@ public:
     @param pTime 연산 할 Tensor가 위치한 Time값. default는 0으로 사용한다.
     @return 성공 시 TRUE.
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -466,7 +458,6 @@ public:
     @param pTime 연산 할 Tensor가 위치한 Time값. default는 0으로 사용한다.
     @return 성공 시 TRUE.
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int BackPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -586,7 +577,6 @@ public:
     @param pName Operator에 사용자가 부여한 이름.
     @ref int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias)
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     AddChannelWise(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias, std::string pName) : Operator<DTYPE>(pInput, pBias, pName) {
         #ifdef __DEBUG__
         std::cout << "AddChannelWise::AddChannelWise(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -611,7 +601,6 @@ public:
     @param pBias 더할 Operator.
     @return 성공 시 TRUE.
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias) {
         #ifdef __DEBUG__
         std::cout << "AddColWise::Alloc(Operator<DTYPE> *, Operator<DTYPE> *)" << '\n';
@@ -715,7 +704,6 @@ public:
     @param pTime 연산 할 Tensor가 위치한 Time값. default는 0으로 사용한다.
     @return 성공 시 TRUE.
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int ForwardPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 
@@ -747,7 +735,6 @@ public:
     @param pTime 연산 할 Tensor가 위치한 Time값. default는 0으로 사용한다.
     @return 성공 시 TRUE.
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
     int BackPropagate(int pTime = 0) {
         Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
 

@@ -7,14 +7,13 @@
 @class Softmax class
 @detilas 각 dim의 값들을 확률 값으로 계산해 주는 Operator
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-10-01
 template<typename DTYPE>
 class Softmax : public Operator<DTYPE>{
-    DTYPE m_epsilon; ///<   @todo Variable
+    DTYPE m_epsilon; ///< Softmax연산 중 더해지는 epsilon값.
 
-    int m_timesize; ///<   @todo Variable
-    DTYPE **sum; ///<   @todo Variable
-    DTYPE **max; ///<   @todo Variable
+    int m_timesize; ///<  연산 할 Tensor가 위치한 Time값.
+    DTYPE **sum; ///<  Softmax연산 중 Tensor값들의 합을 저장하기 위한 포인터.
+    DTYPE **max; ///< Softmax연산 중 Tensor값들 중 가장 큰 값을 저장하기 위한 포인터.
 
 public:
     /*!
@@ -62,7 +61,6 @@ public:
 
     /*!
     @brief Softmax의 소멸자.
-    @details 딱히 하는 일은 없다.
     */
     ~Softmax() {
         #ifdef __DEBUG__
@@ -73,7 +71,7 @@ public:
     /*!
     @brief 파라미터로 받은 pOperator로 맴버변수들을 초기화 하고 Result, Gradient를 설정한다.
     @details input으로 받은 Operator의 Shape정보들로 맴버 변수드을 초기화 하고, 같은 Shape을 갖는 Tensor를 만들어 Result와 Gradient로 설정한다.
-    @param pOperator Softmax할 Operator
+    @param pOperator Softmax할 Operator들
     @param epsilon 0으로 나누어지는 것을 방지하기위해 softmax식의 분모에 더하는 값.
     @return 성공 시 TRUE.
     */

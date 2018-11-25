@@ -14,7 +14,7 @@ private:
     cudnnTensorDescriptor_t inputTensorDesc, outputTensorDesc, deltaDesc, inputDeltaDesc; ///< GPU내의 Tensor값들을 가르키기 위한 descriptor.
     cudnnConvolutionDescriptor_t convDesc; ///< Convolution에 대한 description을 포함하는 구조체 포인터.
     cudnnFilterDescriptor_t filterDesc, filterDeltaDesc; ///< 필터 데이터셋을 가리키는 구조체 포인터.
-    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevFilter, *m_pDevInputDelta, *m_pDevDelta, *m_pDevFilterDelta; ///<   @todo Variable
+    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevFilter, *m_pDevInputDelta, *m_pDevDelta, *m_pDevFilterDelta; ///<  cudnn 연산에서 사용 할 데이터를 가리키는 맴버 변수.
 
     cudnnConvolutionFwdAlgo_t m_algo; ///< ForwardPropagate Convolution연산을 하기 위한 다양한 알고리즘을 제공하는 변수.
     cudnnConvolutionBwdFilterAlgo_t m_filterAlgo; ///< BackwardPropagate Convolution연산을 하기 위한 다양한 알고리즘을 제공하는 변수.
@@ -89,12 +89,12 @@ public:
     }
 
 #ifdef __CUDNN__
-/*!
-@brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
-@details TensorDesriptor들을 생성하고, TensorDesriptor들의 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
-@details Convolution연산에 필요한 알고리즘을 정의하고, 연산에 필요한 메모리공간을 할당 받는다. MatMul은 Convolution연산을 이용한다.
-@param idOfDevice 사용할 GPU의 id
-*/
+    /*!
+    @brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
+    @details TensorDesriptor들을 생성하고, TensorDesriptor들의 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
+    @details Convolution연산에 필요한 알고리즘을 정의하고, 연산에 필요한 메모리공간을 할당 받는다. MatMul은 Convolution연산을 이용한다.
+    @param idOfDevice 사용할 GPU의 id
+    */
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         Operator<DTYPE> *pWeight = this->GetInput()[0];
         Operator<DTYPE> *pInput  = this->GetInput()[1];
@@ -207,7 +207,6 @@ public:
 
 #endif  // if __CUDNN__
 
-
     /*!
     @brief GPU에 할당했던 메모리를 해제하고 각 포인터들을 NULL로 초기화한다.
     @details inputTensorDesc, outputTensorDesc,deltaDesc, inputDeltaDesc, convDesc, filterDesc,filterDeltaDesc들을 삭제하고 NULL로 초기화한다.
@@ -304,7 +303,7 @@ public:
 
     /*!
     @brief MatMul의 BackPropagate 매소드.
-    @details input_delta의 input_index에 weight * this_delta값을 더해주고,
+    @details input_delta에 weight * this_delta값을 더해주고,
     @details weight_gradient에는 input * this_delta값을 더해준다.
     @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.

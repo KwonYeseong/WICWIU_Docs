@@ -6,16 +6,15 @@
 /*!
 @class Relu 클래스
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-24
 template<typename DTYPE> class Relu : public Operator<DTYPE>{
 private:
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc; ///<   @todo Variable
-    cudnnActivationDescriptor_t actDesc; ///<   @todo Variable
-    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta; ///<   @todo Variable
-    float m_alpha; ///<   @todo Variable
-    float m_beta; ///<   @todo Variable
-    double m_coef; ///<   @todo Variable
+    cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc; ///<  GPU내의 Tensor값들을 가르키기 위한 descriptor.
+    cudnnActivationDescriptor_t actDesc; ///< Activation 연산의 description을 가리키는 구조체 포인터.
+    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta; ///< cudnn 연산에서 사용 할 데이터를 가리키는 맴버 변수.
+    float m_alpha; ///<    연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
+    float m_beta; ///<    연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
+    double m_coef; ///<  Activation모드에 따라 threashold값이나 alpha값을 지정하기 위한 변수.
 
 #endif  // __CUDNN__
 
@@ -49,6 +48,7 @@ public:
 
     /*!
     @brief Relu의 소멸자.
+    @see void Delete()
     */
     ~Relu() {
         #ifdef __DEBUG__

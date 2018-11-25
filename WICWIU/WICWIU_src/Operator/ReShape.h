@@ -6,7 +6,6 @@
 /*!
 @class ReShape class
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-24
 template<typename DTYPE>
 class ReShape : public Operator<DTYPE>{
 private:
@@ -86,7 +85,6 @@ public:
     @details Delete 매소드를 사용한다.
     @ref void Delete()
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ~ReShape() {
         #ifdef __DEBUG__
         std::cout << "ReShape::~ReShape()" << '\n';
@@ -209,7 +207,7 @@ public:
 #ifdef __CUDNN__
     /*!
     @brief GPU에서 동작하는 ReShape의 ForwardPropagate 메소드.
-    @details cudnnAddTensor를 이용해 pDevInput의 값을 pDevResult(새로운 Shape을 갖는 Tensor)에 더한다.
+    @details cudnnAddTensor를 이용해 pDevInput의 값을 pDevResult에 더한다.
     @param pTime 연산 할 Tensor가 위치한 Time값.
     @return 성공 시 TRUE.
     */

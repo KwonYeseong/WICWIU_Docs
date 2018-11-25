@@ -8,7 +8,6 @@
 @class Convolution2D  Convolution2D class
 @details
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-10-07
 template<typename DTYPE> class Convolution2D : public Operator<DTYPE>{
 private:
     int m_stride[2]; ///< stride값. [0]은 row, [1]은 colunm을 각각 의미한다.
@@ -18,7 +17,7 @@ private:
     cudnnTensorDescriptor_t inputTensorDesc, outputTensorDesc, deltaDesc, inputDeltaDesc; ///<   GPU내의 Tensor값들을 가르키기 위한 descriptor.
     cudnnConvolutionDescriptor_t convDesc; ///< Convolution에 대한 description을 포함하는 구조체 포인터.
     cudnnFilterDescriptor_t filterDesc, filterDeltaDesc; ///<  필터 데이터셋을 가리키는 구조체 포인터.
-    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevFilter, *m_pDevInputDelta, *m_pDevDelta, *m_pDevFilterDelta; ///<   @todo Variable
+    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevFilter, *m_pDevInputDelta, *m_pDevDelta, *m_pDevFilterDelta; ///<  cudnn 연산에서 사용 할 데이터를 가리키는 맴버 변수.
 
     cudnnConvolutionFwdAlgo_t m_algo; ///<  ForwardPropagate Convolution연산을 하기 위한 다양한 알고리즘을 제공하는 변수.
     cudnnConvolutionBwdFilterAlgo_t m_filterAlgo; ///< BackwardPropagate Convolution연산을 하기 위한 다양한 알고리즘을 제공하는 변수.
@@ -63,7 +62,6 @@ public:
     @param padding padding 할 값. height, width 모두 이 값으로 한다.
     @param pName 사용자가 부여한 Operator이름.
     @ref int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding1, int padding2)
-
     */
     Convolution2D(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding, std::string pName = "NO NAME") : Operator<DTYPE>(pInput, pWeight, pName) {
         Alloc(pInput, pWeight, stride1, stride2, padding, padding);

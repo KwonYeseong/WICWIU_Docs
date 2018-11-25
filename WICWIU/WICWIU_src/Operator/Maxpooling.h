@@ -6,23 +6,22 @@
 /*!
 @class Maxpooling2D class
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-25
 template<typename DTYPE> class Maxpooling2D : public Operator<DTYPE>{
 private:
     int m_stride[2]; ///<  stride 값
     int m_mask[2]; ///< mask size
-    int m_padding[2]; ///< paading size
+    int m_padding[2]; ///< padding size
 
-    Tensor<int> *indexOfMaxInput; ///<   @todo Variable
+    Tensor<int> *indexOfMaxInput; ///< Backproagate할 떄 delta값을 흘려보낼 index를 기억하기 위한 맴버변수.
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc; ///<   @todo Variable
-    cudnnPoolingDescriptor_t m_aPoolingDesc; ///<   @todo Variable
-    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta; ///<   @todo Variable
+    cudnnTensorDescriptor_t m_aInputTensorDesc, m_aOutputTensorDesc, m_aDeltaDesc, m_aInputDeltaDesc; ///< GPU내의 Tensor값들을 가르키기 위한 descriptor.
+    cudnnPoolingDescriptor_t m_aPoolingDesc; ///< pooling연산 descriptor 구조체를 가라키는 포인터.
+    DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevInputDelta, *m_pDevDelta; ///<  cudnn 연산에서 사용 할 데이터를 가리키는 맴버 변수.
 
-    float m_alpha; ///<   @todo Variable
-    float m_beta; ///<   @todo Variable
-    double m_coef; ///<   @todo Variable
+    float m_alpha; ///< 연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
+    float m_beta; ///< 연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
+    double m_coef; ///< unUsed Variable
 #endif  // __CUDNN__
 
 public:
@@ -117,12 +116,12 @@ public:
     }
 
 #ifdef __CUDNN__
-/*!
-@brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
-@details Activation 함수를 Maxpooling2D로 지정한다.
-@details TensorDesriptor들을 생성하고, TensorDesriptor들으 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
-@param idOfDevice 사용할 GPU의 id
-*/
+    /*!
+    @brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
+    @details Activation 함수를 Maxpooling2D로 지정한다.
+    @details TensorDesriptor들을 생성하고, TensorDesriptor들으 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
+    @param idOfDevice 사용할 GPU의 id
+    */
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         Tensor<DTYPE> *input = this->GetInput()[0]->GetResult();
         Shape *shapeOfInput  = input->GetShape();

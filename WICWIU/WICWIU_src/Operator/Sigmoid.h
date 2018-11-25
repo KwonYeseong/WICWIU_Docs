@@ -6,7 +6,6 @@
 /*!
 @class Sigmoid Operator 클래스
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-25
 template<typename DTYPE>
 class Sigmoid : public Operator<DTYPE>{
 public:
