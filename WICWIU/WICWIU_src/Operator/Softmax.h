@@ -126,7 +126,7 @@ public:
     /*!
     @brief Softmax의 ForwardPropagate 매소드
     @details max값을 계산하고, exp()한 모든 값들을 더해 sum을 구한 뒤, 각각의 exp(input)한 값을 sum으로 나누어주어 확률값을 구하고 result에 저장한다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int ForwardPropagate(int pTime = 0) {
@@ -186,8 +186,8 @@ public:
 
     /*!
     @brief softmax의 BackPropagate 매소드.
-    @details softmax의 미분 값을 delta값과 곱하여 input_delta에 넣어준다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @details softmax의 미분 값을 구하여 input_delta에 넣어준다.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int BackPropagate(int pTime = 0) {
