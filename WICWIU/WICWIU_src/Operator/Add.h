@@ -152,8 +152,8 @@ public:
 
     /*!
     @brief Addall의 forwardPropagate 매소드.
-    @details Container에 저장한 left, right의 Result값을 서로 더한다.
-    @param pTime 더할 텐서의 m_timesize값, default는 0으로 사용한다.
+    @details Container에 저장한 left, right의 Result값을 서로 더해 result에 저장한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0으로 사용한다.
     @return 성공 시 TRUE.
     */
     // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
@@ -184,7 +184,7 @@ public:
     /*!
     @brief Addall의 BackPropagate 매소드.
     @details Container에 저장한 pLeftInput, pRightInput의 Gradient값에 계산한 Gradient값을 각각 더한다.
-    @param pTime 더할 텐서의 m_timesize값, default는 0으로 사용한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0으로 사용한다.
     @return 성공 시 TRUE.
     */
     // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
@@ -217,7 +217,7 @@ public:
 #ifdef __CUDNN__
     /*!
     @brief GPU에서 동작하는 Addall ForwardPropagate 메소드.
-    @details cudnnAddTensor를 이용히여  m_pDevLeft, m_pDevRight의 값을 더하여 m_pDevOutput에 저장한다.
+    @details cudnnAddTensor를 이용히여  m_pDevLeft, m_pDevRight의 값을 m_pDevOutput에 더해 넣는다.
     @param pTime 연산 할 Tensor가 위치한 Time값.
     @return 성공 시 TRUE.
     */
@@ -245,7 +245,7 @@ public:
 
     /*!
     @brief GPU에서 동작하는 Addall BackwardPropagate 메소드.
-    @details cudnnAddTensor를 이용히여 m_pDevDelta값을 m_pDevLeftDelta, m_pDevRightDelta에 저장한다.
+    @details cudnnAddTensor를 이용히여 m_pDevDelta값을 m_pDevLeftDelta, m_pDevRightDelta에 각각 더한다.
     @param pTime 연산 할 Tensor가 위치한 Time값.
     @return 성공 시 TRUE.
     */
@@ -430,8 +430,8 @@ public:
 
     /*!
     @brief AddColWise의 forwardPropagate 매소드.
-    @details Container에 저장한 Input, bias의 Result값 중 Colunm값을 서로 더한다.
-    @param pTime input의 Shape 중 m_timesize값, default는 0으로 사용한다.
+    @details Container에 저장한 Input과 bias의 Colunm값을 서로 더해 result에 저장한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0으로 사용한다.
     @return 성공 시 TRUE.
     */
     // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
@@ -462,8 +462,8 @@ public:
 
     /*!
     @brief AddColWise의 BackPropagate 매소드.
-    @details Container에 저장한 pInput, pBias의 Gradient값애 계산을 통해 구한 gradient값을 각각 더한다.
-    @param pTime input의 Shape 중 m_timesize값, default는 0으로 사용한다.
+    @details Container에 저장한 pInput, pBias의 Gradient값에 계산을 통해 구한 gradient값을 각각 더한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0으로 사용한다.
     @return 성공 시 TRUE.
     */
     // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
@@ -556,9 +556,8 @@ public:
 };
 
 /*!
-@class  AddChannelWise Tensor의 channel값만 서로
+@class  AddChannelWise Tensor의 channel값만 서로 더하는 class
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class AddChannelWise : public Operator<DTYPE>{
 private:
     Shape *m_pInputTenShape; ///< 더해질 Tensor의 Shape
@@ -712,8 +711,8 @@ public:
 
     /*!
     @brief AddChannelWise의 forwardPropagate 매소드.
-    @details Container에 저장한 Input, bias의 Result값 중 Channel값을 서로 더한다.
-    @param pTime input의 Shape 중 m_timesize값, default는 0으로 사용한다.
+    @details Container에 저장한 Input, bias의 Channel값을 Result에 더한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0으로 사용한다.
     @return 성공 시 TRUE.
     */
     // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
@@ -745,7 +744,7 @@ public:
     /*!
     @brief AddColWise의 BackPropagate 매소드.
     @details Container에 저장한 pInput, pBias의 Gradient값애 계산을 통해 구한 gradient값을 각각 더한다.
-    @param pTime input의 Shape 중 m_timesize값, default는 0으로 사용한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0으로 사용한다.
     @return 성공 시 TRUE.
     */
     // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-23
