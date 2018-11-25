@@ -16,8 +16,8 @@ enum Mode {
 };
 
 /*!
-@class Operator class 
-@details 프래임워크의 가장 작은 연산 단위.
+@class Operator class
+@details 본 프래임워크의 가장 작은 연산 단위.
 */
 template<typename DTYPE> class Operator {
 private:
