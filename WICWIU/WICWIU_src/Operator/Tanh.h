@@ -57,7 +57,7 @@ public:
     /*!
     @brief Tanh의 ForwardPropagate 매소드
     @details input의 Tensor값들을 Tanh값을 취한 뒤 result에 저장한다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int ForwardPropagate(int pTime = 0) {
@@ -91,8 +91,8 @@ public:
 
     /*!
     @brief Tanh의 BackPropagate 매소드.
-    @details result값들을 (tanh)'식에 맞추어 input_delta에 더한다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @details result값으로 tanh의 미분 값을 계산하여 input_delta에 더한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     // 문서 작성자 : , 작성 날짜 : 2018-

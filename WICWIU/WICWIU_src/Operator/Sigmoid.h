@@ -58,7 +58,7 @@ public:
     /*!
     @brief Sigmoid의 ForwardPropagate 매소드.
     @details input의 Tensor값들을  SIGMOID값을 취한 뒤 result에 저장한다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int ForwardPropagate(int pTime = 0) {
@@ -92,8 +92,8 @@ public:
 
     /*!
     @brief SIGMOID의 BackPropagate 매소드.
-    @details result값들을 (Sigmoid)'식에 맞추어 input_delta에 더한다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @details result값으로 Sigmoid 미분 값을 계산하여 input_delta에 더한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int BackPropagate(int pTime = 0) {
