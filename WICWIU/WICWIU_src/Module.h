@@ -4,24 +4,19 @@
 #include "Operator_utils.h"
 
 /*!
-@class
-@details Static, Batch size cover하기 힘듬
+@class Operator들을 그래프로 구성해 모듈화하는 클래스
+@details Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 단일 Operator로서 할 수 없는 기능들을 수행하게 한다
+@details Module은 하나의 Operator처럼 뉴럴 네트워크 안에서 작동한다
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Module : public Operator<DTYPE>{
 private:
     Container<Operator<DTYPE> *> *m_aaExcutableOperator; ///< Module을 구성하는 Operator들 중, 연산에 참여하는 Operator들의 포인터를 저장하는 Container 멤버 변수
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
     int m_numOfExcutableOperator; ///< Module을 구성하는 Operator들 중, 연산에 참여하는 Operator들의 개수
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
     Operator<DTYPE> *m_pLastOperator; ///< Module을 구성하는 Operator들 중, 순전파 순서 상 마지막에 해당하는 operator의 포인터
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
     Device m_Device; ///< 장치 사용 구분자, CPU 또는 GPU, Device 참고
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
     unsigned int m_idOfDevice = 0; ///< GPU 사용 시, 사용하려는 GPU의 번호. CPU의 경우 -1
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 
 private:
     int  Alloc();

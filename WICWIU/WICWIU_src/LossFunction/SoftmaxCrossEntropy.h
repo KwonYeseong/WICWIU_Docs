@@ -4,25 +4,20 @@
 #include "../LossFunction.h"
 
 /*!
-@class
-@details
+@class SoftmaxCrossEntropy Cross Entropy를 이용해 뉴럴 네트워크의 손실 함수를 계산하는 클래스
+@details Cross Entropy 계산 식을 이용해 뉴럴 네트워크의 순전파를 통해 계산된 출력 Tensor와 레이블 값의 손실 함수를 계산한다
+@details Softmax Function을 뉴럴 네트워크의 마지막 Operator로 사용해 뉴럴 네트워크의 Gradient 계산을 용이하게 한다
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE>
 class SoftmaxCrossEntropy : public LossFunction<DTYPE>{
 private:
-    Tensor<DTYPE> *m_aSoftmaxResult; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE m_epsilon;  // for backprop ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_aSoftmaxResult; ///<   @todo 기술 예정
+    DTYPE m_epsilon;  // for backprop ///<   @todo 기술 예정
 
-    int m_timesize; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    int m_timesize; ///<   @todo 기술 예정
 
-    DTYPE **sum; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE **max; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE **sum; ///<   @todo 기술 예정
+    DTYPE **max; ///<   @todo 기술 예정
 
 public:
     /*!
@@ -34,8 +29,8 @@ public:
     @param pName LossFunction의 이름, 지정하지 않을 시 "NO NAME"으로 초기화
     @return 없음
     @see SoftmaxCrossEntropy<DTYPE>::Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon)
+    @todo
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     SoftmaxCrossEntropy(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, DTYPE epsilon, std::string pName = "NO NAME") : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "SoftmaxCrossEntropy::SoftmaxCrossEntropy(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -52,7 +47,6 @@ public:
     @return 없음
     @see SoftmaxCrossEntropy<DTYPE>::Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon)
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     SoftmaxCrossEntropy(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, std::string pName = "NO NAME") : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "SoftmaxCrossEntropy::SoftmaxCrossEntropy(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -64,7 +58,6 @@ public:
     @brief SoftmaxCrossEntropy LossFunction 클래스 소멸자
     @return 없음
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     virtual ~SoftmaxCrossEntropy() {
         #ifdef __DEBUG__
         std::cout << "SoftmaxCrossEntropy::~SoftmaxCrossEntropy()" << '\n';
@@ -77,9 +70,8 @@ public:
     @details
     @param
     @return
-    @todo Constructor
+    @todo 기술 예정
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-
     virtual int Alloc(Operator<DTYPE> *pOperator, DTYPE epsilon) {
         #ifdef __DEBUG__
         std::cout << "SoftmaxCrossEntropy::Alloc(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -118,9 +110,8 @@ public:
         @details
         @param
         @return
-        @todo GPU
+        @todo 기술 예정
         */
-        // 문서 작성자 : , 작성 날짜 : 2018-
         void InitializeAttributeForGPU(unsigned int idOfDevice) {
             m_aSoftmaxResult->SetDeviceGPU(idOfDevice);
         }
@@ -132,9 +123,8 @@ public:
     @details
     @param
     @return
-    @todo Constructor
+    @todo 기술 예정
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual void Delete() {
         if (m_aSoftmaxResult) {
             delete m_aSoftmaxResult;
@@ -163,9 +153,8 @@ public:
     @details
     @param
     @return
-    @todo E_Train
+    @todo 기술 예정
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *input         = this->GetTensor();
         Tensor<DTYPE> *label         = this->GetLabel()->GetResult();
@@ -231,9 +220,8 @@ public:
     @details
     @param
     @return
-    @todo E_Train
+    @todo 기술 예정
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *label         = this->GetLabel()->GetResult();
         Tensor<DTYPE> *softmaxresult = m_aSoftmaxResult;
@@ -269,9 +257,8 @@ public:
     @details
     @param
     @return
-    @todo GPU
+    @todo 기술 예정
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* ForwardPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input         = this->GetTensor();
         Tensor<DTYPE> *label         = this->GetLabel()->GetResult();
@@ -314,9 +301,8 @@ public:
     @details
     @param
     @return
-    @todo GPU
+    @todo 기술 예정
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* BackPropagateOnGPU(int pTime = 0) {
         return this->BackPropagate(pTime);
     }
@@ -329,9 +315,8 @@ public:
     @details
     @param
     @return
-    @todo E_Train
+    @todo 기술 예정
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     DTYPE Max(Tensor<DTYPE> *input, int start, int end) {
         DTYPE max = (*input)[start];
 

@@ -11,7 +11,6 @@ template class Module<double>;
 @details 동적으로 할당 받은 Module 클래스의 Excutable Operator의 메모리를 할당 해제한다.
 @return TRUE
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> int Module<DTYPE>::Alloc() {
     m_aaExcutableOperator = new Container<Operator<DTYPE> *>();
     return TRUE;
@@ -22,7 +21,6 @@ template<typename DTYPE> int Module<DTYPE>::Alloc() {
 @details 동적으로 할당 받은 Module 클래스의 Excutable Operator Container의 메모리를 할당 해제한다.
 @return 없음
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> void Module<DTYPE>::Delete() {
     #ifdef __DEBUG__
     std::cout << "Module<DTYPE>::Delete()" << '\n';
@@ -49,7 +47,6 @@ template<typename DTYPE> void Module<DTYPE>::Delete() {
 @see Module<DTYPE>::Alloc()
 @return 없음
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> Module<DTYPE>::Module(std::string pName) : Operator<DTYPE>(pName) {
     #ifdef __DEBUG__
     std::cout << "Module<DTYPE>::Module()" << '\n';
@@ -67,7 +64,6 @@ template<typename DTYPE> Module<DTYPE>::Module(std::string pName) : Operator<DTY
 @return 없음
 @see Module<DTYPE>::Delete()
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> Module<DTYPE>::~Module() {
     #ifdef __DEBUG__
     std::cout << "Module<DTYPE>::~Module()" << '\n';
@@ -103,7 +99,6 @@ template<typename DTYPE> int Module<DTYPE>::SetInput(int pNumOfInput, ...) {
 @param pOperator Input 여부를 확인하고자 하는 Operator
 @return Input container에 포함되어 있는 경우 TRUE, 포함되어 있지 않는 경우 FALSE를 반환한다.
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> int Module<DTYPE>::IsInput(Operator<DTYPE> *pOperator) {
     Container<Operator<DTYPE> *> *m_apInput = this->GetInputContainer();
     int m_InputDegree                       = m_apInput->GetSize();
@@ -121,7 +116,6 @@ template<typename DTYPE> int Module<DTYPE>::IsInput(Operator<DTYPE> *pOperator) 
 @param pOperator Output Container 멤버 변수가 Excutable Operator Container에 포함되어 있는 지 확인하고자 하는 Operator
 @return 해당 Operator의 Output Container 멤버 변수가 Excutable Operator Container에 중복되어 포함되어 있으면 TRUE를 아니면 FALSE를 반환한다.
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> int Module<DTYPE>::IsValid(Operator<DTYPE> *pOperator) {
     Container<Operator<DTYPE> *> *prevOp = pOperator->GetOutputContainer();
     int numOfOutputEdge                  = prevOp->GetSize();
@@ -152,7 +146,6 @@ template<typename DTYPE> int Module<DTYPE>::IsValid(Operator<DTYPE> *pOperator) 
 @param pResultOperator 그래프를 구성하고자 하는 신경망의 Output에 해당하는 Operator
 @return 매개변수로 받은 그래프를 구성하고자 하는 신경망의 Output에 해당하는 Operator
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> Operator<DTYPE> *Module<DTYPE>::AnalyzeGraph(Operator<DTYPE> *pResultOperator) {
     // BFS
     Container<Operator<DTYPE> *> queue;
@@ -285,7 +278,6 @@ template<typename DTYPE> int Module<DTYPE>::SetModeInferencing() {
 @param pTime 각 ForwardPropagate 메소드에 전달할 Time의 인덱스
 @return TRUE
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> int Module<DTYPE>::ForwardPropagate(int pTime) {
     for (int i = 0; i < m_numOfExcutableOperator; i++) {
         (*m_aaExcutableOperator)[i]->ForwardPropagate(pTime);
@@ -299,7 +291,6 @@ template<typename DTYPE> int Module<DTYPE>::ForwardPropagate(int pTime) {
 @param pTime 각 ForwardPropagate 메소드에 전달할 Time의 인덱스
 @return TRUE
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> int Module<DTYPE>::BackPropagate(int pTime) {
     for (int i = m_numOfExcutableOperator - 1; i >= 0; i--) {
         (*m_aaExcutableOperator)[i]->BackPropagate(pTime);
@@ -317,9 +308,8 @@ template<typename DTYPE> int Module<DTYPE>::BackPropagate(int pTime) {
 @brief 연산에 참여하는 Operator들의 Result Container를 초기화시킨다.
 @details Excutable Operator Container에 포함되어 있는 각 Operator들에서 Operator<DTYPE>::ResetResult() 메소드를 호출한다.
 @return TRUE
-@todo 추가 설명 요
+@todo 기술 예정
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> int Module<DTYPE>::ResetResult() {
     for (int i = 0; i < m_numOfExcutableOperator; i++) {
         (*m_aaExcutableOperator)[i]->ResetResult();
@@ -332,9 +322,8 @@ template<typename DTYPE> int Module<DTYPE>::ResetResult() {
 @brief 연산에 참여하는 Operator들의 Gradient Container를 초기화시킨다.
 @details Excutable Operator Container에 포함되어 있는 각 Operator들에서 Operator<DTYPE>::ResetGradient() 메소드를 호출한다.
 @return TRUE
-@todo 추가 설명 요
+@todo 기술 예정
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> int Module<DTYPE>::ResetGradient() {
     for (int i = 0; i < m_numOfExcutableOperator; i++) {
         (*m_aaExcutableOperator)[i]->ResetGradient();
@@ -347,7 +336,6 @@ template<typename DTYPE> int Module<DTYPE>::ResetGradient() {
 @return 없음
 @see Operator<DTYPE>::PrintInformation()
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> void Module<DTYPE>::PrintInformation() {
     std::cout << this->GetName() << " : ";
     std::cout << this->GetResult()->GetShape() << '\n';
@@ -363,7 +351,6 @@ template<typename DTYPE> void Module<DTYPE>::PrintInformation() {
 @details Module의 Device 멤버변수를 CPU로 전환하고, Excutable Operator Container의 각 Operator들에서 Operator<DTYPE>::SetDeviceCPU() 메소드를 순서대로 호출한다.
 @return 없음
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
 template<typename DTYPE> void Module<DTYPE>::SetDeviceCPU() {
     this->SetDevice(CPU);
 
@@ -387,7 +374,7 @@ template<typename DTYPE> void Module<DTYPE>::SetDeviceCPU() {
 @details
 @param
 @return
-@todo GPU
+@todo 기술 예정
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Module<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnHandle, unsigned int idOfDevice) {
@@ -412,7 +399,7 @@ template<typename DTYPE> void Module<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnH
 @details
 @param
 @return
-@todo GPU
+@todo 기술 예정
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::ForwardPropagateOnGPU(int pTime) {
@@ -427,7 +414,7 @@ template<typename DTYPE> int Module<DTYPE>::ForwardPropagateOnGPU(int pTime) {
 @details
 @param
 @return
-@todo GPU
+@todo 기술 예정
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::BackPropagateOnGPU(int pTime) {

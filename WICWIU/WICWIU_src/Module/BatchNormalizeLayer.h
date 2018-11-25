@@ -5,10 +5,9 @@
 #include "../Module.h"
 
 /*!
-@class
-@details
+@class Operator들을 그래프로 구성해 Batch Normalization Layer의 기능을 수행하는 모듈을 생성하는 클래스
+@details Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 Batch Normalization Layer의 기능을 수행한다 
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class BatchNormalizeLayer : public Module<DTYPE>{
 private:
 public:
@@ -17,7 +16,6 @@ public:
     @details BatchNormalizeLayer 클래스의 Alloc 메소드를 호출한다.
     @see BatchNormalizeLayer<DTYPE>::Alloc(Operator<DTYPE> *pInput, int pIsChannelwise, std::string pName)
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
     BatchNormalizeLayer(Operator<DTYPE> *pInput, int pIsChannelwise = FALSE, std::string pName = "NO NAME") {
         Alloc(pInput, pIsChannelwise, pName);
     }
@@ -26,7 +24,6 @@ public:
     @brief BatchNormalizeLayer 클래스 소멸자
     @details 단, 동적 할당 받은 Operator들은 NeuralNetwork에서 할당 해제한다.
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
     virtual ~BatchNormalizeLayer() {}
 
     /*!
@@ -38,7 +35,6 @@ public:
     @return TRUE
     @see BatchNormalize<DTYPE>::BatchNormalize(Operator<DTYPE> *pInput, Operator<DTYPE> *pScale, Operator<DTYPE> *pBias, int pIsChannelwise = TRUE, std::string pName = NULL) Module<DTYPE>::AnalyzeGraph(Operator<DTYPE> *pResultOperator)
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
     int Alloc(Operator<DTYPE> *pInput, int pIsChannelwise, std::string pName) {
         this->SetInput(pInput);
         Operator<DTYPE> *out = pInput;

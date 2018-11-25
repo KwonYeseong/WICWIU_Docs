@@ -113,7 +113,7 @@ void Shape::Delete() {
 @details cuda와 cudnn 라이브러리를 이용하여, 매개변수로 받은 GPU 번호에 해당되는 GPU의 메모리 공간에 Descriptor 변수를 할당한다
 @param Descriptor를 할당하고자 하는 GPU의 번호
 @return 성공 시 TRUE
-@todo 추가 기술 요
+@todo 기술 예정
 */
 int Shape::AllocOnGPU(unsigned int idOfDevice) {
     # if __DEBUG__
@@ -144,7 +144,7 @@ int Shape::AllocOnGPU(unsigned int idOfDevice) {
 @brief Descriptor를 동적으로 할당했던 GPU 메모리 공간을 반환하는 메소드
 @details cudnn 라이브러리를 사용하여, Descriptor 동적 할당에 사용했던 메모리 공간을 반환하고 해당 메모리 공간을 NULL로 초기화한다.
 @return 없음
-@todo 추가 기술 요
+@todo 기술 예정
 */
 void Shape::DeleteOnGPU() {
     # if _
@@ -165,7 +165,7 @@ void Shape::DeleteOnGPU() {
 @brief
 @details
 @return
-@todo 추가 기술 요
+@todo 기술 예정
 */
 int Shape::ReShapeOnGPU() {
     # if __DEBUG__
@@ -422,7 +422,7 @@ int& Shape::operator[](int pRanknum) {
 @param pSize3
 @param pSize4
 @return
-@todo 추가기술요
+@todo 기술 예정
 */
 int Shape::ReShape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4) {
     #ifdef __DEBUG__
@@ -440,7 +440,7 @@ int Shape::ReShape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4) {
 @param pRank
 @param ...
 @return
-@todo 추가기술요
+@todo 기술 예정
 */
 int Shape::ReShape(int pRank, ...) {
     #ifdef __DEBUG__
@@ -524,7 +524,7 @@ int Shape::SetDeviceGPU(unsigned int idOfDevice) {
 @brief
 @details
 @return
-@todo 추가기술요
+@todo 기술 예정
 */
 cudnnTensorDescriptor_t& Shape::GetDescriptor() {
     # if __DEBUG__

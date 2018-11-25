@@ -5,7 +5,6 @@
 
 /*!
 @brief 삭제 예정
-@todo 삭제 예정
 */
 template<typename DTYPE> std::ostream & operator<<(std::ostream& pOS, Tensor<DTYPE> *pTensor) {
     int timesize    = pTensor->GetTimeSize();

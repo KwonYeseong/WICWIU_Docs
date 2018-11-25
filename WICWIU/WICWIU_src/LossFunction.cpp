@@ -10,7 +10,6 @@ template class LossFunction<double>;
 @param pName m_name에 할당할 LossFunction의 이름, 값을 전달하지 않을 시 "NO NAME"으로 초기화 됨
 @return 없음
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-04
 template<typename DTYPE> LossFunction<DTYPE>::LossFunction(std::string pName) {
     #ifdef __DEBUG__
     std::cout << "LossFunction<DTYPE>::LossFunction()" << '\n';
@@ -33,7 +32,6 @@ template<typename DTYPE> LossFunction<DTYPE>::LossFunction(std::string pName) {
 @param pName m_name에 할당할 LossFunction의 이름, 값을 전달하지 않을 시 "NO NAME"으로 초기화 됨
 @return 없음
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-04
 template<typename DTYPE> LossFunction<DTYPE>::LossFunction(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, std::string pName) {
     #ifdef __DEBUG__
     std::cout << "LossFunction<DTYPE>::LossFunction()" << '\n';
@@ -53,7 +51,6 @@ template<typename DTYPE> LossFunction<DTYPE>::LossFunction(Operator<DTYPE> *pOpe
 @details LossFunction<DTYPE>::Delete() 메소드를 호출하고 클래스를 소멸시킨다.
 @return 없음
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-04
 template<typename DTYPE> LossFunction<DTYPE>::~LossFunction() {
     #ifdef __DEBUG__
     std::cout << "LossFunction<DTYPE>::~LossFunction()" << '\n';
@@ -68,7 +65,6 @@ template<typename DTYPE> LossFunction<DTYPE>::~LossFunction() {
 @param plabel LossFunction의 입력이 되는 레이블
 @return TRUE
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> int LossFunction<DTYPE>::Alloc(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel) {
     #ifdef __DEBUG__
     std::cout << "LossFunction<DTYPE>::Alloc(Tensor<DTYPE> *)" << '\n';
@@ -86,7 +82,6 @@ template<typename DTYPE> int LossFunction<DTYPE>::Alloc(Operator<DTYPE> *pOperat
 @details Result와 Gradient에 해당하는 Tensor들의 메모리를 할당 해제한다.
 @return 없음
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> void LossFunction<DTYPE>::Delete() {
     if (m_aResult) {
         delete m_aResult;
@@ -144,7 +139,6 @@ template<typename DTYPE> int LossFunction<DTYPE>::GetDeviceID() {
 @param pTime 학습 데이터 텐서의 Time 인덱스, 값을 전달하지 않을 시 0으로 초기화 됨
 @return NULL
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::ForwardPropagate(int pTime) {
     #ifdef __DEBUG__
     std::cout << "LossFunction<DTYPE>::ForwardPropagate(int pTime)" << '\n';
@@ -158,7 +152,6 @@ template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::ForwardPropagate(in
 @param pTime 학습 데이터 텐서의 Time 인덱스, 값을 전달하지 않을 시 0으로 초기화 됨
 @return NULL
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::BackPropagate(int pTime) {
     #ifdef __DEBUG__
     std::cout << "LossFunction<DTYPE>::BackPropagate(int pTime)" << '\n';
@@ -174,7 +167,7 @@ template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::BackPropagate(int p
 @details
 @param
 @return
-@todo GPU
+@todo 기술 예정
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::ForwardPropagateOnGPU(int pTime) {
@@ -189,7 +182,7 @@ template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::ForwardPropagateOnG
 @details
 @param
 @return
-@todo GPU
+@todo 기술 예정
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::BackPropagateOnGPU(int pTime) {
@@ -208,19 +201,10 @@ template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::BackPropagateOnGPU(
 @return (*m_aResult)[index]
 @see Tensor<DTYPE>::operator[](unsigned int index)
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> DTYPE& LossFunction<DTYPE>::operator[](unsigned int index) {
     return (*m_aResult)[index];
 }
 
-/*!
-@brief
-@details
-@param
-@return
-@todo N_Graph
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void LossFunction<DTYPE>::SetDeviceCPU() {
     m_Device = CPU;
 
@@ -237,7 +221,6 @@ template<typename DTYPE> void LossFunction<DTYPE>::SetDeviceCPU() {
 @details Result 텐서가 정상적으로 할당되어 있는 경우, Result 텐서의 Device 멤버 변수를 CPU로 설정한다.
 @return TRUE
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> int LossFunction<DTYPE>::SetResultOnCPU() {
     if (m_aResult) m_aResult->SetDeviceCPU();
 
@@ -249,7 +232,6 @@ template<typename DTYPE> int LossFunction<DTYPE>::SetResultOnCPU() {
 @details Gradient 텐서가 정상적으로 할당되어 있는 경우, Result 텐서의 Device 멤버 변수를 CPU로 설정한다.
 @return TRUE
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> int LossFunction<DTYPE>::SetGradientOnCPU() {
     if (m_aGradient) m_aGradient->SetDeviceCPU();
 
@@ -267,7 +249,7 @@ template<typename DTYPE> int LossFunction<DTYPE>::SetGradientOnCPU() {
 @details
 @param
 @return
-@todo GPU
+@todo 기술 예정
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void LossFunction<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnHandle, unsigned int idOfDevice) {
@@ -283,7 +265,7 @@ template<typename DTYPE> void LossFunction<DTYPE>::SetDeviceGPU(cudnnHandle_t& p
 /*!
 @brief
 @return 없음
-@todo GPU
+@todo 기술 예정
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void LossFunction<DTYPE>::InitializeAttributeForGPU(unsigned int idOfDevice) {}
@@ -293,7 +275,7 @@ template<typename DTYPE> void LossFunction<DTYPE>::InitializeAttributeForGPU(uns
 @details
 @param
 @return
-@todo GPU
+@todo 기술 예정
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int LossFunction<DTYPE >::SetResultOnGPU(unsigned int idOfDevice) {
@@ -307,7 +289,7 @@ template<typename DTYPE> int LossFunction<DTYPE >::SetResultOnGPU(unsigned int i
 @details
 @param
 @return
-@todo GPU
+@todo 기술 예정
 */
 // 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int LossFunction<DTYPE>::SetGradientOnGPU(unsigned int idOfDevice) {
@@ -328,7 +310,6 @@ template<typename DTYPE> cudnnHandle_t& LossFunction<DTYPE>::GetCudnnHandle() {
 @details Result 텐서의 Device 멤버 변수가 CPU인 경우 CPU 메모리에서 초기화하고, CPU인 경우 GPU 메모리에서 초기화한다.
 @return Result 텐서의 Device 멤버 변수가 Invalid한 값을 가지고 있는 경우 FALSE를 그 외의 경우 TRUE를 반환한다.
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> int LossFunction<DTYPE>::ResetResult() {
     if (m_Device == CPU) {
         if (m_aResult) m_aResult->Reset();
@@ -350,7 +331,6 @@ template<typename DTYPE> int LossFunction<DTYPE>::ResetResult() {
 @details Gradient 텐서의 Device 멤버 변수가 CPU인 경우 CPU 메모리에서 초기화하고, CPU인 경우 GPU 메모리에서 초기화한다.
 @return Gradient 텐서의 Device 멤버 변수가 Invalid한 값을 가지고 있는 경우 FALSE를 그 외의 경우 TRUE를 반환한다.
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> int LossFunction<DTYPE>::ResetGradient() {
     if (m_Device == CPU) {
         if (m_aGradient) m_aGradient->Reset();

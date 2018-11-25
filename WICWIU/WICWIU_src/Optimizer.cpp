@@ -12,9 +12,9 @@ template class Optimizer<double>;
 @param pLearningRate
 @param pOptimizeDirection
 @return 없음
-@see Optimizer<DTYPE>::Alloc(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, OptimizeDirection pOptimizeDirectio)
+@see Optimizer<DTYPE>::Alloc(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, OptimizeDirection pOptimizeDirection)
+@todo 기술 예정
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> Optimizer<DTYPE>::Optimizer(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, OptimizeDirection pOptimizeDirection) {
     #ifdef __DEBUG__
     std::cout << "Optimizer::Optimizer(Operator<DTYPE> *, float, OptimizeDirection)" << '\n';
@@ -38,8 +38,8 @@ template<typename DTYPE> Optimizer<DTYPE>::Optimizer(Container<Operator<DTYPE> *
 @param pOptimizeDirection
 @return 없음
 @see Optimizer<DTYPE>::Alloc(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, float pWeightDecayRate, OptimizeDirection pOptimizeDirection)
+@todo 기술 예정
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> Optimizer<DTYPE>::Optimizer(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, float pWeightDecayRate, OptimizeDirection pOptimizeDirection) {
     #ifdef __DEBUG__
     std::cout << "Optimizer::Optimizer(Operator<DTYPE> *, float, OptimizeDirection)" << '\n';
@@ -57,8 +57,8 @@ template<typename DTYPE> Optimizer<DTYPE>::Optimizer(Container<Operator<DTYPE> *
 @brief Optimizer 클래스 소멸자
 @details Optimizer<DTYPE>::Delete() 메소드를 호출하고 클래스를 소멸시킨다.
 @return 없음
+@todo 기술 예정
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> Optimizer<DTYPE>::~Optimizer() {
     #ifdef __DEBUG__
     std::cout << "Optimizer::~Optimizer()" << '\n';
@@ -74,8 +74,8 @@ template<typename DTYPE> Optimizer<DTYPE>::~Optimizer() {
 @param pLearningRate
 @param pOptimizeDirection
 @return TRUE
+@todo 기술 예정
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> int Optimizer<DTYPE>::Alloc(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, OptimizeDirection pOptimizeDirection) {
     #ifdef __DEBUG__
     std::cout << "Optimizer::Alloc(Container<Operator<DTYPE> *> *, float , OptimizeDirection )" << '\n';
@@ -99,8 +99,8 @@ template<typename DTYPE> int Optimizer<DTYPE>::Alloc(Container<Operator<DTYPE> *
 @param pWeightDecayRate
 @param pOptimizeDirection
 @return TRUE
+@todo 기술 예정
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> int Optimizer<DTYPE>::Alloc(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, float pWeightDecayRate, OptimizeDirection pOptimizeDirection) {
     #ifdef __DEBUG__
     std::cout << "Optimizer::Alloc(Container<Operator<DTYPE> *> *, float , OptimizeDirection )" << '\n';
@@ -127,8 +127,8 @@ template<typename DTYPE> int Optimizer<DTYPE>::Delete() {
 @brief
 @details
 @return TRUE
+@todo 기술 예정
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> int Optimizer<DTYPE>::UpdateParameter() {
     for (int i = 0; i < m_TrainableTensorDegree; i++) {
         UpdateParameter((*m_ppTrainableTensors)[i]);
@@ -161,9 +161,8 @@ template<typename DTYPE> cudnnHandle_t& Optimizer<DTYPE>::GetCudnnHandle() {
 @brief
 @details
 @return TRUE
-@todo GPU
+@todo 기술 예정
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-
 template<typename DTYPE> int Optimizer<DTYPE>::UpdateParameterOnGPU() {
     for (int i = 0; i < m_TrainableTensorDegree; i++) {
         UpdateParameterOnGPU((*m_ppTrainableTensors)[i]);
@@ -210,8 +209,8 @@ template<typename DTYPE> int Optimizer<DTYPE>::GetTrainableTensorDegree() const 
 @brief
 @details
 @return TRUE
+@todo 기술 예정
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
 template<typename DTYPE> int Optimizer<DTYPE>::ResetParameterGradient() {
     for (int i = 0; i < m_TrainableTensorDegree; i++) {
         (*m_ppTrainableTensors)[i]->ResetGradient();

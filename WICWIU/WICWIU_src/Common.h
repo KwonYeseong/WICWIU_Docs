@@ -34,7 +34,7 @@
 /*!
 @brief 장치 사용 구분자, CPU 또는 GPU
 @details 학습 시 사용하는 장치를 구분하기 위해 사용하는 열거형 변수, CPU 또는 GPU
-@todo 추가설명 요
+@todo 기술 예정
 */
 enum Device {
     CPU,
