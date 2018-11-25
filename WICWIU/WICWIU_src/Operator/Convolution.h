@@ -6,7 +6,6 @@
 
 /*!
 @class Convolution2D  Convolution2D class
-@details
 */
 template<typename DTYPE> class Convolution2D : public Operator<DTYPE>{
 private:
