@@ -17,7 +17,6 @@ public:
     @param pTrainable 생성 할 Operator(Tensorholder)가 Trainable인지 알리는 변수. default로 TRUE를 사용한다.
     @ref int Alloc(Tensor<DTYPE> *pTensor, int pTrainable)
     */
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-10-1
     Tensorholder(Tensor<DTYPE> *pTensor, std::string pName, int pTrainable = TRUE) : Operator<DTYPE>(pName) {
         #ifdef __DEBUG__
         std::cout << "Tensorholder<DTYPE>::Tensorholder(Tensor<DTYPE> *, std::string)" << '\n';
@@ -38,7 +37,6 @@ public:
     @param pTrainable 생성 할 Operator(Tensorholder)가 Trainable인지 알리는 변수. default로 TRUE를 사용한다.
     @ref int Alloc(int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize, int pTrainable)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensorholder(int pTimeSize, int pBatchSize, int pChannelSize, int pRowSize, int pColSize, std::string pName, int pTrainable = TRUE) : Operator<DTYPE>(pName) {
         #ifdef __DEBUG__
         std::cout << "Placeholder<DTYPE>::Placeholder(int, int, int, int, int, std::string)" << '\n';

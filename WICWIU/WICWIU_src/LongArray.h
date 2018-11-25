@@ -9,7 +9,6 @@
 @details 실질적으로 Tensor클래스의 데이터를 저장하고 관리하기위한 클래스.
 @details 데이터를 초기화하고 CPU와 GPU간 데이터의 이동을 가능하게 한다.
 */
-// 문서 작성자 : 권예성, 작성 날짜 2018-09-08
 
 template<typename DTYPE> class LongArray {
 private:

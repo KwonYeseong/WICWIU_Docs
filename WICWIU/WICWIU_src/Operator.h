@@ -31,7 +31,6 @@ private:
     Mode m_Mode; ///< Operator의 Mode.
     int m_isParameter; ///< Operator가 파라미터인지 알려주는 값.
     int m_isTrainable; ///< Operator가 학습가능한 Operator인지 알려주는 값.
-    // 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 
 #ifdef __CUDNN__
     cudnnHandle_t m_pCudnnHandle; ///< cudnn 라이브러리를 가리키는 포인터.

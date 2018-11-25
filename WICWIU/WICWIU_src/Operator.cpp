@@ -12,7 +12,6 @@ template class Operator<double>;
 @details 맴버변수 m_apOutput, m_apInput, m_aaResult, m_aaGradient들을 메모리에 할당한다
 @return 성공시 TRUE.
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::Alloc() {
     m_apOutput   = new Container<Operator<DTYPE> *>();
     m_apInput    = new Container<Operator<DTYPE> *>();
@@ -30,7 +29,6 @@ template<typename DTYPE> int Operator<DTYPE>::Alloc() {
 @return 성공 시 TRUE, 실패 시 FALSE.
 @ref Operator<DTYPE>::AddEdgebetweenOperators(Operator<DTYPE> *pInput)
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Operator<DTYPE>::Alloc(int numInput, ...) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Alloc(Tensor<DTYPE> *)" << '\n';
@@ -73,7 +71,6 @@ template<typename DTYPE> int Operator<DTYPE>::Alloc(int numInput, ...) {
 @brief Operator를 메모리에 삭제하는 매소드.
 @details 메모리에 할당했던 변수들을 삭제하고 포인터들을 NULL로 초기화한다.
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> void Operator<DTYPE>::Delete() {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Delete()" << '\n';
@@ -126,7 +123,6 @@ template<typename DTYPE> void Operator<DTYPE>::Delete() {
 @return 성공 시 TRUE, 실패 시 FALSE
 @ref int Push(DTYPE pElement)
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddInputEdge(Operator<DTYPE> *pInput) {
     try {
         m_apInput->Push(pInput);
@@ -145,7 +141,6 @@ template<typename DTYPE> int Operator<DTYPE>::AddInputEdge(Operator<DTYPE> *pInp
 @return 성공 시 TRUE, 실패 시 FALSE
 @ref int Push(DTYPE pElement)
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddOutputEdge(Operator<DTYPE> *pOutput) {
     try {
         m_apOutput->Push(pOutput);
@@ -164,7 +159,6 @@ template<typename DTYPE> int Operator<DTYPE>::AddOutputEdge(Operator<DTYPE> *pOu
 @details 파라미터로 전달 받은 pName을 m_name으로 설정 하고 나머지는 변수들은 NULL, CPU, TRAINING으로 초기화 한다.
 @param pName 사용자가 설정 할 Operator의 이름.
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> Operator<DTYPE>::Operator(std::string pName) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Operator()" << '\n';
@@ -188,7 +182,6 @@ template<typename DTYPE> Operator<DTYPE>::Operator(std::string pName) {
 @param pName 사용자가 설정 할 Operator의 이름.
 @ref Operator<DTYPE>::AddEdgebetweenOperators(int numInput, ...)
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput, std::string pName) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Operator()" << '\n';
@@ -214,7 +207,6 @@ template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput, std:
 @param pName 사용자가 설정 할 Operator의 이름.
 @ref Operator<DTYPE>::AddEdgebetweenOperators(int numInput, ...)
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput0, Operator<DTYPE> *pInput1, std::string pName) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Operator()" << '\n';
@@ -241,7 +233,6 @@ template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput0, Ope
 @param pName 사용자가 설정 할 Operator의 이름.
 @ref Operator<DTYPE>::AddEdgebetweenOperators(int numInput, ...)
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> Operator<DTYPE>::Operator(Operator<DTYPE> *pInput0, Operator<DTYPE> *pInput1, Operator<DTYPE> *pInput2, std::string pName) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Operator()" << '\n';
@@ -278,7 +269,6 @@ template<typename DTYPE> Operator<DTYPE>::~Operator() {
 @ref int Operator<DTYPE>::AddInputEdge(Operator<DTYPE> *pInput), int Operator<DTYPE>::AddOutputEdge(Operator<DTYPE> *pOutput)
 @return 성공 시 TRUE.
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddEdgebetweenOperators(Operator<DTYPE> *pInput) {
     this->AddInputEdge(pInput);
     pInput->AddOutputEdge(this);
@@ -293,7 +283,6 @@ template<typename DTYPE> int Operator<DTYPE>::AddEdgebetweenOperators(Operator<D
 @ref int Operator<DTYPE>::AddEdgebetweenOperators(Operator<DTYPE> *pInput)
 @return 성공 시 TRUE, 실패 시 FALSE.
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddEdgebetweenOperators(int numInput, ...) {
     #ifdef __DEBUG__
     std::cout << "Operator<DTYPE>::Alloc(Tensor<DTYPE> *)" << '\n';
@@ -349,7 +338,6 @@ template<typename DTYPE> int Operator<DTYPE>::SetResult(Tensor<DTYPE> *pTensor) 
 @param pTensor m_aaResult에 저장 할 Tensor.
 @return 성공 시 TRUE.
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddResult(Tensor<DTYPE> *pTensor) {
     m_aaResult->Push(pTensor);
     return TRUE;
@@ -395,7 +383,6 @@ template<typename DTYPE> int Operator<DTYPE>::SetDelta(Tensor<DTYPE> *pTensor) {
 @param pTensor m_aaGradient에 저장 할 Tensor.
 @return 성공 시 TRUE.
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::AddDelta(Tensor<DTYPE> *pTensor) {
     m_aaGradient->Push(pTensor);
     return TRUE;
@@ -515,7 +502,6 @@ template<typename DTYPE> int Operator<DTYPE>::ForwardPropagate(int pTime) {
 @param pTime forwardPropagate했던 데이터의 Time값.
 @return 성공 시 TRUE.
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-9-22
 template<typename DTYPE> int Operator<DTYPE>::BackPropagate(int pTime) {
     #ifdef __DEBUG__
     std::cout << "thread number : " << pThreadNum << '\n';
