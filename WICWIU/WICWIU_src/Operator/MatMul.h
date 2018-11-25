@@ -6,30 +6,30 @@
 
 /*!
 @class  MatMul class
-@details 행렬간의 곱샘 연산을 수행하는 클래스
+@details 행렬간의 곱샘 연산을 수행하는 클래스.
 */
 template<typename DTYPE> class MatMul : public Operator<DTYPE>{
 private:
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t inputTensorDesc, outputTensorDesc, deltaDesc, inputDeltaDesc; ///<   @todo Variable
-    cudnnConvolutionDescriptor_t convDesc; ///<   @todo Variable
-    cudnnFilterDescriptor_t filterDesc, filterDeltaDesc; ///<  @todo Variable
+    cudnnTensorDescriptor_t inputTensorDesc, outputTensorDesc, deltaDesc, inputDeltaDesc; ///< GPU내의 Tensor값들을 가르키기 위한 descriptor.
+    cudnnConvolutionDescriptor_t convDesc; ///< Convolution에 대한 description을 포함하는 구조체 포인터.
+    cudnnFilterDescriptor_t filterDesc, filterDeltaDesc; ///< 필터 데이터셋을 가리키는 구조체 포인터.
     DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevFilter, *m_pDevInputDelta, *m_pDevDelta, *m_pDevFilterDelta; ///<   @todo Variable
 
-    cudnnConvolutionFwdAlgo_t m_algo; ///<   @todo Variable
-    cudnnConvolutionBwdFilterAlgo_t m_filterAlgo; ///<   @todo Variable
-    cudnnConvolutionBwdDataAlgo_t m_dataAlgo; ///<   @todo Variable
+    cudnnConvolutionFwdAlgo_t m_algo; ///< ForwardPropagate Convolution연산을 하기 위한 다양한 알고리즘을 제공하는 변수.
+    cudnnConvolutionBwdFilterAlgo_t m_filterAlgo; ///< BackwardPropagate Convolution연산을 하기 위한 다양한 알고리즘을 제공하는 변수.
+    cudnnConvolutionBwdDataAlgo_t m_dataAlgo; ///< BackwardPropagate Convolution연산을 하기 위한 다양한 알고리즘을 제공하는 변수.
 
-    size_t m_sizeInBytes; ///<   @todo Variable
-    size_t m_dataSizeInBytes; ///<   @todo Variable
-    size_t m_filterSizeInBytes; ///<   @todo Variable
+    size_t m_sizeInBytes; ///< Convolution 연산에 필요한 메모리를 계산하여 저장하기 위한 맴버변수.
+    size_t m_dataSizeInBytes; ///< Convolution 연산에 필요한 메모리를 계산하여 저장하기 위한 맴버변수.
+    size_t m_filterSizeInBytes; ///< Convolution 연산에 필요한 메모리를 계산하여 저장하기 위한 맴버변수.
 
-    DTYPE m_alpha; ///<   @todo Variable
-    DTYPE m_beta; ///<   @todo Variable
+    DTYPE m_alpha; ///< 연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
+    DTYPE m_beta; ///< 연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
 
-    void *m_devWorkSpace; ///<   @todo Variable
-    void *m_dataDevWorkSpace; ///<   @todo Variable
-    void *m_filterDevWorkSpace; ///<   @todo Variable
+    void *m_devWorkSpace; ///< Convolution 연산을 위해 할당받은 메모리 공간을 가리키는 포인터
+    void *m_dataDevWorkSpace; ///<  Convolution 연산을 위해 할당받은 메모리 공간을 가리키는 포인터
+    void *m_filterDevWorkSpace; ///<  Convolution 연산을 위해 할당받은 메모리 공간을 가리키는 포인터
 
 #endif  // __CUDNN__
 
@@ -91,8 +91,8 @@ public:
 #ifdef __CUDNN__
 /*!
 @brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
-@details
 @details TensorDesriptor들을 생성하고, TensorDesriptor들의 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
+@details Convolution연산에 필요한 알고리즘을 정의하고, 연산에 필요한 메모리공간을 할당 받는다. MatMul은 Convolution연산을 이용한다.
 @param idOfDevice 사용할 GPU의 id
 */
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
@@ -258,10 +258,9 @@ public:
     @brief MatMul의 ForwardPropagate매소드.
     @details weight의 각 row의 값들과 input의 Colunm의 각 값들을 곱하여 result에 더한다.
     @details [2 x 3] x [3 x 1]일때  3이 hiddensize
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagate(int pTime = 0) {
         Tensor<DTYPE> *weight = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *input  = this->GetInput()[1]->GetResult();
@@ -307,7 +306,7 @@ public:
     @brief MatMul의 BackPropagate 매소드.
     @details input_delta의 input_index에 weight * this_delta값을 더해주고,
     @details weight_gradient에는 input * this_delta값을 더해준다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int BackPropagate(int pTime = 0) {
@@ -358,13 +357,12 @@ public:
 
 #ifdef __CUDNN__
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 동작하는 ForwardPropagate 메소드.
+    @details cudnn이 제공하는 Convolution ForwardPropagate 메소드를 이용하여 MatMul의 ForwardPropagate연산을 한다.
+    @details MatMul의 ForwardPropagate결과는 m_pDevOutput에 저장된다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int ForwardPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *weight = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *input  = this->GetInput()[1]->GetResult();
@@ -383,13 +381,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU에서 동작하는 BackwardPropagate 메소드.
+    @details cudnn이 제공하는 Convolution BackwardPropagate 메소드를 아용하여 MatMul의 BackwardPropagate연산을 한다.
+    @details Convolution의 BackwardPropagate결과는 m_pDevInputDelta와 m_pDevFilterDelta에 저장된다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int BackPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *weight          = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *weight_gradient = this->GetInput()[0]->GetGradient();

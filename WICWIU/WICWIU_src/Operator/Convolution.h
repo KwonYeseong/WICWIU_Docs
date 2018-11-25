@@ -15,45 +15,32 @@ private:
     int m_padding[2]; ///< padding값 [0]은 height, [1]은 width를 각각 의미한다.
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t inputTensorDesc, outputTensorDesc, deltaDesc, inputDeltaDesc; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    cudnnConvolutionDescriptor_t convDesc; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    cudnnFilterDescriptor_t filterDesc, filterDeltaDesc; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnTensorDescriptor_t inputTensorDesc, outputTensorDesc, deltaDesc, inputDeltaDesc; ///<   GPU내의 Tensor값들을 가르키기 위한 descriptor.
+    cudnnConvolutionDescriptor_t convDesc; ///< Convolution에 대한 description을 포함하는 구조체 포인터.
+    cudnnFilterDescriptor_t filterDesc, filterDeltaDesc; ///<  필터 데이터셋을 가리키는 구조체 포인터.
     DTYPE *m_pDevInput, *m_pDevOutput, *m_pDevFilter, *m_pDevInputDelta, *m_pDevDelta, *m_pDevFilterDelta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
 
-    cudnnConvolutionFwdAlgo_t m_algo; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    cudnnConvolutionBwdFilterAlgo_t m_filterAlgo; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    cudnnConvolutionBwdDataAlgo_t m_dataAlgo; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    cudnnConvolutionFwdAlgo_t m_algo; ///<  ForwardPropagate Convolution연산을 하기 위한 다양한 알고리즘을 제공하는 변수.
+    cudnnConvolutionBwdFilterAlgo_t m_filterAlgo; ///< BackwardPropagate Convolution연산을 하기 위한 다양한 알고리즘을 제공하는 변수.
+    cudnnConvolutionBwdDataAlgo_t m_dataAlgo; ///< BackwardPropagate Convolution연산을 하기 위한 다양한 알고리즘을 제공하는 변수.
 
-    size_t m_sizeInBytes; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    size_t m_dataSizeInBytes; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    size_t m_filterSizeInBytes; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    //그 계산할 때 자동으로 그 버퍼같은걸 만듬
+    //cudnn연산에 필요한 메모리를 잡기 위한 변수, 밑에서 계산한다.
+    size_t m_sizeInBytes; ///< Convolution 연산에 필요한 메모리를 계산하여 저장하기 위한 맴버변수.
+    size_t m_dataSizeInBytes; ///< Convolution 연산에 필요한 메모리를 계산하여 저장하기 위한 맴버변수.
+    size_t m_filterSizeInBytes; ///< Convolution 연산에 필요한 메모리를 계산하여 저장하기 위한 맴버변수.
 
-    DTYPE m_alpha; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    DTYPE m_beta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    DTYPE m_alpha; ///< 연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
+    DTYPE m_beta; ///< 연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
 
-    void *m_devWorkSpace; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    void *m_dataDevWorkSpace; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    void *m_filterDevWorkSpace; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    void *m_devWorkSpace; ///< Convolution 연산을 위해 할당받은 메모리 공간을 가리키는 포인터
+    void *m_dataDevWorkSpace; ///< Convolution 연산을 위해 할당받은 메모리 공간을 가리키는 포인터
+    void *m_filterDevWorkSpace; ///< Convolution 연산을 위해 할당받은 메모리 공간을 가리키는 포인터
 #endif  // __CUDNN__
 
 public:
     /*!
-    @brief Convolution2의 생성자.
+    @brief Convolution2D의 생성자.
     @details 파라미터로 받은 pInput, pWeight, stride1, stride2로 Alloc한다.
     @param pInput Convolution할 Operator
     @param pWeight Convolution할 weight.
@@ -67,7 +54,7 @@ public:
     }
 
     /*!
-    @brief Convolution2의 생성자.
+    @brief Convolution2D의 생성자.
     @details 파라미터로 받은 pInput, pWeight, stride1, stride2, padding로 Alloc한다.
     @param pInput Convolution할 Operator
     @param pWeight Convolution할 weight.
@@ -83,7 +70,7 @@ public:
     }
 
     /*!
-    @brief Convolution2의 생성자.
+    @brief Convolution2D의 생성자.
     @details 파라미터로 받은 pInput, pWeight, stride1, stride2, padding1, padding2로 Alloc한다.
     @param pInput Convolution할 Operator
     @param pWeight Convolution할 weight.
@@ -99,7 +86,7 @@ public:
     }
 
     /*!
-    @brief Convolution2의 소멸자.
+    @brief Convolution2D의 소멸자.
     @details Delete매소드를 사용해 GPU에 할당했던 값들을 해제한다.
     @ref void Delete()
     */
@@ -150,8 +137,8 @@ public:
 #ifdef __CUDNN__
     /*!
     @brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
-    @details
     @details TensorDesriptor들을 생성하고, TensorDesriptor들의 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
+    @details Convolution연산에 필요한 알고리즘을 정의하고, 연산에 필요한 메모리공간을 할당 받는다.
     @param idOfDevice 사용할 GPU의 id
     */
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
@@ -268,7 +255,7 @@ public:
 /*!
 @brief GPU에 할당했던 메모리를 해제하고 각 포인터들을 NULL로 초기화한다.
 @details inputTensorDesc, outputTensorDesc,deltaDesc, inputDeltaDesc, convDesc, filterDesc,filterDeltaDesc들을 삭제하고 NULL로 초기화한다.
-@details m_devWorkSpace, m_dataDevWorkSpace, m_filterDevWorkSpace들이 가리키는 메모리를 해제한다.
+@details cudnn연산을 위해 할당 했던 메모리들을 해제시킨다.
 */
     void Delete() {
 #ifdef __CUDNN__
@@ -312,8 +299,9 @@ public:
 
     /*!
     @brief Convolution2D의 ForwardPropagate 메소드.
-    @details weight(filter size = rowsizeOfWeight *  colsizeOfWeight)로 input의 데이터를 stride값 만큼씩 이동하면서 곱한 값을 result에 더한다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @details weight(filter size = rowsizeOfWeight *  colsizeOfWeight)와 input의 곱한 값을 result에 더해 넣는다.
+    @details 이때 m_stride값들 만큼 이동하며 result를 계산한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int ForwardPropagate(int pTime = 0) {
@@ -363,9 +351,9 @@ public:
 
     /*!
     @brief CONVOLUTION_2D의 BackPropagate 메소드.
-    @details Convolution의 미분 값을 input_delta와 weight_gradient에 더해 넣는다.
-    @details 추가 설명 요함!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @details Convolution의 미분 값(weight * this_delta, input * this_delta)을 계산하여 input_delta와 weight_gradient에 각각 더해 넣는다.
+    @details 이때 m_stride값들 만큼 이동하며 미분 값을 넣을 위치를 계산한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int BackPropagate(int pTime = 0) {
@@ -429,6 +417,7 @@ public:
     /*!
     @brief GPU에서 동작하는 ForwardPropagate 메소드.
     @details cudnn이 제공하는 Convolution ForwardPropagate 메소드를 실행한다.
+    @details Convolution의 ForwardPropagate결과는 m_pDevOutput에 저장된다.
     @param pTime 연산 할 Tensor가 위치한 Time값.
     @return 성공 시 TRUE.
     */
@@ -453,6 +442,7 @@ public:
     /*!
     @brief GPU에서 동작하는 BackwardPropagate 메소드.
     @details cudnn이 제공하는 Convolution BackwardPropagate 메소드를 실행한다.
+    @details Convolution의 BackwardPropagate결과는 m_pDevInputDelta와 m_pDevFilterDelta에 저장된다.
     @param pTime 연산 할 Tensor가 위치한 Time값.
     @return 성공 시 TRUE.
     */
