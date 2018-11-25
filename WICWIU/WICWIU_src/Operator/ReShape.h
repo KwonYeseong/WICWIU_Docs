@@ -141,7 +141,7 @@ public:
     /*!
     @brief ReShape의 ForwardPropagate 매소드
     @details input값을 result(새로운 Shape을 갖는 Tensor)에 저장한다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int  ForwardPropagate(int pTime = 0) {
@@ -175,7 +175,7 @@ public:
     /*!
     @brief ReShape의 BackPropagate 매소드.
     @details input_delta에 this_delta값을 더한다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int BackPropagate(int pTime = 0) {
@@ -210,7 +210,7 @@ public:
     /*!
     @brief GPU에서 동작하는 ReShape의 ForwardPropagate 메소드.
     @details cudnnAddTensor를 이용해 pDevInput의 값을 pDevResult(새로운 Shape을 갖는 Tensor)에 더한다.
-    @param pTime Tensor의 Time값
+    @param pTime 연산 할 Tensor가 위치한 Time값.
     @return 성공 시 TRUE.
     */
     int ForwardPropagateOnGPU(int pTime) {
@@ -220,7 +220,7 @@ public:
         DTYPE *pDevInput  = input->GetGPUData();
         DTYPE *pDevResult = result->GetGPUData();
 
-        cudnnTensorDescriptor_t pDesc = input->GetDescriptor(); //is a pointer to an opaque structure holding the description of a generic n-D dataset.
+        cudnnTensorDescriptor_t pDesc = input->GetDescriptor();
 
         float alpha = 1.f;
         float beta  = 0.f;
@@ -236,7 +236,7 @@ public:
     /*!
     @brief GPU에서 동작하는 ReShape의 BackPropagateOnGPU 메소드.
     @details cudnnAddTensor를 이용해 pDevDelta의 값을 pDevInputDelta에 더한다.
-    @param pTime Tensor의 Time값
+    @param pTime 연산 할 Tensor가 위치한 Time값.
     @return 성공 시 TRUE.
     */
     int BackPropagateOnGPU(int pTime) {
