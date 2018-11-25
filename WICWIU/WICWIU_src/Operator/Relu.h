@@ -156,7 +156,7 @@ public:
     /*!
     @brief Relu의 ForwardPropagate 매소드.
     @details input의 Tensor값들 중 0.f이상의 값은 그대로 result에 저장하고, 0.f미만의 값은 0.f로 저장한다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int ForwardPropagate(int pTime = 0) {
@@ -190,7 +190,7 @@ public:
     /*!
     @brief Relu의 BackPropagate 매소드.
     @details result값이 0보다 클 경우 input_delta에 더하고, 0보다 작을 경우 0.f를 더한다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int BackPropagate(int pTime = 0) {
@@ -242,7 +242,7 @@ public:
 #ifdef __CUDNN__
     /*!
     @brief GPU에서 동작하는 ForwardPropagate 메소드.
-    @details 지정한 Activation(Relu) functiondml ForwardPropagate연산을 실행한다.
+    @details 지정한 Activation function(Relu)의 ForwardPropagate연산을 실행한다.
     @details m_pDevOutput에 결과 값을 저장한다.
     @param pTime 연산 할 Tensor가 위치한 Time값.
     @return 성공 시 TRUE.
