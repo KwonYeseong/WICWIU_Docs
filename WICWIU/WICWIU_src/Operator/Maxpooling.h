@@ -119,7 +119,7 @@ public:
 #ifdef __CUDNN__
 /*!
 @brief cudnn을 사용하기 전 관련 맴버변수들을 초기화 한다.
-@details Activation 함수를 Maxpooling2D로 지정gksek.
+@details Activation 함수를 Maxpooling2D로 지정한다.
 @details TensorDesriptor들을 생성하고, TensorDesriptor들으 데이터가 batch, channel, row, col 순서로 배치되도록 지정한다.
 @param idOfDevice 사용할 GPU의 id
 */
@@ -202,7 +202,7 @@ public:
     /*!
     @brief Maxpooling2D의 ForwardPropagate 매소드.
     @details Filter(temprow * tempcol)의 범위 중 가장 큰 값을 result에 저장하고, index는 indexOfMaxInput에 저장한다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     // 메모리 효율을 생각하면 time에 따라 취해야 할 액션이 다르다.
@@ -271,7 +271,7 @@ public:
     /*!
     @brief Maxpooling2D의 BackPropagate 매소드.
     @details 계산한 delta값을 input_delta에 더한다.
-    @param pTime pInput의 m_timesize값, default는 0을 사용.
+    @param pTime 연산 할 Tensor가 위치한 Time값. default는 0을 사용.
     @return 성공 시 TRUE.
     */
     int BackPropagate(int pTime = 0) {
@@ -304,13 +304,13 @@ public:
     }
 
 #ifdef __CUDNN__
-/*!
-@brief GPU에서 작동하는 ForwardPropagate 메소드.
-@details 지정한 Activation(Maxpooling2D) functiondml ForwardPropagate연산을 실행한다.
-@details m_pDevOutput에 결과 값을 저장한다.
-@param pTime 연산 할 Tensor가 위치한 Time값.
-@return 성공 시 TRUE.
-*/
+    /*!
+    @brief GPU에서 작동하는 ForwardPropagate 메소드.
+    @details 지정한 Activation function(Maxpooling2D) functiondml ForwardPropagate연산을 실행한다.
+    @details m_pDevOutput에 결과 값을 저장한다.
+    @param pTime 연산 할 Tensor가 위치한 Time값.
+    @return 성공 시 TRUE.
+    */
     int ForwardPropagateOnGPU(int pTime = 0) {
         Tensor<DTYPE> *input  = this->GetInput()[0]->GetResult();
         Tensor<DTYPE> *result = this->GetResult();
