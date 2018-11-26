@@ -74,7 +74,7 @@ public:
     @param stride1 stride row값
     @param stride2 stride colunm값
     @param padding1 height padding값
-    @param padding2 height padding값
+    @param padding2 width padding값
     @param pName 사용자가 부여한 Operator이름.
     @ref int Alloc(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, int padding1, int padding2)
     */

@@ -4,7 +4,7 @@
 #include "Operator_utils.h"
 
 /*!
-@class Operator들을 그래프로 구성해 모듈화하는 클래스
+@class Module Operator들을 그래프로 구성해 모듈화하는 클래스
 @details Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 단일 Operator로서 할 수 없는 기능들을 수행하게 한다
 @details Module은 하나의 Operator처럼 뉴럴 네트워크 안에서 작동한다
 */
