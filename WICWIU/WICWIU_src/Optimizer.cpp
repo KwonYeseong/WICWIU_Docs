@@ -8,12 +8,11 @@ template class Optimizer<double>;
 @brief Optimizer 클래스 생성자
 @details 멤버 변수들을 0 또는 NULL로 초기화하고,
 @details 전달받은 매개변수를 매개변수로 하여 Optimizer의 Alloc 메소드를 호출한다.
-@param pTrainableTensors
-@param pLearningRate
-@param pOptimizeDirection
+@param pTrainableTensors Optimizer 클래스의 alloc 메소드의 파라미터로 전달할 Trainable Tensor container
+@param pLearningRate Optimizer 클래스의 alloc 메소드의 파라미터로 전달할 learning Rate
+@param pOptimizeDirection Optimizer 클래스의 alloc 메소드의 파라미터로 전달할 optimize Direction
 @return 없음
 @see Optimizer<DTYPE>::Alloc(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, OptimizeDirection pOptimizeDirection)
-@todo 기술 예정
 */
 template<typename DTYPE> Optimizer<DTYPE>::Optimizer(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, OptimizeDirection pOptimizeDirection) {
     #ifdef __DEBUG__
@@ -32,13 +31,12 @@ template<typename DTYPE> Optimizer<DTYPE>::Optimizer(Container<Operator<DTYPE> *
 @brief Optimizer 클래스 생성자
 @details 멤버 변수들을 0 또는 NULL로 초기화하고,
 @details 전달받은 매개변수를 매개변수로 하여 Optimizer의 Alloc 메소드를 호출한다.
-@param pTrainableTensors
-@param pLearningRate
-@param pWeightDecayRate
-@param pOptimizeDirection
+@param pTrainableTensors Optimizer 클래스의 alloc 메소드의 파라미터로 전달할 Trainable Tensor container
+@param pLearningRate Optimizer 클래스의 alloc 메소드의 파라미터로 전달할 learning Rate
+@param pWeightDecayRate Optimizer 클래스의 alloc 메소드의 파라미터로 전달할 Weight Decay Rate
+@param pOptimizeDirection Optimizer 클래스의 alloc 메소드의 파라미터로 전달할 optimize Direction
 @return 없음
 @see Optimizer<DTYPE>::Alloc(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, float pWeightDecayRate, OptimizeDirection pOptimizeDirection)
-@todo 기술 예정
 */
 template<typename DTYPE> Optimizer<DTYPE>::Optimizer(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, float pWeightDecayRate, OptimizeDirection pOptimizeDirection) {
     #ifdef __DEBUG__
@@ -57,7 +55,6 @@ template<typename DTYPE> Optimizer<DTYPE>::Optimizer(Container<Operator<DTYPE> *
 @brief Optimizer 클래스 소멸자
 @details Optimizer<DTYPE>::Delete() 메소드를 호출하고 클래스를 소멸시킨다.
 @return 없음
-@todo 기술 예정
 */
 template<typename DTYPE> Optimizer<DTYPE>::~Optimizer() {
     #ifdef __DEBUG__
@@ -68,13 +65,12 @@ template<typename DTYPE> Optimizer<DTYPE>::~Optimizer() {
 }
 
 /*!
-@brief Optimizer들의 멤버 변수들에 값을 할당하는 메소드
-@details 매개변수로 전달 받은 값들을 각각 Trainable Tensor Conatiner, learning rate, Optimize Direction 멤버 변수에 할당한다.
-@param pTrainableTensors
-@param pLearningRate
-@param pOptimizeDirection
+@brief Optimizer 클래스의 멤버 변수들에 값을 할당하는 메소드
+@details 매개변수로 전달 받은 값들을 각각 Trainable Tensor Conatiner, learning rate, Optimize Direction, Weight Decay Rate 멤버 변수에 할당한다.
+@param pTrainableTensors Optimizer 클래스에의 Trainable Tensor container 멤버 변수
+@param pLearningRate Optimizer 클래스의 learning Rate 멤버 변수
+@param pOptimizeDirection Optimizer 클래스의 optimize Direction 멤버 변수
 @return TRUE
-@todo 기술 예정
 */
 template<typename DTYPE> int Optimizer<DTYPE>::Alloc(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, OptimizeDirection pOptimizeDirection) {
     #ifdef __DEBUG__
@@ -92,14 +88,13 @@ template<typename DTYPE> int Optimizer<DTYPE>::Alloc(Container<Operator<DTYPE> *
 }
 
 /*!
-@brief Optimizer들의 멤버 변수들에 값을 할당하는 메소드
+@brief Optimizer 클래스의 멤버 변수들에 값을 할당하는 메소드
 @details 매개변수로 전달 받은 값들을 각각 Trainable Tensor Conatiner, learning rate, Optimize Direction, Weight Decay Rate 멤버 변수에 할당한다.
-@param pTrainableTensors
-@param pLearningRate
-@param pWeightDecayRate
-@param pOptimizeDirection
+@param pTrainableTensors Optimizer 클래스에의 Trainable Tensor container 멤버 변수
+@param pLearningRate Optimizer 클래스의 learning Rate 멤버 변수
+@param pWeightDecayRate Optimizer 클래스의 Weight Decay Rate 멤버 변수
+@param pOptimizeDirection Optimizer 클래스의 optimize Direction 멤버 변수
 @return TRUE
-@todo 기술 예정
 */
 template<typename DTYPE> int Optimizer<DTYPE>::Alloc(Container<Operator<DTYPE> *> *pTrainableTensors, float pLearningRate, float pWeightDecayRate, OptimizeDirection pOptimizeDirection) {
     #ifdef __DEBUG__
@@ -124,10 +119,9 @@ template<typename DTYPE> int Optimizer<DTYPE>::Delete() {
 }
 
 /*!
-@brief
-@details
+@brief Trainable Tensor Container의 Operator들의 파라미터들을 순서대로 업데이트하는 메소드
+@details 파생 클래스에서 오버라이드해서 사용하는 메소드
 @return TRUE
-@todo 기술 예정
 */
 template<typename DTYPE> int Optimizer<DTYPE>::UpdateParameter() {
     for (int i = 0; i < m_TrainableTensorDegree; i++) {
@@ -158,10 +152,9 @@ template<typename DTYPE> cudnnHandle_t& Optimizer<DTYPE>::GetCudnnHandle() {
 }
 
 /*!
-@brief
-@details
+@brief GPU를 활용해 Trainable Tensor Container의 Operator들의 파라미터들을 순서대로 업데이트하는 메소드
+@details 파생 클래스에서 오버라이드해서 사용하는 메소드
 @return TRUE
-@todo 기술 예정
 */
 template<typename DTYPE> int Optimizer<DTYPE>::UpdateParameterOnGPU() {
     for (int i = 0; i < m_TrainableTensorDegree; i++) {
@@ -206,10 +199,9 @@ template<typename DTYPE> int Optimizer<DTYPE>::GetTrainableTensorDegree() const 
 }
 
 /*!
-@brief
-@details
+@brief Trainable Tensor Container의 Operator들의 Gradient를 초기화하는 메소드
 @return TRUE
-@todo 기술 예정
+@ref Operator<DTYPE>::ResetGradient()
 */
 template<typename DTYPE> int Optimizer<DTYPE>::ResetParameterGradient() {
     for (int i = 0; i < m_TrainableTensorDegree; i++) {

@@ -10,7 +10,7 @@
 template<typename DTYPE>
 class CrossEntropy : public LossFunction<DTYPE>{
 private:
-    DTYPE m_epsilon = 0.0;  // for backprop ///<   @todo 기술 예정
+    DTYPE m_epsilon = 0.0;  // for backprop ///< 더미 변수
 
 public:
     /*!
@@ -18,7 +18,7 @@ public:
     @details LossFunction 클래스의 생성자를 호출하고, Operator와 epsilon을 매개변수로 전달하여 CrossEntropy<DTYPE>::Alloc(Operator<DTYPE> *pOperator, int epsilon) 메소드를 호출한다.
     @param pOperator CrossEntropy<DTYPE>::Alloc(Operator<DTYPE> *pOperator, int epsilon) 메소드의 매개변수로 전달할 Operator
     @param pLabel LossFunction의 입력 레이블에 해당하는 Operator
-    @param epsilon 값을 지정하지 않을 시 1e-6f로 초기화
+    @param epsilon 더미 변수, 값을 미 지정시 1e-6f로 초기화
     @return 없음
     @see CrossEntropy<DTYPE>::Alloc(Operator<DTYPE> *pOperator, int epsilon)
     */
@@ -54,7 +54,6 @@ public:
     @param pName LossFunction의 이름
     @return 없음
     @see CrossEntropy<DTYPE>::Alloc(Operator<DTYPE> *pOperator, int epsilon)
-    @todo 기술 예정
     */
     CrossEntropy(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, int epsilon, std::string pName) : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
