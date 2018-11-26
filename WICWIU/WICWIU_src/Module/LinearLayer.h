@@ -4,7 +4,11 @@
 #include "../Module.h"
 
 /*!
+<<<<<<< HEAD
 @class Linear Operator들을 그래프로 구성해 fully connected layer의 기능을 수행하는 모듈을 생성하는 클래스
+=======
+@class Operator들을 그래프로 구성해 fully connected layer의 기능을 수행하는 모듈을 생성하는 클래스
+>>>>>>> 0bb96e58fd530401fb2efc8176f3300e834b132d
 @details Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 fully connected layer의 기능을 수행한다
 */
 template<typename DTYPE> class Linear : public Module<DTYPE>{
