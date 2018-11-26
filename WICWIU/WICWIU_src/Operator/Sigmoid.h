@@ -154,7 +154,6 @@ public:
     @param data SIGMOID할 값
     @return data를 SIGMOID함수에 넣은 결과 값.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     inline DTYPE SIGMOID(DTYPE data) {
         return 1.F / (1.F + (DTYPE)exp(-data));
     }

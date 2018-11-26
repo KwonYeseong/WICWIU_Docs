@@ -7,7 +7,6 @@
 @class Nag Optimizer
 @details
 */
-// 문서 작성자 : 윤성결 , 작성 날짜 : 2018-11-19
 
 template<typename DTYPE> class NagOptimizer : public Optimizer<DTYPE>{
 private:

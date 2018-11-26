@@ -380,7 +380,6 @@ template<typename DTYPE> Device Tensor<DTYPE>::GetDevice() {
 *@brief Tensor의 Time사용 여부를 반환한다.
 *@return m_IsUseTime
 */
-// 문서 작성자 : 권예성, 작성 날짜 : 2018-09-02
 template<typename DTYPE> IsUseTime Tensor<DTYPE>::GetIsUseTime() {
     #ifdef __DEBUG__
     std::cout << "Tensor<DTYPE>::GetIsUseTime()" << '\n';

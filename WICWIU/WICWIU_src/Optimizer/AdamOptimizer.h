@@ -7,7 +7,6 @@
 @class Adam Optimizer
 @details
 */
-// 문서 작성자 : 윤성결 , 작성 날짜 : 2018-11-19
 template<typename DTYPE> class AdamOptimizer : public Optimizer<DTYPE>{
 private:
     Container<Operator<DTYPE> *> *m_ppParameter; ///< 값을 업데이트 할 Tensor들을 가리키는 포인터

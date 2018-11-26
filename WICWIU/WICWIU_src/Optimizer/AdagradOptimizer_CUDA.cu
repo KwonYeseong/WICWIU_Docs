@@ -10,7 +10,6 @@ template class AdagradOptimizer<float>;
 @class Adagrad Optimizer cuda
 @details
 */
-// 문서 작성자 : 윤성결 , 작성 날짜 : 2018-11-19
 
 /*!
 @brief 파라미터 값들을 업데이트 하는 커널함수

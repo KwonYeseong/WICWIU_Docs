@@ -39,7 +39,6 @@ public:
     @details ConvouutionLayer2D 클래스의 Alloc 함수를 호출한다.
     @see Convolution2D<DTYPE>::Alloc(Operator<DTYPE> *pInput, int pNumInputChannel, int pNumOutputChannel, int pNumKernelRow, int pNumKernelCol, int pStrideRow, int pStrideCol, int pPaddingRow, int pPaddingCol, int use_bias, std::string pName)
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     ConvolutionLayer2D(Operator<DTYPE> *pInput, int pNumInputChannel, int pNumOutputChannel, int pNumKernelRow, int pNumKernelCol, int pStrideRow, int pStrideCol, int pPadding, int use_bias = FALSE, std::string pName = "NO NAME") : Module<DTYPE>(pName){
         Alloc(pInput, pNumInputChannel, pNumOutputChannel, pNumKernelRow, pNumKernelCol, pStrideRow, pStrideCol, pPadding, pPadding, use_bias, pName);
     }
@@ -48,15 +47,15 @@ public:
     @brief ConvolutionLayer2D 클래스 소멸자
     @details 단, 동적 할당 받은 Operator들은 NeuralNetwork에서 할당 해제한다.
     */
-    virtual ~ConvolutionLayer2D() {}
+    virtual ~ConvoluionLayer2D() {}
 
     /*!
     @brief 2D convolution Layer 그래프를 동적으로 할당 및 구성하는 메소드
     @details Input Operator의 Element에 대해 2D Convolution을 수행한다.
     @details Input Operator의 Element에 대해 Weight를 이용해 2차원 합성 곱(2D Convolution)을 수행하고 Bias가 존재할 시 Bias를 합(Column Wise Addition)해 Output Operator로 내보내는 layer를 구성한다.
     @param pInput 해당 Layer의 Input에 해당하는 Operator
-    @param pNumInputChannel 해당 Layer의 Input Operator의 Column의 갯수, Input Column에 대한 Dimension
-    @param pNumOutputChannel 해당 Layer의 Output Operator의 Column의 갯수, Output Column에 대한 Dimension
+    @param pNumInputChannel 해당 Layer의 Input Operator의 Channel의 갯수, Input Channel에 대한 Dimension
+    @param pNumOutputChannel 해당 Layer의 Output Operator의 Channel의 갯수, Output Channel에 대한 Dimension
     @param pNumKernelRow 2D Convolution Layer 커널의 Row Size
     @param pNumKernelCol 2D Convolution Layer 커널의 Column Size
     @param pStrideRow 2D Convolution Layer의 Row Stride Size
