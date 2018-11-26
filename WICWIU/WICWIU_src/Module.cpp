@@ -287,7 +287,7 @@ template<typename DTYPE> int Module<DTYPE>::ForwardPropagate(int pTime) {
 
 /*!
 @brief 모듈 그래프의 역전파를 수행하는 메소드
-@details Excutable Operator Container의 각 Operator들에서 Operator<DTYPE>::ForwardPropagate(int pTime) 메소드를 역순으로 호출한다.
+@details 역순으로 Excutable Operator Container의 각 Operator들에서 Operator<DTYPE>::ForwardPropagate(int pTime) 메소드를 호출한다.
 @param pTime 각 ForwardPropagate 메소드에 전달할 Time의 인덱스
 @return TRUE
 */
@@ -391,13 +391,11 @@ template<typename DTYPE> void Module<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnH
 // }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo 기술 예정
+@brief GPU를 이용해 모듈 그래프의 순전파를 수행하는 메소드
+@details Excutable Operator Container의 각 Operator들에서 Operator<DTYPE>::ForwardPropagateOnGPU(int pTime) 메소드를 순서대로 호출한다.
+@param pTime 각 ForwardPropagateOnGPU 메소드에 전달할 Time의 인덱스
+@return TRUE
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::ForwardPropagateOnGPU(int pTime) {
     for (int i = 0; i < m_numOfExcutableOperator; i++) {
         (*m_aaExcutableOperator)[i]->ForwardPropagateOnGPU(pTime);
@@ -406,13 +404,11 @@ template<typename DTYPE> int Module<DTYPE>::ForwardPropagateOnGPU(int pTime) {
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo 기술 예정
+@brief GPU를 이용해 모듈 그래프의 역전파를 수행하는 메소드
+@details 역순으로 Excutable Operator Container의 각 Operator들에서 Operator<DTYPE>::BackPropagateOnGPU(int pTime) 메소드를 호출한다.
+@param pTime 각 BackPropagateOnGPU 메소드에 전달할 Time의 인덱스
+@return TRUE
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int Module<DTYPE>::BackPropagateOnGPU(int pTime) {
     for (int i = m_numOfExcutableOperator - 1; i >= 0; i--) {
         (*m_aaExcutableOperator)[i]->BackPropagateOnGPU(pTime);

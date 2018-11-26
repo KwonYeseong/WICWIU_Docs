@@ -76,11 +76,8 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::Delete() {
 
 #ifdef __CUDNN__
 /*!
-@brief
-@details
-@param
-@return
-@todo 기술 예정
+@brief GPU 연산을 사용하기 위해 CUDNN Handler를 생성하는 메소드
+@return 없음
 */
 template<typename DTYPE> int NeuralNetwork<DTYPE>::AllocOnGPU() {
     // checkCudaErrors(cudaSetDevice(2));
@@ -88,11 +85,8 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::AllocOnGPU() {
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo 기술 예정
+@brief GPU 연산을 사용하지 않기 위해 CUDNN Handler를 파괴하는 메소드
+@return 없음
 */
 template<typename DTYPE> void NeuralNetwork<DTYPE>::DeleteOnGPU() {
     // checkCudaErrors(cudaThreadSynchronize());
@@ -536,12 +530,14 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::TestingOnCPU() {
 }
 
 /*!
-@brief
-@details
-@return
-@todo 기술 예정
+@brief GPU를 활용해 신경망을 학습시키는 메소드
+@details 순서대로 Excutable Operator들의 Result와 Gradient를 초기화하고 Loss Function의 Result와 Gradient를 초기화하고
+@detaisl ForwardPropagateOnGPU, BackwardPropagateOnGPU 메소드를 호출하고 Optimizer로 파라미터를 학습시킨다.
+@details 각 메소드 참조
+@return TRUE
+@see NeuralNetwork<DTYPE>::ResetOperatorResult() NeuralNetwork<DTYPE>::ResetOperatorGradient() NeuralNetwork<DTYPE>::ResetLossFunctionResult() NeuralNetwork<DTYPE>::ResetLossFunctionGradient()
+@see NeuralNetwork<DTYPE>::ForwardPropagateOnGPU() NeuralNetwork<DTYPE>::BackPropagateOnGPU() Optimizer<DTYPE>::UpdateParameterOnGPU()
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::TrainingOnGPU() {
 #ifdef __CUDNN__
     this->ResetOperatorResult();
@@ -562,12 +558,12 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::TrainingOnGPU() {
 }
 
 /*!
-@brief
-@details
-@return
-@todo 기술 예정
+@brief GPU를 활용해 신경망을 테스트하는 메소드
+@details 순서대로 Excutable Operator들의 Result를 초기화하고 Loss Function의 Result를 초기화하고 ForwardPropagateOnGPU메소드를 호출한다.
+@details 각 메소드 참조
+@return TRUE
+@see NeuralNetwork<DTYPE>::ResetOperatorResult() NeuralNetwork<DTYPE>::ResetLossFunctionResult() NeuralNetwork<DTYPE>::ForwardPropagateOnGPU()
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::TestingOnGPU() {
 #ifdef __CUDNN__
     this->ResetOperatorResult();
@@ -761,7 +757,6 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::PrintGraphInformation() {
 @brief 연산에 참여하는 Operator들의 Result Container를 초기화시킨다.
 @details Excutable Operator Container에 포함되어 있는 각 Operator들에서 Operator<DTYPE>::ResetResult() 메소드를 호출한다.
 @return TRUE
-@todo 기술 예정
 */
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetOperatorResult() {
     for (int i = 0; i < m_ExcutableOperatorDegree; i++) {
@@ -774,7 +769,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetOperatorResult() {
 @brief 연산에 참여하는 Operator들의 Gradient Container를 초기화시킨다.
 @details Excutable Operator Container에 포함되어 있는 각 Operator들에서 Operator<DTYPE>::ResetGradient() 메소드를 호출한다.
 @return TRUE
-@todo 기술 예정
 */
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetOperatorGradient() {
     for (int i = 0; i < m_ExcutableOperatorDegree; i++) {
@@ -787,7 +781,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetOperatorGradient() {
 @brief LossFunction의 Result Tensor를 초기화시킨다.
 @details LossFunction의 LossFunction<DTYPE>::ResetResult() 메소드를 호출한다.
 @return TRUE
-@todo 기술 예정
 */
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetLossFunctionResult() {
     m_aLossFunction->ResetResult();
@@ -798,7 +791,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetLossFunctionResult() {
 @brief LossFunction의 Gradient Tensor를 초기화시킨다.
 @details LossFunction의 Lossfunction<DTYPE>::ResetGradient() 메소드를 호출한다.
 @return TRUE
-@todo 기술 예정
 */
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetLossFunctionGradient() {
     m_aLossFunction->ResetGradient();
@@ -809,7 +801,6 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetLossFunctionGradient() {
 @brief Optimizer의 Gradient와 Parameter들의 Gradient를 초기화시킨다.
 @details Optimizer의 Optimzier<DTYPE>::ResetParameterGradient() 메소드를 호출한다.
 @return TRUE
-@todo 기술 예정
 */
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ResetParameterGradient() {
     m_aOptimizer->ResetParameterGradient();
@@ -846,11 +837,10 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::Load(FILE *fileForLoad) {
 
 #ifdef __CUDNN__
 /*!
-@brief
-@details
-@param pTime
-@return
-@todo 기술 예정
+@brief GPU를 활용해 신경망 그래프의 순전파를 수행하는 메소드
+@details Excutable Operator Container의 각 Operator들에서 Operator<DTYPE>::ForwardPropagateOnGPU(int pTime) 메소드를 순서대로 호출하고, Lossfunction의 LossFunction<DTYPE>::ForwardPropagateOnGPU(int pTime) 메소드를 호출한다.
+@param pTime 각 ForwardPropagateOnGPU 메소드에 전달할 Time의 인덱스
+@return TRUE
 */
 template<typename DTYPE> int NeuralNetwork<DTYPE>::ForwardPropagateOnGPU(int pTime) {
     for (int i = 0; i < m_ExcutableOperatorDegree; i++) {
@@ -862,11 +852,10 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::ForwardPropagateOnGPU(int pTi
 }
 
 /*!
-@brief
-@details
-@param pTime
-@return
-@todo 기술 예정
+@brief GPU를 활용해 신경망 그래프의 역전파를 수행하는 메소드
+@details Lossfunction의 LossFunction<DTYPE>::ForwardPropagateOnGPU(int pTime) 메소드를 호출하고, Excutable Operator Container의 각 Operator들에서 Operator<DTYPE>::ForwardPropagateOnGPU(int pTime) 메소드를 역순으로 호출한다.
+@param pTime 각 ForwardPropagateOnGPU 메소드에 전달할 Time의 인덱스
+@return TRUE
 */
 template<typename DTYPE> int NeuralNetwork<DTYPE>::BackPropagateOnGPU(int pTime) {
     m_aLossFunction->BackPropagateOnGPU(pTime);
@@ -878,11 +867,12 @@ template<typename DTYPE> int NeuralNetwork<DTYPE>::BackPropagateOnGPU(int pTime)
 }
 
 /*!
-@brief
-@details
-@param idOfDevice
-@return
-@todo 기술 예정
+@brief 신경망 그래프 학습에 사용되는 장치를 GPU로 전환하는 메소드
+@details 파라미터로 전달받은 GPU 장치 번호에 해당하는 GPU에 메모리를 할당하고 NeuralNetwork의 Device 멤버변수를 GPU로 전환한다
+@details Excutable Operator Container, Parameter Operator Container, Input Operator Container의 각 Operator들에서 Operator<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnHandle, unsigned int idOfDevice) 메소드를 순서대로 호출한다
+@details Lossfunction의 LossFunction<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnHandle, unsigned int idOfDevice) 메소드를 호출하고, Optimizer의 (cudnnHandle_t& pCudnnHandle, unsigned int idOfDevice) 메소드를 호출한다.
+@param idOfDevice 학습에 이용하려는 GPU 장치 번호
+@return 없음
 */
 template<typename DTYPE> void NeuralNetwork<DTYPE>::SetDeviceGPU(unsigned int idOfDevice) {
     // std::cout << "NeuralNetwork<DTYPE>::SetModeGPU()" << '\n';
@@ -912,13 +902,10 @@ template<typename DTYPE> void NeuralNetwork<DTYPE>::SetDeviceGPU(unsigned int id
 }
 
 /*!
-@brief
-@details
-@param idOfDevice
-@return
-@todo 기술 예정
+@brief 파라미터로 입력받은 값으로 GPU 장치 번호를 변경한다.
+@param idOfDevice 해당 GPU 장치 번호
+@return TRUE
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int NeuralNetwork<DTYPE>::SetDeviceID(unsigned int idOfDevice) {
     m_idOfDevice = idOfDevice;
     return TRUE;
