@@ -9,7 +9,7 @@
 
 /*!
 @class Shape Tensor의 차원 정보를 담고 있는 Shape을 저장하고 관리하는 클래스
-@brief Tensor의 차원 정보를 담고 있는 Shape을 저장하고 관리하는 클래스
+@details Tensor의 차원 정보를 담고 있는 Shape을 저장하고 관리하는 클래스
 */
 class Shape {
 private:

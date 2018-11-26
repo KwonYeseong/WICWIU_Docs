@@ -16,7 +16,7 @@ enum IsUseTime {
 
 /*!
 @class Tensor 다차원의 tensor데이터를 저장하고 관리하는 클래스
-@brief 학습에 사용될 Tensor를 정의하기 위한 클래스
+@details 학습에 사용될 Tensor를 정의하기 위한 클래스
 @details Tensor클래스는 Shape와 LongArray를 이용하여 Tensor의 모양과 데이터를 저장한다.
 @details Operator클래스에서 m_aaResult(ForwardPropagate한 값)와 m_aaGradient(BackPropagate한 값)을 저장한다.
 */

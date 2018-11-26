@@ -13,7 +13,7 @@ enum OptimizeDirection {
 
 /*!
 @class Optimizer 자동 미분 기능을 통해 계산된 Gradient를 이용해 파라미터들을 학습시키는 클래스
-@brief 자동 미분 기능을 통해 계산된 Gradient를 이용해 파라미터들을 학습시키는 클래스
+@details 자동 미분 기능을 통해 계산된 Gradient를 이용해 파라미터들을 학습시키는 클래스
 */
 template<typename DTYPE> class Optimizer {
 private:
