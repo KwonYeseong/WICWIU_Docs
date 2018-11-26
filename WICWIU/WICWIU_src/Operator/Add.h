@@ -18,10 +18,10 @@ private:
     int m_colsize; ///< col의 dimension 크기
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t leftTensorDesc, rightTensorDesc, outputTensorDesc, leftDeltaDesc, rightDeltaDesc, deltaDesc; ///<   @todo Variable
-    DTYPE *m_pDevLeft, *m_pDevRight, *m_pDevOutput, *m_pDevLeftDelta, *m_pDevRightDelta, *m_pDevDelta; ///<   @todo Variable
-    DTYPE m_alpha; ///<   @todo Variable
-    DTYPE m_beta; ///<   @todo Variable
+    cudnnTensorDescriptor_t leftTensorDesc, rightTensorDesc, outputTensorDesc, leftDeltaDesc, rightDeltaDesc, deltaDesc; ///< GPU내의 Tensor값들을 가르키기 위한 descriptor.
+    DTYPE *m_pDevLeft, *m_pDevRight, *m_pDevOutput, *m_pDevLeftDelta, *m_pDevRightDelta, *m_pDevDelta; ///< cudnn 연산에서 사용 할 데이터를 가리키는 맴버 변수.
+    DTYPE m_alpha; ///<  연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
+    DTYPE m_beta; ///< 연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
 #endif  // __CUDNN__
 
 public:
@@ -284,10 +284,10 @@ private:
     int m_colsize; ///< colcol
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc; ///<   @todo Variable
-    DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta; ///<   @todo Variable
-    DTYPE m_alpha; ///<   @todo Variable
-    DTYPE m_beta; ///<   @todo Variable
+    cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc; ///<  GPU내의 Tensor값들을 가르키기 위한 descriptor.
+    DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta; ///<  cudnn 연산에서 사용 할 데이터를 가리키는 맴버 변수.
+    DTYPE m_alpha; ///<  연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
+    DTYPE m_beta; ///< 연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
 
 #endif  // __CUDNN__
 
@@ -554,18 +554,18 @@ private:
     Shape *m_pInputTenShape; ///< 더해질 Tensor의 Shape
     Shape *m_pBiasTenShape; ///< 더 할 Tensor의 Shape
 
-    int m_timesize; ///<   @todo timetime
-    int m_batchsize; ///<   @todo batchbatch
-    int m_channelsize; ///<   @todo channelchannel
-    int m_rowsize; ///<   @todo rowrow
-    int m_colsize; ///<   @todo colcol
+    int m_timesize; ///< time의 dimension 크기
+    int m_batchsize; ///<  batch의 dimension 크기
+    int m_channelsize; ///< channe의 dimension 크기
+    int m_rowsize; ///<  row의 dimension 크기
+    int m_colsize; ///< col의 dimension 크기
 
 #ifdef __CUDNN__
-    cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc; ///<   @todo Variable
-    DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta; ///<   @todo Variable
+    cudnnTensorDescriptor_t inputTensorDesc, biasTensorDesc, outputTensorDesc, inputDeltaDesc, biasDeltaDesc, deltaDesc; ///<  GPU내의 Tensor값들을 가르키기 위한 descriptor.
+    DTYPE *m_pDevInput, *m_pDevBias, *m_pDevOutput, *m_pDevInputDelta, *m_pDevBiasDelta, *m_pDevDelta; ///<  cudnn 연산에서 사용 할 데이터를 가리키는 맴버 변수.
 
-    DTYPE m_alpha; ///<   @todo Variable
-    DTYPE m_beta; ///<   @todo Variable
+    DTYPE m_alpha; ///< 연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
+    DTYPE m_beta; ///<  연산 간 두 Operand의 가중치를 표현하기 귀한 변수. ex) z = α*x + β*y
 #endif  // __CUDNN__
 
 public:
