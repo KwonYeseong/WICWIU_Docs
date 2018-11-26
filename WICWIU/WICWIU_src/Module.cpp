@@ -308,7 +308,6 @@ template<typename DTYPE> int Module<DTYPE>::BackPropagate(int pTime) {
 @brief 연산에 참여하는 Operator들의 Result Container를 초기화시킨다.
 @details Excutable Operator Container에 포함되어 있는 각 Operator들에서 Operator<DTYPE>::ResetResult() 메소드를 호출한다.
 @return TRUE
-@todo 기술 예정
 */
 template<typename DTYPE> int Module<DTYPE>::ResetResult() {
     for (int i = 0; i < m_numOfExcutableOperator; i++) {
@@ -322,7 +321,6 @@ template<typename DTYPE> int Module<DTYPE>::ResetResult() {
 @brief 연산에 참여하는 Operator들의 Gradient Container를 초기화시킨다.
 @details Excutable Operator Container에 포함되어 있는 각 Operator들에서 Operator<DTYPE>::ResetGradient() 메소드를 호출한다.
 @return TRUE
-@todo 기술 예정
 */
 template<typename DTYPE> int Module<DTYPE>::ResetGradient() {
     for (int i = 0; i < m_numOfExcutableOperator; i++) {
@@ -370,13 +368,11 @@ template<typename DTYPE> void Module<DTYPE>::SetDeviceCPU() {
 // }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo 기술 예정
+@brief Module 클래스의 device 맴버 변수를 GPU로 변경한다.
+@details LossFunction의 Result와 Gradient의 Device를 GPU로 변경한다.
+@param pCudnnHandle cudnn 라이브러리를 가리키는 구조체 포인터.
+@param idOfDevice 사용하고자 하는 GPU번호
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void Module<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnHandle, unsigned int idOfDevice) {
     checkCudaErrors(cudaSetDevice(idOfDevice));
     this->SetDevice(GPU);
