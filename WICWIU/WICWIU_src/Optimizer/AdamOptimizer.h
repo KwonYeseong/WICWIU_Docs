@@ -11,10 +11,10 @@
 template<typename DTYPE> class AdamOptimizer : public Optimizer<DTYPE>{
 private:
     Container<Operator<DTYPE> *> *m_ppParameter; ///< 값을 업데이트 할 Tensor들을 가리키는 포인터
-    Container<Tensor<DTYPE> *> *m_aaFirstVelocity; ///<  @todo Variable
-    Container<Tensor<DTYPE> *> *m_aaFirstMomentum;  ///<  @todo Variable
-    Container<Tensor<DTYPE> *> *m_aaUnbiasedVelocity;  ///<  @todo Variable
-    Container<Tensor<DTYPE> *> *m_aaUnbiasedMomentum;  ///<  @todo Variable
+    Container<Tensor<DTYPE> *> *m_aaFirstVelocity; ///<  @m_Beta2의 가중치로 조정되는 gradient의 제곱과  현재 m_aaFirstVelocity 값으로 업데이트 되는 variable
+    Container<Tensor<DTYPE> *> *m_aaFirstMomentum;  ///<  @m_Beta1의 가중치로 조정되는 gradient와  현재 m_aaFirstVelocity 값으로 업데이트 되는 variable
+    Container<Tensor<DTYPE> *> *m_aaUnbiasedVelocity;  ///<  @Unbiased 작업을 거친 varibla
+    Container<Tensor<DTYPE> *> *m_aaUnbiasedMomentum;  ///<  @Unbiased 작업을 거친 varibla
 
     int m_numOfParameter;  ///<  업데이트 할 Tensor의 degree
 

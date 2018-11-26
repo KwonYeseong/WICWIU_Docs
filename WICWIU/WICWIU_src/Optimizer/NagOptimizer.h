@@ -12,7 +12,7 @@
 template<typename DTYPE> class NagOptimizer : public Optimizer<DTYPE>{
 private:
     Container<Operator<DTYPE> *> *m_ppParameter; ///< 값을 업데이트 할 Tensor들을 가리키는 포인터
-    Container<Tensor<DTYPE> *> *m_aaVelocity; ///<  @todo Variable
+    Container<Tensor<DTYPE> *> *m_aaVelocity; ///<  @이동 벡터 variable
 
     int m_numOfParameter; ///<  업데이트 할 Tensor의 degree
 

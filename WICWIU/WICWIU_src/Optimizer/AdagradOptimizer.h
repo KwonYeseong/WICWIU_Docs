@@ -12,7 +12,7 @@
 template<typename DTYPE> class AdagradOptimizer : public Optimizer<DTYPE>{
 private:
     Container<Operator<DTYPE> *> *m_ppParameter; ///< 값을 업데이트 할 Tensor들을 가리키는 포인터
-    Container<Tensor<DTYPE> *> *m_aaGradientSquared; ///<  @todo Variable
+    Container<Tensor<DTYPE> *> *m_aaGradientSquared; ///<  @gradient의 제곱으로 업데이트 되는 variable
 
     int m_numOfParameter; ///<  업데이트 할 Tensor의 degree
     float m_epsilon;  ///< 분모 값이 0이 되는 것을 방지 하는 값

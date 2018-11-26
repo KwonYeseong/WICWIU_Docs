@@ -57,8 +57,8 @@ delta = - mom
 template<typename DTYPE> class RMSPropOptimizer : public Optimizer<DTYPE>{
 private:
     Container<Operator<DTYPE> *> *m_ppParameter; ///< 값을 업데이트 할 Tensor들을 가리키는 포인터
-    Container<Tensor<DTYPE> *> *m_aaMeanSquared;  ///<  @todo Variable
-    Container<Tensor<DTYPE> *> *m_aaMeanGrad;  ///<  @todo Variable
+    Container<Tensor<DTYPE> *> *m_aaMeanSquared;  ///<  @decay 가중치로 조정된  gradient의 제곱과 현재 m_aaMeanSquared 값으로 업데이트 되는 variable
+    Container<Tensor<DTYPE> *> *m_aaMeanGrad;  ///<  @decay 가중치로 조정된  gradient와 현재 m_aaMeanSquared 값으로 업데이트 되는 variable
 
     int m_numOfParameter; ///<  업데이트 할 Tensor의 degree
 
