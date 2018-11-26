@@ -5,9 +5,7 @@
 
 /*!
 @brief 삭제 예정
-@todo 삭제 예정
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-10
 template<typename DTYPE> std::ostream & operator<<(std::ostream& pOS, Tensor<DTYPE> *pTensor) {
     int timesize    = pTensor->GetTimeSize();
     int batchsize   = pTensor->GetBatchSize();

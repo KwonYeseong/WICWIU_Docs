@@ -4,10 +4,9 @@
 #include "../Module.h"
 
 /*!
-@class
-@details
+@class Operator들을 그래프로 구성해 fully connected layer의 기능을 수행하는 모듈을 생성하는 클래스
+@details Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 fully connected layer의 기능을 수행한다
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class Linear : public Module<DTYPE>{
 private:
 public:
@@ -16,7 +15,6 @@ public:
     @details Linear 클래스의 Alloc 메소드를 호출한다.
     @see linear<DTYPE>::Alloc(Operator<DTYPE> *pInput, int pNumInputCol, int pNumOutputCol, int use_bias, std::string pName)
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
     Linear(Operator<DTYPE> *pInput, int pNumInputCol, int pNumOutputCol, int use_bias = FALSE, std::string pName = NULL) : Module<DTYPE>(pName) {
         Alloc(pInput, pNumInputCol, pNumOutputCol, use_bias, pName);
     }
@@ -25,7 +23,6 @@ public:
     @brief Linear 클래스 소멸자
     @details 단, 동적 할당 받은 Operator들은 NeuralNetwork에서 할당 해제한다.
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
     virtual ~Linear() {}
 
     /*!
@@ -39,7 +36,6 @@ public:
     @return TRUE
     @see MatMul<DTYPE>::MatMul(Operator<DTYPE> *pWeight, Operator<DTYPE> *pInput, std::string pName) AddColWise<DTYPE>::AddColWise(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias, std::string pName) Module<DTYPE>::AnalyzeGraph(Operator<DTYPE> *pResultOperator)
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
     int Alloc(Operator<DTYPE> *pInput, int pNumInputCol, int pNumOutputCol, int use_bias, std::string pName) {
         this->SetInput(pInput);
 

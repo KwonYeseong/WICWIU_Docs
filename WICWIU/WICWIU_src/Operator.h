@@ -7,7 +7,6 @@
 /*!
 @brief Operator의 현재 상태를 나타내는  enum class
 @details TRAINING:학습 중, ACCUMULATING:, INFERENCING:accuracy를 구하는 중
-@todo EXTRA
 */
 enum Mode {
     TRAINING,

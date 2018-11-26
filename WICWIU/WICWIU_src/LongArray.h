@@ -5,7 +5,7 @@
 
 /*!
 @class LongArray 다차원 Tensor의 데이터를 저장하고 관리하는 클래스.
-@brief 학습에 사용 될 Tensor의 맴버변수 중 LongArray를 정의하기 위한 클래스.
+@details 학습에 사용 될 Tensor의 맴버변수 중 LongArray를 정의하기 위한 클래스.
 @details 실질적으로 Tensor클래스의 데이터를 저장하고 관리하기위한 클래스.
 @details 데이터를 초기화하고 CPU와 GPU간 데이터의 이동을 가능하게 한다.
 */
