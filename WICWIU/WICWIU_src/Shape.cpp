@@ -111,9 +111,9 @@ void Shape::Delete() {
 /*!
 @brief GPU을 사용하기 위해 GPU 메모리에 해당 Shape 클래스의 정보를 동적으로 할당하는 메소드
 @details cuda와 cudnn 라이브러리를 이용하여, 매개변수로 받은 GPU 번호에 해당되는 GPU의 메모리 공간에 Descriptor 변수를 할당한다
-@param Descriptor를 할당하고자 하는 GPU의 번호
+@details GPU내에서 Tensor의 형식은 batch, channel, row, colunm순서로 배치되도록 지정한다.
+@param idOfDevice Descriptor를 할당하고자 하는 GPU의 번호
 @return 성공 시 TRUE
-@todo 기술 예정
 */
 int Shape::AllocOnGPU(unsigned int idOfDevice) {
     # if __DEBUG__
@@ -144,7 +144,6 @@ int Shape::AllocOnGPU(unsigned int idOfDevice) {
 @brief Descriptor를 동적으로 할당했던 GPU 메모리 공간을 반환하는 메소드
 @details cudnn 라이브러리를 사용하여, Descriptor 동적 할당에 사용했던 메모리 공간을 반환하고 해당 메모리 공간을 NULL로 초기화한다.
 @return 없음
-@todo 기술 예정
 */
 void Shape::DeleteOnGPU() {
     # if _
@@ -162,10 +161,9 @@ void Shape::DeleteOnGPU() {
 //// Descriptor 지우고 다시 할당 받음, 주소 값이 변형 됨
 //// 수정 보완 필요
 /*!
-@brief
-@details
-@return
-@todo 기술 예정
+@brief GPU 메모리내에 할당 된 데이터를 해제하고 새로 할당한다.
+@details 사전에 정의 한 DeleteOnGPUdhk AllocOnGPU 메소드를 이용하여, 기존에  GPU에 할당 되어있던 Descriptor를 할당 해제 시키, 새로운 Descriptor를 할당 시킨다.
+@return 성공 시 TRUE.
 */
 int Shape::ReShapeOnGPU() {
     # if __DEBUG__
@@ -414,15 +412,14 @@ int& Shape::operator[](int pRanknum) {
 
 //// 5차원 텐서를 다른 5차원 텐서로 바꿔주는 메소드
 /*!
-@brief
-@details
-@param pSize0
-@param pSize1
-@param pSize2
-@param pSize3
-@param pSize4
-@return
-@todo 기술 예정
+@brief 새로운 Shape을 만들어 반환 하는 메소드.
+@details 파마미터로 전달받은 각 축의  Dimension정보를 바탕으로 새로운 Shape을 생성하여 반환한다.
+@param pSize0 Time의 Dimension
+@param pSize1 Batch의 Dimension
+@param pSize2 Channel의 Dimension
+@param pSize3 Row의 Dimension
+@param pSize4 Column의 Dimension
+@return 파라미터 정보를 바탕으로 만든 Shape
 */
 int Shape::ReShape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4) {
     #ifdef __DEBUG__
@@ -435,12 +432,11 @@ int Shape::ReShape(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4) {
 //// 가변인자를 이용해서 텐서를 다른 차원의 텐서로 바꿔주는 메소드
 //// 변경 가능 여부 확인을 하고
 /*!
-@brief
-@details
-@param pRank
-@param ...
-@return
-@todo 기술 예정
+@brief Shape 각 축의 Dimension정보를 초기화 하는 메소드.
+@details 파마미터로 전달받은 각 축의  Dimension정보를 m_aDim에 저장한다.
+@param pRank Shape을 이루는 축의 갯수를 나타내는 변수.
+@param ... 각 축의 Dimension정보를 가지고 있는 가변인자.
+@return 성공 시 TRUE
 */
 int Shape::ReShape(int pRank, ...) {
     #ifdef __DEBUG__
@@ -521,10 +517,9 @@ int Shape::SetDeviceGPU(unsigned int idOfDevice) {
 
 //// 특이하게 & 타입으로 정의되어 있음
 /*!
-@brief
-@details
-@return
-@todo 기술 예정
+@brief GPU내 Descriptor를 반ㅇ환하는 함수.
+@details cudnn의 Tensor Descriptor, GPU 연산에서 사용하는 Tensor의 shape 정보를 담고 있는 포인터 변수를 반환한다.
+@return GPU내 Tensor의 shape정보를 담고 있는 포인터 변수
 */
 cudnnTensorDescriptor_t& Shape::GetDescriptor() {
     # if __DEBUG__
