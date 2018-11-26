@@ -4,17 +4,14 @@
 #include "../LossFunction.h"
 
 /*!
-@class
-@details
+@class HingeLoss Hinge Loss Metric를 이용해 뉴럴 네트워크의 손실 함수를 계산하는 클래스
+@details Hinge Loss 계산 식을 이용해 뉴럴 네트워크의 순전파를 통해 계산된 출력 Tensor와 레이블 값의 손실 함수를 계산한다
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE>
 class HingeLoss : public LossFunction<DTYPE>{
 private:
-    Tensor<DTYPE> *m_aindexForBackProp; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
-    float m_theta; ///<   @todo Variable
-    // 문서 작성자 : , 작성 날짜 : 2018-
+    Tensor<DTYPE> *m_aindexForBackProp; ///<   @todo 기술 예정
+    float m_theta; ///<   @todo 기술 예정
 
 public:
     /*!
@@ -26,7 +23,6 @@ public:
     @return 없음
     @see HingeLoss<DTYPE>::Alloc(Operator<DTYPE> *pOperator, float theta)
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     HingeLoss(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, float theta = 1.f) : LossFunction<DTYPE>(pOperator, pLabel) {
         #ifdef __DEBUG__
         std::cout << "HingeLoss::HingeLoss(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -43,7 +39,6 @@ public:
     @return 없음
     @see HingeLoss<DTYPE>::Alloc(Operator<DTYPE> *pOperator, float theta)
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     HingeLoss(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, std::string pName) : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "HingeLoss::HingeLoss(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -58,8 +53,8 @@ public:
     @param pLabel LossFunction의 입력 레이블에 해당하는 Operator
     @param theta
     @see HingeLoss<DTYPE>::Alloc(Operator<DTYPE> *pOperator, float theta)
+    @todo 기술 예정
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     HingeLoss(Operator<DTYPE> *pOperator, Operator<DTYPE> *pLabel, float theta, std::string pName) : LossFunction<DTYPE>(pOperator, pLabel, pName) {
         #ifdef __DEBUG__
         std::cout << "HingeLoss::HingeLoss(Operator<DTYPE> *, Operator<DTYPE> *, std::string)" << '\n';
@@ -71,7 +66,6 @@ public:
     @brief HingeLoss LossFunction 클래스 소멸자
     @return 없음
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     ~HingeLoss() {
         #ifdef __DEBUG__
         std::cout << "HingeLoss::~HingeLoss()" << '\n';
@@ -81,13 +75,12 @@ public:
     /*!
     @brief HingeLoss Lossfunction의 멤버 변수들을 동적 할당하는 메소드
     @details 매개변수로 전달받은 Operator를 Input Operator에 할당하고 초기화 된 Result 텐서를 동적으로 할당 및 생성한다.
-    @details
+    @details 역전파를 위한
     @param pOperator CrossEntropy LossFunction의 입력에 해당하는 Operator
-    @param theta
+    @param theta LossFunction의 멤버 변수 theta에 할당할 값
     @return TRUE
-    @todo 추가 요
+    @todo 기술 예정
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     int Alloc(Operator<DTYPE> *pOperator, float theta) {
         #ifdef __DEBUG__
         std::cout << "HingeLoss::Alloc(Operator<DTYPE> *, Operator<DTYPE> *, int)" << '\n';
@@ -115,7 +108,6 @@ public:
     @details Index for BackPropagation Tensor가 존재할 경우 Tensor의 메모리를 할당 해제하고 0으로 초기화한다.
     @return 없음
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-08
     void Delete() {
         if (m_aindexForBackProp) {
             delete m_aindexForBackProp;
@@ -128,9 +120,8 @@ public:
     @details
     @param
     @return
-    @todo E_Train
+    @todo 기술 예정
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* ForwardPropagate(int timeIdx = 0) {
         Tensor<DTYPE> *input   = this->GetTensor();
         Tensor<DTYPE> *desired = this->GetLabel()->GetResult();
@@ -186,9 +177,8 @@ public:
     @details
     @param
     @return
-    @todo E_Train
+    @todo 기술 예정
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* BackPropagate(int pTime = 0) {
         Tensor<DTYPE> *input       = this->GetTensor();
         Tensor<DTYPE> *label       = this->GetLabel()->GetResult();
@@ -226,9 +216,8 @@ public:
     @details
     @param
     @return
-    @todo GPU
+    @todo 기술 예정
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* ForwardPropagateOnGPU(int pTime = 0) {
         this->ForwardPropagate();
         return NULL;
@@ -239,9 +228,8 @@ public:
     @details
     @param
     @return
-    @todo GPU
+    @todo 기술 예정
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     Tensor<DTYPE>* BackPropagateOnGPU(int pTime = 0) {
         this->BackPropagate();
         return NULL;

@@ -9,13 +9,10 @@ template<typename DTYPE> class Tensorholder;
 @details Tensor, Operator, Tensorholder 세 가지 클래스에 대한 Queue를 동적으로 할당한다.
 @details 기본 queue 구조에 인덱스를 이용한 접근 및 역순으로 접근 등 추가적인 메소드가 구현되어 있다.
 */
-// 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
 template<typename DTYPE> class Container {
 private:
     DTYPE *m_aElement;///< 동적으로 할당받는 Queue의 Element 배열
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-26
     int m_size;///< 동적으로 할당받는 Queue의 Element 개수
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-26
 
 public:
 
@@ -24,7 +21,6 @@ public:
     @details 각 멤버 변수를 초기화하여 Container 클래스를 생성한다.
     @return 없음
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-26
     Container() {
         #ifdef __DEBUG__
         std::cout << "Container<DTYPE>::Container()" << '\n';
@@ -38,7 +34,6 @@ public:
     @details 해당 Container 클래스를 위해 동적으로 할당된 메모리 공간을 반환하고 클래스를 소멸한다.
     @return 없음
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-26
     virtual ~Container() {
         if (m_aElement) {
             delete[] m_aElement;
@@ -52,7 +47,6 @@ public:
     @param pElement Queue에 추가하고자 하는 변수
     @return 성공 시 TRUE, 실패 시 FALSE
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-26
     int Push(DTYPE pElement) {
         try {
             DTYPE *temp = new DTYPE[m_size + 1];
@@ -81,7 +75,6 @@ public:
     @details 기존의 queue를 할당 해제하고 Queue의 첫번째 Element를 반환한 후 새로운 Queue를 동적으로 할당한다.
     @return Queue의 첫번째 Element
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-26
     DTYPE Pop() {
         DTYPE  element = m_aElement[0];
         DTYPE *temp    = new DTYPE[m_size - 1];
@@ -106,7 +99,6 @@ public:
     @param pElement Queue에서 찾고자 하는 Element
     @return 실패 시 NULL, 성공 시 매개변수로 전달받은 Element와 동일한 Queue의 Element
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-26
     DTYPE Pop(DTYPE pElement) {
         int index = -1;
 
@@ -148,7 +140,6 @@ public:
     @details Queue의 Element를 반대 순서로 저장하는 새로운 Queue를 할당하고, 기존의 Queue를 할당 해제한다.
     @return TRUE
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-29
     int Reverse() {
         DTYPE *temp = new DTYPE[m_size];
 
@@ -193,7 +184,6 @@ public:
     @param index 찾고자 하는 Queue의 Element의 인덱스
     @return m_aElement[index]
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-09-25
     DTYPE& operator[](unsigned int index) {
         return m_aElement[index];
     }

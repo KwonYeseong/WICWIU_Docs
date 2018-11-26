@@ -28,10 +28,9 @@
 // };
 
 /*!
-@class
-@details
+@class ConvolutionLayer2D Operator들을 그래프로 구성해 2-Dimensional Convolution Layer의 기능을 수행하는 모듈을 생성하는 클래스
+@details Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 2-Dimensional convolution Layer의 기능을 수행한다
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> class ConvolutionLayer2D : public Module<DTYPE>{
 private:
 public:
@@ -49,7 +48,6 @@ public:
     @brief ConvolutionLayer2D 클래스 소멸자
     @details 단, 동적 할당 받은 Operator들은 NeuralNetwork에서 할당 해제한다.
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
     virtual ~ConvolutionLayer2D() {}
 
     /*!
@@ -70,7 +68,6 @@ public:
     @return TRUE
     @see Convolution2D<DTYPE>::Convolution2D(Operator<DTYPE> *pInput, Operator<DTYPE> *pWeight, int stride1, int stride2, std::string pName = "NO NAME") AddColWise<DTYPE>::AddColWise(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias, std::string pName) Module<DTYPE>::AnalyzeGraph(Operator<DTYPE> *pResultOperator)
     */
-    // 문서 작성자 : 윤동휘, 작성 날짜 : 2018-10-01
     int Alloc(Operator<DTYPE> *pInput, int pNumInputChannel, int pNumOutputChannel, int pNumKernelRow, int pNumKernelCol, int pStrideRow, int pStrideCol, int pPaddingRow, int pPaddingCol, int use_bias, std::string pName) {
         this->SetInput(pInput);
 
