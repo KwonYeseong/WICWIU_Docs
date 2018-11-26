@@ -241,7 +241,7 @@ template<typename DTYPE> int LossFunction<DTYPE>::SetGradientOnCPU() {
 /*!
 @brief LossFunction 클래스의 device 맴버 변수를 GPU로 변경한다.
 @details LossFunction의 Result와 Gradient의 Device를 GPU로 변경한다.
-@param pCudnnHandle
+@param pCudnnHandle cudnn 라이브러리를 가리키는 구조체 포인터.
 @param idOfDevice 사용하고자 하는 GPU번호
 */
 template<typename DTYPE> void LossFunction<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnHandle, unsigned int idOfDevice) {
