@@ -163,13 +163,10 @@ template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::BackPropagate(int p
 #ifdef __CUDNN__
 
 /*!
-@brief
-@details
-@param
-@return
-@todo 기술 예정
+@brief GPU에서의 LossFunction의 순전파를 수행하는 메소드.
+@param pTime
+@return NULL
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::ForwardPropagateOnGPU(int pTime) {
     # if __DEBUG__
     std::cout << this->GetName() << '\n';
@@ -178,13 +175,10 @@ template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::ForwardPropagateOnG
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo 기술 예정
+@brief GPU에서의 LossFunction의 순전파를 수행하는 메소드.
+@param pTime
+@return NULL
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> Tensor<DTYPE> *LossFunction<DTYPE>::BackPropagateOnGPU(int pTime) {
     # if __DEBUG__
     std::cout << this->GetName() << '\n';
@@ -245,13 +239,11 @@ template<typename DTYPE> int LossFunction<DTYPE>::SetGradientOnCPU() {
 // }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo 기술 예정
+@brief LossFunction 클래스의 device 맴버 변수를 GPU로 변경한다.
+@details LossFunction의 Result와 Gradient의 Device를 GPU로 변경한다.
+@param pCudnnHandle
+@param idOfDevice 사용하고자 하는 GPU번호
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> void LossFunction<DTYPE>::SetDeviceGPU(cudnnHandle_t& pCudnnHandle, unsigned int idOfDevice) {
     checkCudaErrors(cudaSetDevice(idOfDevice));
     m_Device       = GPU;
@@ -262,22 +254,14 @@ template<typename DTYPE> void LossFunction<DTYPE>::SetDeviceGPU(cudnnHandle_t& p
     this->InitializeAttributeForGPU(idOfDevice);
 }
 
-/*!
-@brief
-@return 없음
-@todo 기술 예정
-*/
-// 문서 작성자 : , 작성 날짜 : 2018-
+
 template<typename DTYPE> void LossFunction<DTYPE>::InitializeAttributeForGPU(unsigned int idOfDevice) {}
 
 /*!
-@brief
-@details
-@param
-@return
-@todo 기술 예정
+@brief m_aResult의 device 맴버 변수를 GPU로 변경한다.
+@param idOfDevice 사용하고자 하는 GPU번호
+@return 성공 시 TRUE
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int LossFunction<DTYPE >::SetResultOnGPU(unsigned int idOfDevice) {
     if (m_aResult) m_aResult->SetDeviceGPU(idOfDevice);
 
@@ -285,13 +269,10 @@ template<typename DTYPE> int LossFunction<DTYPE >::SetResultOnGPU(unsigned int i
 }
 
 /*!
-@brief
-@details
-@param
-@return
-@todo 기술 예정
+@brief m_aGradient의 device 맴버 변수를 GPU로 변경한다.
+@param idOfDevice 사용하고자 하는 GPU번호
+@return 성공 시 TRUE.
 */
-// 문서 작성자 : , 작성 날짜 : 2018-
 template<typename DTYPE> int LossFunction<DTYPE>::SetGradientOnGPU(unsigned int idOfDevice) {
     if (m_aGradient) m_aGradient->SetDeviceGPU(idOfDevice);
 
