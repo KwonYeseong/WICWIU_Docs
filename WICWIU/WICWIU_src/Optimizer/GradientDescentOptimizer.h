@@ -5,13 +5,11 @@
 
 /*!
 @class Gradient Descent Optimizer
-@details
 */
-// 문서 작성자 : , 작성 날짜 : 2018-11-11
 template<typename DTYPE> class GradientDescentOptimizer : public Optimizer<DTYPE>{
 private:
     Container<Operator<DTYPE> *> *m_ppParameter; ///< 값을 업데이트 할 Tensor들을 가리키는 포인터
-    Container<Tensor<DTYPE> *> *m_aaVelocity; ///<   @todo Variable
+    Container<Tensor<DTYPE> *> *m_aaVelocity; ///<  momentum의 누적된 속도.
 
     int m_numOfParameter; ///< 업데이트 할 Tensor의 degree
     float m_momentum; ///< Optimizer의 momentum값
@@ -40,7 +38,7 @@ public:
 
     /*!
     @brief GradientDescentOptimizer의 생성자.
-    @details 맴버변수들을 초기화하고 momenum값을 파라미터로 하는 Alloc 매소드를 호출한다.
+    @details 맴버변수들을 초기화하고 momentum값을 파라미터로 하는 Alloc 매소드를 호출한다.
     @param pParameterContainer
     @param pLearningRate Optimizer의 learning rate
     @param momentum Optimize의 momentum
@@ -62,7 +60,7 @@ public:
 
     /*!
     @brief GradientDescentOptimizer의 생성자.
-    @details 맴버변수들을 초기화하고 momenum값을 파라미터로 하는 Alloc 매소드를 호출한다.
+    @details 맴버변수들을 초기화하고 momentum값을 파라미터로 하는 Alloc 매소드를 호출한다.
     @param pParameterContainer
     @param pLearningRate Optimizer의 learning rate
     @param momentum Optimize의 momentum
@@ -220,13 +218,10 @@ public:
 
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief GPU의 메모리에 있는 Parameter값들을 업데이트 하는 메소드.
+    @details momentum여부에 따라 오버로딩 된 각기 다른 UpdateParameterOnGPU 메소드를 호출함.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     virtual int UpdateParameterOnGPU() {
         if (m_momentum == 0.f) {
             for (int i = 0; i < m_numOfParameter; i++) {
@@ -242,13 +237,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief momentum없이 GPU의 메모리에 있는 Parameter값들을 업데이트 하는 메소드.
+    @details 파라미터로 전달받은 Operator의 Result와 Gradient값을 업데이트한다.
+    @details cudnnAddTensor를 이용하여 Gradient값을 더한다.
+    @param pParameter Gradient값을 업데이트 할 Operator.
+    @return 성공 시 TRUE
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int UpdateParameterOnGPU(Operator<DTYPE> *pParameter) {
         Tensor<DTYPE> *trainable_data = pParameter->GetResult();
         Tensor<DTYPE> *gradient       = pParameter->GetGradient();
@@ -273,13 +267,12 @@ public:
     }
 
     /*!
-    @brief
-    @details
-    @param
-    @return
-    @todo GPU
+    @brief momentum을 적용하여 GPU의 메모리에 있는 Parameter값들을 업데이트 하는 메소드.
+    @details 파라미터로 전달 받은 Operator의 Result와 Gradient값을 momentum을 반영하여 업데이트한다.
+    @param pParameter Gradient값을 업데이트 할 Operator.
+    @param pVelocity momentum값.
+    @return 성공 시 TRUE.
     */
-    // 문서 작성자 : , 작성 날짜 : 2018-
     int UpdateParameterOnGPU(Operator<DTYPE> *pParameter, Tensor<DTYPE> *pVelocity) {
         Tensor<DTYPE> *trainable_data = pParameter->GetResult();
         Tensor<DTYPE> *gradient       = pParameter->GetGradient();
