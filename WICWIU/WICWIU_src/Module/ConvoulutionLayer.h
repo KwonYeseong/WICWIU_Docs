@@ -28,7 +28,7 @@
 // };
 
 /*!
-@class Operator들을 그래프로 구성해 2-Dimensional Convolution Layer의 기능을 수행하는 모듈을 생성하는 클래스
+@class ConvolutionLayer2D Operator들을 그래프로 구성해 2-Dimensional Convolution Layer의 기능을 수행하는 모듈을 생성하는 클래스
 @details Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 2-Dimensional convolution Layer의 기능을 수행한다
 */
 template<typename DTYPE> class ConvolutionLayer2D : public Module<DTYPE>{
