@@ -4,7 +4,7 @@
 #include "../Module.h"
 
 /*!
-@class Operator들을 그래프로 구성해 2-Dimensional TransposedConvolution Layer의 기능을 수행하는 모듈을 생성하는 클래스
+@class TransposedConvolutionLayer2D Operator들을 그래프로 구성해 2-Dimensional TransposedConvolution Layer의 기능을 수행하는 모듈을 생성하는 클래스
 @details Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 2-Dimensional Transposedconvolution Layer의 기능을 수행한다
 */
 template<typename DTYPE> class TransposedConvolutionLayer2D : public Module<DTYPE>{
